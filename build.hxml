@@ -1,0 +1,7 @@
+-cp Source 
+-cp console
+-main ConsoleMain.hx 
+-neko test.n 
+-lib openfl 
+-lib lime 
+--macro include("rewards")

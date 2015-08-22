@@ -9,7 +9,7 @@
 			"statCoef" : [1.5,2.0,0.5]
 		},
 		{
-			"name" : "Fight",
+			"name" : "Capture",
 			"statCoef" : [2.0, 3.0, 0.2]
 		}
 	],
@@ -34,8 +34,8 @@
 		},
 		{
 			"title" : "Capture",
-			"desc" : "Capture some more slaves!",
-			"type" : "Fight",
+			"desc" : "Get some more slav... employees!",
+			"type" : "Capture",
 			"requires" : ["none"],
 			"duration" : 2,
 			"teamSize" : 1,

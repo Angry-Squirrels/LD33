@@ -8,11 +8,12 @@ import missions.Mission;
 class MonsterReward extends Reward
 {
 
-	override public function computeQuantity(tier:UInt, mission:Mission){
+	override public function computeQuantity(tier:UInt, mission:Mission) {
+		mQuantity = Math.ceil(tier * tier / 2) + 1;
 	}
 	
 	public function toString() : String {
-		return mQuantity + " monsters";		
+		return '$mQuantity monsters';		
 	}
 	
 }

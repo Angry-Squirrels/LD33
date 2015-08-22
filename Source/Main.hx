@@ -9,6 +9,7 @@ import ui.Styles;
 
 class Main extends Sprite {
 	
+	var mGameManager : GameManager;
 	
 	public function new () {
 		
@@ -16,9 +17,9 @@ class Main extends Sprite {
 		
 		new Styles();
 		
-		for (i in 0 ... 10) {
-			trace(Mission.get());
-		}
+		mGameManager = GameManager.getInstance();
+		mGameManager.startNewDay();
+		mGameManager.addMonster();
 		
 		addChild(new UIGame());
 		

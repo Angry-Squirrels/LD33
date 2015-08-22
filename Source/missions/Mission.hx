@@ -1,8 +1,15 @@
 package missions;
+import flash.Boot;
 import monsters.Monster;
+import msignal.Signal;
+import openfl.desktop.ClipboardTransferMode;
 import rewards.Reward;
 import haxe.Json;
 import openfl.Assets;
+
+#if neko
+import sys.io.File;
+#end
 
 /**
  * ...
@@ -36,8 +43,12 @@ class Mission
 	public var description : String;
 	public var reward : Reward;
 	public var teamSize : UInt = 1;
+	public var type : String;
+	public var successChance : Float = 0;
 	
 	public var assignedMonsters : Array<Monster>;
+	
+	public var successChanceChanged : Signal0;
 	
 	static var mJson : Dynamic;
 	static var mListInited : Bool;
@@ -48,25 +59,60 @@ class Mission
 	static private function initList(){
 		if (mListInited) return;
 		
-		mJson = Json.parse(Assets.getText("missions/missions.json"));
+		var rawText : String = "";
+		#if neko
+		rawText = File.getContent("Assets/missions/missions.json");
+		#else
+		rawText = Assets.getText("missions/missions.json");
+		#end
+		mJson = Json.parse(rawText);
 		
 		mTypeList = mJson.missionsTypes;
 		mMissionList = mJson.missions;
 		
 		mListInited = true;
 	}
+	
+	public static function find(fields : Dynamic) : Array<UInt> {
+		var rep = new Array<UInt>();
+		var id = 0;
+		for (mission in mMissionList) {
+			var push = true;
+			for (field in Reflect.fields(fields)) 
+				if (!Reflect.hasField(mission, field)) {
+					push = false;	
+					break;
+				}else if (Reflect.field(mission, field) != Reflect.field(fields, field)){
+					push = false;	
+					break;
+				}
+			
+			if(push)
+				rep.push(id);
+			id++;
+		}
+		
+		return rep;
+	}
 
-	public static function get(tier : UInt = 1) : Mission {
+	public static function get(tier : UInt = 1, type : String = "") : Mission {
 		if (!mListInited) initList();
 		
 		var mission = new Mission();
 		mission.creationDate = GameManager.getInstance().getDate();
 		
-		var missionDesc = mMissionList[Std.random(mMissionList.length)];
+		var missionID = Std.random(mMissionList.length);
+		if (type != "") {
+			var possibleID = find( { type : "Capture" } );
+			missionID = possibleID[Std.random(possibleID.length)];
+		}
+		
+		var missionDesc = mMissionList[missionID];
 		mission.title = missionDesc.title;
 		mission.duration = missionDesc.duration;
 		mission.description = missionDesc.desc;
 		mission.teamSize = missionDesc.teamSize;
+		mission.type = missionDesc.type;
 		
 		var missionType : MissionType = null;
 		for (type in mTypeList)
@@ -79,7 +125,8 @@ class Mission
 		
 		mission.requiredStats = Stats.make(tier, coefA, coefS, coefI);
 		
-		mission.reward = Type.createInstance(Type.resolveClass("rewards." + missionDesc.rewardType+"Reward"), []);
+		var rewardClass : Class<Dynamic> = Type.resolveClass("rewards." + missionDesc.rewardType+"Reward");
+		mission.reward = Type.createInstance(rewardClass, []);
 		mission.reward.computeQuantity(tier, mission);
 		
 		return mission;
@@ -89,10 +136,55 @@ class Mission
 	{
 		requiredStats = new Stats();
 		assignedMonsters = new Array<Monster>();
+		successChanceChanged = new Signal0();
 	}
 	
 	public function toString() {
-		return title + " ; " + description + " stats : " + requiredStats + " award : " + reward;
+		return title + " ; " + description + " stats : " + requiredStats + " reward : " + reward;
+	}
+	
+	public function onRepportRead() 
+	{
+		for (monster in assignedMonsters) {
+			monster.busy = null;
+		}
+	}
+	
+	public function assignMonster(monster : Monster) {
+		if (assignedMonsters.length < cast teamSize)
+			assignedMonsters.push(monster);
+			
+		computeSuccess();
+	}
+	
+	public function unassignMonster(monster : Monster) {
+		assignedMonsters.remove(monster);
+		
+		computeSuccess();
+	}
+	
+	function computeSuccess():Void 
+	{
+		var sumAgi = 0;
+		var sumStr = 0;
+		var sumInt = 0;
+		
+		for (monster in assignedMonsters) {
+			sumAgi += monster.stats.g[Stats.AGILITY];
+			sumStr += monster.stats.g[Stats.STRENGHT];
+			sumInt += monster.stats.g[Stats.INTEL];
+		}
+		
+		var successA = sumAgi / requiredStats.g[Stats.AGILITY];
+		var successS = sumStr / requiredStats.g[Stats.STRENGHT];
+		var successI = sumInt / requiredStats.g[Stats.INTEL];
+		
+		if (successA > 1) successA = 1;
+		if (successS > 1) successS = 1;
+		if (successI > 1) successI = 1;
+		
+		var successChance = (successA + successS + successI) / 3;
+		successChanceChanged.dispatch();
 	}
 	
 }

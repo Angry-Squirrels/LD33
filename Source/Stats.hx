@@ -66,4 +66,8 @@ class Stats
 		return "{A : " + g[Stats.AGILITY] + " S : " + g[Stats.STRENGHT] + " I : " + g[Stats.INTEL] + " tier : " + getTier() + "}";
 	}
 	
+	public function getTotal() : UInt {
+		return g[0] + g[1] + g[2];
+	}
+	
 }

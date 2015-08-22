@@ -8,7 +8,7 @@ import missions.Mission;
 class Reward
 {
 	
-	var mQuantity : UInt;
+	var mQuantity : UInt = 0;
 
 	public function new() 
 	{
