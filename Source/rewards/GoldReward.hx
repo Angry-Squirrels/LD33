@@ -22,7 +22,7 @@ class GoldReward extends Reward
 	}
 	
 	public function toString() : String {
-		return mQuantity + " gold.";
+		return "$"+mQuantity;
 	}
 	
 }
