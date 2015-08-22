@@ -21,11 +21,11 @@ class MissionSheet extends PaperSheet
 	
 	
 	
-	public function new(mission:Mission) 
+	public function new(mission:Mission, Width:Float=400, Height:Float=480) 
 	{
-		super(400, 480);
+		super(Width, Height);
 		
-		var contentWidth = w - 2 * hMargin;
+		//var contentWidth = w - 2 * hMargin;
 		
 		var localVMargin:Float = 16;
 		var slotMargin:Float = 8;
@@ -67,60 +67,60 @@ class MissionSheet extends PaperSheet
 		var currentY:Float = vMargin;
 		
 		titleTf.y = currentY;
-		addChild(titleTf);
+		content.addChild(titleTf);
 		currentY += titleTf.height;
 
 		descriptionTf.y = currentY;
-		addChild(descriptionTf);
+		content.addChild(descriptionTf);
 		currentY += descriptionTf.height;
 
 		currentY += vMargin;
 		
 		durationLine.y = currentY;
-		addChild(durationLine);
+		content.addChild(durationLine);
 		currentY += durationLine.height;
 		
 		rewardLine.y = currentY;
-		addChild(rewardLine);
+		content.addChild(rewardLine);
 		currentY += rewardLine.height;
 		
 		teamLine.y = currentY;
-		addChild(teamLine);
+		content.addChild(teamLine);
 		currentY += teamLine.height;
 		currentY += slotMargin;
 		
 		slotHolder.y = currentY;
-		addChild(slotHolder);
+		content.addChild(slotHolder);
 		currentY += slotHolder.height;
 		
 		currentY += vMargin;
 		
 		requirementsTf.y = currentY;
-		addChild(requirementsTf);
+		content.addChild(requirementsTf);
 		currentY += requirementsTf.height;
 		
 		brainDL.y = currentY;
-		addChild(brainDL);
+		content.addChild(brainDL);
 		currentY += brainDL.height;
 		
 		agilityDL.y = currentY;
-		addChild(agilityDL);
+		content.addChild(agilityDL);
 		currentY += agilityDL.height;
 		
 		muscleDL.y = currentY;
-		addChild(muscleDL);
+		content.addChild(muscleDL);
 		currentY += muscleDL.height;
 		
 		currentY += vMargin;
 		
 		probBar.y = currentY;
-		addChild(probBar);
+		content.addChild(probBar);
 		currentY += probBar.height;
 		
 		currentY += vMargin;
 		
 		startButton.y = currentY;
-		addChild(startButton);
+		content.addChild(startButton);
 		currentY += startButton.height;
 		
 	}

@@ -1,4 +1,6 @@
 package ui;
+import openfl.display.DisplayObject;
+import openfl.display.Shape;
 import openfl.display.Sprite;
 
 /**
@@ -11,21 +13,30 @@ class AbstractPaperObject extends Sprite
 	var w:Float;
 	var hMargin:Float;
 	var vMargin:Float;
+	var content:Sprite;
+	var contentWidth:Float;
 
-	public var bg:Sprite;
+	public var bg:Shape;
 	
 	public function new(Width:Float, Height:Float, hMargin:Float, vMargin:Float) 
 	{
 		super();
 		this.vMargin = vMargin;
 		this.hMargin = hMargin;
-		bg = new Sprite();
+		bg = new Shape();
 		w = Width;
 		h = Height;
+		addChild(bg);
+		
+		contentWidth = Width - hMargin * 2;
+		
+		content = new Sprite();
+		content.x = hMargin;
+		content.y = vMargin;
+		addChild(content);
 	}
 	public function draw() 
 	{
-		bg.graphics.clear();
 		bg.graphics.drawRect(0, 0, w, h);
 	}
 	
