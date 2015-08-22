@@ -1,6 +1,6 @@
 -cp Source 
--cp tests 
--main TestMain.hx 
+-cp console
+-main ConsoleMain.hx 
 -neko test.n 
 -lib openfl 
 -lib lime 

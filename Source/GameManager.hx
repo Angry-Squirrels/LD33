@@ -18,8 +18,12 @@ class GameManager
 	}
 
 	public var monsters : Array<Monster>;
+	
 	public var availableMissions : Array<Mission>;
 	public var ongoingMissions : Array<Mission>;
+	public var endedMission : Array<Mission>;
+	public var archivedMission : Array<Mission>;
+	
 	public var gold : UInt;
 	public var day : UInt;
 	public var maxDay : UInt;
@@ -29,6 +33,8 @@ class GameManager
 		monsters = new Array<Monster>();
 		availableMissions = new Array<Mission>();
 		ongoingMissions = new Array<Mission>();
+		endedMission = new Array<Mission>();
+		archivedMission = new Array<Mission>();
 		
 		day = 0;
 		maxDay = 42;
@@ -58,8 +64,16 @@ class GameManager
 		
 		message("A new sun arise... Day " + day);
 		
-		// check that a capture mission is available
+		for (mission in ongoingMissions) {
+			mission.remainingTime--;
+			if (mission.remainingTime < 0) 
+				endedMission.push(mission);
+		}
 		
+		for (mission in endedMission)
+			ongoingMissions.remove(mission);
+		
+		// check that a capture mission is available
 		var captureAvailable = false;
 		for (mission in availableMissions)
 			if (mission.type == "Capture") {
@@ -69,6 +83,10 @@ class GameManager
 			
 		if (!captureAvailable)
 			addMission("Capture");
+	}
+	
+	public function endDay() {
+		
 	}
 	
 	public function getDate() : UInt {
@@ -81,6 +99,23 @@ class GameManager
 		#else
 		trace(message);
 		#end
+	}
+	
+	public function archiveMission(mission : Mission) {
+		endedMission.remove(mission);
+		archivedMission.push(mission);
+		mission.onRepportRead();
+	}
+	
+	public function launchMission(mission : Mission) {
+		for (monster in mission.assignedMonsters) 
+			monster.busy = mission;
+		
+		if (mission.assignedMonsters.length > 0){
+			availableMissions.remove(mission);
+			mission.remainingTime = mission.duration;
+			ongoingMissions.push(mission);
+		}
 	}
 	
 	

@@ -9,14 +9,14 @@ import sys.io.File;
  * ...
  * @author Thomas BAUDON
  */
-class TestMain
+class ConsoleMain
 {
 	
-	var mChoiceHandlers : Array<Void -> Void>;
+	
 	var mGame : GameManager;
 	
 	public static function main() {
-		new TestMain();
+		new ConsoleMain();
 	}
 	
 	function new() {
@@ -24,8 +24,9 @@ class TestMain
 		mGame.startNewDay();
 		mGame.addMonster();
 		
-		mChoiceHandlers = new Array<Void -> Void>();
-		mChoiceHandlers.push(listMissions);
+		var choiceHandlers = [
+			listMissions
+		];
 		
 		while (true) {
 			var gold = mGame.gold;
@@ -33,8 +34,8 @@ class TestMain
 			Lib.println("What to do ? 1 : List available missions , 2 : List sla... employee.");
 			var choice : Int = Std.parseInt(Sys.stdin().readLine());
 			choice--;
-			if (choice >= 0 && choice < mChoiceHandlers.length)
-				mChoiceHandlers[choice]();
+			if (choice >= 0 && choice < choiceHandlers.length)
+				choiceHandlers[choice]();
 		}
 	}
 	
@@ -50,6 +51,14 @@ class TestMain
 		}
 		Lib.println("What mission to do ? 0 back : ");
 		var choice : Int = Std.parseInt(Sys.stdin().readLine());
+		if (choice > 0 && choice <= mGame.availableMissions.length){
+			
+			chooseMonster();
+		}
+	}
+	
+	function chooseMonster() {
+		
 	}
 	
 }

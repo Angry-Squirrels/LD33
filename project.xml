@@ -10,6 +10,7 @@
 	<haxeflag name="--macro include('rewards', true)" />
 	
 	<haxelib name="openfl" />
+	<haxelib name="msignal" />
 	
 	<assets path="Assets" rename="assets" />
 	<assets path="Assets/missions" rename="missions" />

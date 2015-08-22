@@ -21,10 +21,6 @@ class Main extends Sprite {
 		mGameManager.startNewDay();
 		mGameManager.addMonster();
 		
-		for (i in 0 ... 10) {
-			trace(Mission.get());
-		}
-		
 		addChild(new UIGame());
 		
 	}
