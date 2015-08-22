@@ -70,8 +70,10 @@ class GameManager
 				endedMission.push(mission);
 		}
 		
-		for (mission in endedMission)
+		for (mission in endedMission) {
+			mission.end();
 			ongoingMissions.remove(mission);
+		}
 		
 		// check that a capture mission is available
 		var captureAvailable = false;
@@ -108,13 +110,11 @@ class GameManager
 	}
 	
 	public function launchMission(mission : Mission) {
-		for (monster in mission.assignedMonsters) 
-			monster.busy = mission;
-		
 		if (mission.assignedMonsters.length > 0){
 			availableMissions.remove(mission);
 			mission.remainingTime = mission.duration;
 			ongoingMissions.push(mission);
+			mission.started = true;
 		}
 	}
 	

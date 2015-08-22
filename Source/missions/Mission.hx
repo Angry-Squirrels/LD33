@@ -45,6 +45,11 @@ class Mission
 	public var teamSize : UInt = 1;
 	public var type : String;
 	public var successChance : Float = 0;
+	public var started : Bool = false;
+	public var ended : Bool = false;
+	public var succeed : Bool = false;
+	
+	public var monsterProgress : Map<Monster, {before : Array<UInt>, after : Array<UInt>}>;
 	
 	public var assignedMonsters : Array<Monster>;
 	
@@ -137,6 +142,8 @@ class Mission
 		requiredStats = new Stats();
 		assignedMonsters = new Array<Monster>();
 		successChanceChanged = new Signal0();
+		
+		monsterProgress = new Map<Monster, {before : Array<UInt>, after : Array<UInt>}>();
 	}
 	
 	public function toString() {
@@ -151,16 +158,33 @@ class Mission
 	}
 	
 	public function assignMonster(monster : Monster) {
-		if (assignedMonsters.length < cast teamSize)
+		if (assignedMonsters.length < cast teamSize){
 			assignedMonsters.push(monster);
+			monster.busy = this;
+		}
 			
 		computeSuccess();
 	}
 	
 	public function unassignMonster(monster : Monster) {
 		assignedMonsters.remove(monster);
+		monster.busy = null;
 		
 		computeSuccess();
+	}
+	
+	public function end() {
+		ended = true;
+		var rand = Math.random();
+		if (rand <= successChance)
+			succeed = true;
+		else
+			succeed = false;
+			
+		for (monster in assignedMonsters)
+			monster.busy = null;
+			
+		
 	}
 	
 	function computeSuccess():Void 
