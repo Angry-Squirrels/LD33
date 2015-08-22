@@ -1,4 +1,5 @@
 package missions;
+import monsters.Monster;
 import rewards.Reward;
 import haxe.Json;
 import openfl.Assets;
@@ -29,10 +30,14 @@ class Mission
 	public var requiredStats : Stats;
 	
 	public var duration : UInt = 1;
+	public var remainingTime : UInt;
+	public var creationDate : UInt;
 	public var title : String;
 	public var description : String;
 	public var reward : Reward;
 	public var teamSize : UInt = 1;
+	
+	public var assignedMonsters : Array<Monster>;
 	
 	static var mJson : Dynamic;
 	static var mListInited : Bool;
@@ -55,6 +60,7 @@ class Mission
 		if (!mListInited) initList();
 		
 		var mission = new Mission();
+		mission.creationDate = GameManager.getInstance().getDate();
 		
 		var missionDesc = mMissionList[Std.random(mMissionList.length)];
 		mission.title = missionDesc.title;
@@ -82,6 +88,7 @@ class Mission
 	public function new() 
 	{
 		requiredStats = new Stats();
+		assignedMonsters = new Array<Monster>();
 	}
 	
 	public function toString() {

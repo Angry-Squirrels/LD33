@@ -1,4 +1,5 @@
 package monsters;
+import missions.Mission;
 import NameGenerator;
 
 
@@ -8,7 +9,7 @@ import NameGenerator;
  */
 class Monster
 {
-	public var busy : Bool;
+	public var busy : Mission;
 	
 	public var stats : Stats;
 	
