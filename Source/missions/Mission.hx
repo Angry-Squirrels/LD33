@@ -183,7 +183,7 @@ class Mission
 		if (successS > 1) successS = 1;
 		if (successI > 1) successI = 1;
 		
-		var successChance = (successA + successS + successI) / 3;
+		successChance = (successA + successS + successI) / 3;
 		successChanceChanged.dispatch();
 	}
 	

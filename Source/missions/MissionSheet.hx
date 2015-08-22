@@ -1,8 +1,11 @@
 package missions;
 
+import monsters.Monster;
+import monsters.MonsterAvatar;
 import openfl.Assets;
 import openfl.display.SimpleButton;
 import openfl.display.Sprite;
+import openfl.events.MouseEvent;
 import openfl.text.TextField;
 import openfl.text.TextFieldAutoSize;
 import openfl.text.TextFormat;
@@ -18,6 +21,7 @@ class MissionSheet extends PaperSheet
 {
 	var titleTf:TF;
 	var descriptionTf:TF;
+	var probBar:ProbabilityBar;
 	
 	
 	
@@ -46,20 +50,33 @@ class MissionSheet extends PaperSheet
 		
 		var currentSlotX:Float = 0;
 		var slotHolder = new Sprite();
+		//trace('plop');
 		for (i in 0...mission.teamSize) 
 		{
 			var slot = new MonsterSlot();
 			slot.x = currentSlotX;
 			currentSlotX += slot.width + slotMargin;
 			slotHolder.addChild(slot);
+			slot.addEventListener(MouseEvent.CLICK, function(evt:MouseEvent)
+			{
+				trace('click');
+				var monster = Monster.get();
+				slot.addAvatar(new MonsterAvatar(monster.picture, 32));
+				mission.assignMonster(monster);
+			});
 		}
+		
+		mission.successChanceChanged.add(function() {
+			trace(mission.successChance);
+			probBar.setPercentage(mission.successChance);
+		});
 		
 		var requirementsTf = new TF("Requirement", Styles.BLACK16);
 		var brainDL:DataLine = new DataLine("Brain", cast(mission.requiredStats.g[Stats.INTEL]), contentWidth, Styles.BLACK12);
 		var agilityDL:DataLine = new DataLine("Agility", cast(mission.requiredStats.g[Stats.AGILITY]), contentWidth, Styles.BLACK12);
 		var muscleDL:DataLine = new DataLine("Muscle", cast(mission.requiredStats.g[Stats.STRENGHT]), contentWidth, Styles.BLACK12);
 		
-		var probBar:ProbabilityBar = new ProbabilityBar(contentWidth, 32);
+		probBar = new ProbabilityBar(contentWidth, 32);
 		
 		var startButton:StartButton = new StartButton();
 		startButton.x = (contentWidth - startButton.width) / 2;
