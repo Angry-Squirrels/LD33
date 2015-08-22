@@ -2,6 +2,10 @@ package missions;
 
 import openfl.display.DisplayObject;
 import openfl.display.SimpleButton;
+import openfl.display.Sprite;
+import ui.RectShape;
+import ui.Styles;
+import ui.TF;
 
 /**
  * ...
@@ -10,9 +14,17 @@ import openfl.display.SimpleButton;
 class StartButton extends SimpleButton
 {
 
-	public function new(upState:DisplayObject=null, overState:DisplayObject=null, downState:DisplayObject=null, hitTestState:DisplayObject=null) 
+	public function new() 
 	{
-		super(upState, overState, downState, hitTestState);
+		
+		var upState = new Sprite();
+		upState.addChild(new RectShape(240, 32, 0x0080ff, 8, 0xffffff));
+		var startTf = new TF("Start mission", Styles.WHITE16);
+		startTf.x = (upState.width - startTf.width) / 2;
+		startTf.y = (upState.height - startTf.height) / 4;
+		upState.addChild(startTf);
+		
+		super(upState);
 		
 	}
 	

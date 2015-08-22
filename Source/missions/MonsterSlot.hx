@@ -1,16 +1,20 @@
 package missions;
+
 import openfl.display.Sprite;
 
 /**
  * ...
  * @author damrem
  */
-class ProgressBar extends Sprite
+class MonsterSlot extends Sprite
 {
 
 	public function new() 
 	{
 		super();
+		
+		graphics.lineStyle(2, 0x000000);
+		graphics.drawRect(0, 0, 32, 32);
 	}
 	
 }
