@@ -6,7 +6,7 @@ import monsters.Monster;
 import openfl.display.Sprite;
 
 
-class TestMain extends Sprite {
+class Main extends Sprite {
 	
 	
 	public function new () {
