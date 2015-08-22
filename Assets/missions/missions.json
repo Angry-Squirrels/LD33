@@ -1,0 +1,45 @@
+{
+	"missionsTypes" : [
+		{	
+			"name" : "Actor", 
+			"statCoef" : [2.0,1.5,0.5]
+		},
+		{
+			"name" : "Worker",
+			"statCoef" : [1.5,2.0,0.5]
+		},
+		{
+			"name" : "Fight",
+			"statCoef" : [2.0, 3.0, 0.2]
+		}
+	],
+	"missions" : [
+		{
+			"title" : "Actor",
+			"desc" : "for a shady anim production studio",
+			"type" : "Actor",
+			"requires" : ["tentacles"],
+			"duration" : 3,
+			"teamSize" : 1,
+			"rewardType" : "Gold"
+		},
+		{
+			"title" : "Builder",
+			"desc" : "construct a bridge in a dangerous area.",
+			"type" : "Worker",
+			"requires" : ["none"],
+			"duration" : 5,
+			"teamSize" : 2,
+			"rewardType" : "Gold"
+		},
+		{
+			"title" : "Capture",
+			"desc" : "Capture some more slaves!",
+			"type" : "Fight",
+			"requires" : ["none"],
+			"duration" : 2,
+			"teamSize" : 1,
+			"rewardType" : "Monster"
+		}
+	]
+}

@@ -3,11 +3,15 @@
 	
 	<meta title="LD33" package="com.sample.ld33" version="1.0.0" company="Company Name" />
 	<app main="Main" path="Export" file="LD33" />
+	<window width="800" height="480" framerate="60" />
 	
 	<source path="Source" />
+	
+	<haxeflag name="--macro include('rewards', true)" />
 	
 	<haxelib name="openfl" />
 	
 	<assets path="Assets" rename="assets" />
+	<assets path="Assets/missions" rename="missions" />
 	
 </project>

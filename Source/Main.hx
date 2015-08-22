@@ -1,6 +1,8 @@
 package;
 
 
+import missions.Mission;
+import monsters.Monster;
 import openfl.display.Sprite;
 
 
@@ -11,7 +13,9 @@ class Main extends Sprite {
 		
 		super ();
 		
-		
+		for (i in 0 ... 10) {
+			trace(Mission.get());
+		}
 		
 	}
 	
