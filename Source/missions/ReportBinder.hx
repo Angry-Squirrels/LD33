@@ -1,4 +1,4 @@
-package missions.sheets;
+package missions;
 import missions.sheets.ArchivedMissionSheet;
 import missions.sheets.EndedMissionSheet;
 import ui.Binder;
@@ -35,7 +35,7 @@ class ReportBinder extends Binder
 		archivedTab.addChild(archivedPile);
 		gameManager.archivedMissionsChanged.add(updateArchived);
 		updateArchived();
-		addTab(archivedTab);
+		//addTab(archivedTab);
 		
 		setCurrentTab(endedTab);
 	}

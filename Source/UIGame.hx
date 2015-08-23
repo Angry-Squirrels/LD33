@@ -4,7 +4,7 @@ import missions.sheets.AvailableMissionSheet;
 import missions.Mission;
 import missions.MissionBinder;
 import missions.sheets.AbstractMissionSheet;
-import missions.sheets.ReportBinder;
+import missions.ReportBinder;
 import monsters.Monster;
 import monsters.MonsterBinder;
 import monsters.MonsterListSheet;
@@ -28,7 +28,7 @@ class UIGame extends Sprite
 	var monsterBinder:MonsterBinder;
 	var missionBinder:MissionBinder;
 	var gameManager:GameManager;
-	var reportBinder:missions.sheets.ReportBinder;
+	var reportBinder:missions.ReportBinder;
 	//var monsterListSheet:monsters.MonsterListSheet;
 	//var missionSheet:missions.MissionSheet;
 	//var mission:missions.Mission;

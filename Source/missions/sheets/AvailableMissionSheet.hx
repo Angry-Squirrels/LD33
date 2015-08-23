@@ -3,6 +3,7 @@ import missions.sheets.AbstractMissionSheet;
 import monsters.Monster;
 import msignal.Signal.Signal0;
 import openfl.events.MouseEvent;
+import ui.TextButton;
 
 /**
  * ...
@@ -11,7 +12,7 @@ import openfl.events.MouseEvent;
 class AvailableMissionSheet extends AbstractMissionSheet
 {
 	public var monsterRequested:Signal0;
-	var startButton:StartButton;
+	var startButton:TextButton;
 	
 	public function new(mission:Mission, Width:Float=400, Height:Float=420) 
 	{
@@ -77,7 +78,7 @@ class AvailableMissionSheet extends AbstractMissionSheet
 	}
 	
 	function drawStartButton() {
-		startButton = new StartButton();
+		startButton = new TextButton("Start Mission");
 		disableStartButton();
 		
 		startButton.x = (contentWidth - startButton.width) / 2;

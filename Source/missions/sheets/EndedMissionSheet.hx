@@ -4,8 +4,10 @@ import missions.Mission;
 import monsters.Monster;
 import openfl.display.Bitmap;
 import openfl.display.Sprite;
+import openfl.events.MouseEvent;
 import ui.DataLine;
 import ui.Styles;
+import ui.TextButton;
 import ui.TF;
 
 /**
@@ -14,6 +16,7 @@ import ui.TF;
  */
 class EndedMissionSheet extends AbstractMissionSheet
 {
+	var btn:ui.TextButton;
 
 	public function new(mission:Mission, Width:Float=400, Height:Float=420) 
 	{
@@ -79,7 +82,19 @@ class EndedMissionSheet extends AbstractMissionSheet
 			
 			
 			
+			
+			
+			
 		}
+		
+		btn = new TextButton(mission.succeed?"Get that rewards":"F**k those losers");
+			btn.x = (contentWidth - btn.width) / 2;
+			btn.y = currentY;
+			content.addChild(btn);
+			currentY += btn.height;
+		btn.addEventListener(MouseEvent.CLICK, function(evt:MouseEvent) {
+				GameManager.getInstance().archiveMission(mission);
+			});
 	}
 	
 }
