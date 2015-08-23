@@ -25,13 +25,13 @@ class ConsoleMain
 	function new() {
 		mGame = GameManager.getInstance();
 		mGame.startNewDay();
-		mGame.addMonster();
 		
 		var choiceHandlers : Array<Dynamic> = [
 			listMissions,
 			listMonster,
 			listOnGoingMission,
 			listEndedMission,
+			goToMarket,
 			endTheDay
 		];
 		
@@ -43,7 +43,8 @@ class ConsoleMain
 						"2 : List sla... employee \n " +
 						"3 : List on going missions \n " +
 						"4 : List ended missions \n " +
-						"5 : End the day \n ");
+						"5 : Go to the market \n " +
+						"6 : End the day \n ");
 			var choice : Int = Std.parseInt(Sys.stdin().readLine());
 			choice--;
 			if (choice >= 0 && choice < choiceHandlers.length)
@@ -164,8 +165,55 @@ class ConsoleMain
 		
 	}
 	
+	function goToMarket() {
+		Sys.command("CLS");
+		Lib.println("-------------------------------------");
+		Lib.println("#           MONSTER MARKET          #");
+		Lib.println("-------------------------------------");
+		Lib.println("What to do ? \n 0: back \n 1: buy monsters \n 2: sell monsters \n ");
+		var choice : Int = Std.parseInt(Sys.stdin().readLine());
+		if (choice > 0 && choice <= 2) 
+			if (choice == 1)
+				buyMonster();
+			else if (choice == 2)
+				sellMonster();
+	}
+	
 	function onMissionSuccessChanceChanged() {
 		mGame.message("Mission success chance : " + Std.int(mCurrentMission.successChance * 100) + "%");
+	}
+	
+	function buyMonster() {
+		Sys.command("CLS");
+		Lib.println("-------------------------------------");
+		Lib.println("#           MONSTER MARKET          #");
+		Lib.println("-------------------------------------");
+		Lib.println("  Today offers : ");
+		var i = 0 ;
+		for (monster in mGame.market.monsterOnMarket) {
+			i++;
+			Lib.println("\t"+i+": " + monster + " cost : $" + monster.sellValue * mGame.market.buyValueMultiplier);
+		}
+		var choice = Std.parseInt(Sys.stdin().readLine());
+		if (choice > 0 && choice <= i)
+			mGame.market.buyMonster(mGame.market.monsterOnMarket[choice - 1]);
+	}
+	
+	function sellMonster() {
+		Sys.command("CLS");
+		Lib.println("-------------------------------------");
+		Lib.println("#           MONSTER MARKET          #");
+		Lib.println("-------------------------------------");
+		Lib.println("  What monster do you have to sell ?");
+		var i = 0 ;
+		var freeMonsters = mGame.getFreeMonster();
+		for (monster in freeMonsters) {
+			i++;
+			Lib.println("\t"+i+": " + monster + " cost : $" + monster.sellValue);
+		}
+		var choice = Std.parseInt(Sys.stdin().readLine());
+		if (choice > 0 && choice <= i)
+			mGame.market.sellMonster(freeMonsters[choice - 1]);
 	}
 	
 }
