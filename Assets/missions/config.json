@@ -77,6 +77,16 @@
 			"duration" : 7,
 			"teamSize" : 3,
 			"rewardType" : "SellUpgrade"
+		},
+		{
+			"title" : "Upgrade : Moar missions",
+			"desc" : "Upgrade your desk drawers so your cancelBubble stock more missions!",
+			"statCoef" : [1, 1, 7, 4],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 7,
+			"teamSize" : 3,
+			"rewardType" : "MissionNumberUpgrade"
 		}
 	]
 }

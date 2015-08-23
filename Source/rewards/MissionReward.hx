@@ -17,7 +17,7 @@ class MissionReward extends Reward
 	{
 		var tooMuchMissions = false;
 		for (i in 0 ... mQuantity) {
-			if(GameManager.getInstance().availableMissions < GameManager.getInstance().maxMissionNb * Upgrades.maxMissionUpgrade)
+			if(GameManager.getInstance().availableMissions.length < GameManager.getInstance().maxMissionNb * Upgrades.maxMissionUpgrade)
 				GameManager.getInstance().addMission("Contract");
 			else
 				tooMuchMissions = true;
