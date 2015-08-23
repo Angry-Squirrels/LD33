@@ -1,7 +1,15 @@
 package;
+import haxe.Json;
 import missions.Mission;
 import monsters.Monster;
 import msignal.Signal.Signal0;
+
+#if !neko
+import openfl.Assets;
+#else
+import sys.io.File; 
+#end
+
 
 /**
  * ...
@@ -28,13 +36,24 @@ class GameManager
 	public var endedMissionsChanged:Signal0;
 	public var archivedMission : Array<Mission>;
 	public var archivedMissionsChanged:Signal0;
+	public var maxMissionNb : UInt = 5;
 	
-	public var gold : UInt;
+	public var gold : Int;
 	public var day : UInt;
 	public var maxDay : UInt;
+	public var config : Dynamic;
 	
 	function new() 
 	{
+		// load config
+		var rawText : String = "";
+		#if neko
+		rawText = File.getContent("Assets/missions/missions.json");
+		#else
+		rawText = Assets.getText("missions/missions.json");
+		#end
+		config = Json.parse(rawText);
+		
 		monsters = new Array<Monster>();
 		availableMissions = new Array<Mission>();
 		availableMissionsChanged = new Signal0();
@@ -55,7 +74,9 @@ class GameManager
 	}
 	
 	public function addMission(type : String = "") {
-		availableMissions.push(Mission.get(getMonstersTiers(), type));
+		var missionTier : Int = Std.int(getMonstersTiers()) + Std.random(5) - 2;
+		if (missionTier < 1) missionTier = 1;
+		availableMissions.push(Mission.get(missionTier, type));
 		availableMissionsChanged.dispatch();
 	}
 	
@@ -74,16 +95,25 @@ class GameManager
 		
 		message("A new sun arise... Day " + day);
 		
+		
+		for(i in 0 ... maxMissionNb){
+			if (availableMissions.length < cast maxMissionNb)
+				addMission();
+			else
+				break;
+		}
+		
 		for (mission in ongoingMissions) {
 			mission.remainingTime--;
-			if (mission.remainingTime < 0) {
+			if (mission.remainingTime < 0){ 
 				endedMission.push(mission);
+				mission.end();
+			}
 				endedMissionsChanged.dispatch();
 			}
 		}
 		
 		for (mission in endedMission) {
-			mission.end();
 			ongoingMissions.remove(mission);
 			ongoingMissionsChanged.dispatch();
 		}
@@ -101,7 +131,14 @@ class GameManager
 	}
 	
 	public function endDay() {
+		message("A new moon is rising!");
 		
+		for (monster in monsters) {
+			gold -= monster.costOfLife;
+			message(monster.name + " costed you " + monster.costOfLife + " to stay alive.");
+		}
+		
+		startNewDay();
 	}
 	
 	public function getDate() : UInt {
@@ -132,6 +169,7 @@ class GameManager
 			ongoingMissions.push(mission);
 			ongoingMissionsChanged.dispatch();
 			mission.started = true;
+			message("Mission " + mission.title + " launched.");
 		}
 	}
 	

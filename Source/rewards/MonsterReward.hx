@@ -16,4 +16,10 @@ class MonsterReward extends Reward
 		return '$mQuantity monsters';		
 	}
 	
+	override public function take() 
+	{
+		for (i in 0 ... mQuantity)
+			GameManager.getInstance().addMonster();
+	}
+	
 }
