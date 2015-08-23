@@ -22,7 +22,7 @@ class MissionBinder extends Binder
 		trace("missionBinder");
 		super();
 		
-		availablePile = new SheetPile();
+		availablePile = new SheetPile(384, 464);
 		availablePile.y = 32;
 		
 		
@@ -32,13 +32,6 @@ class MissionBinder extends Binder
 		
 		var runningTab:Tab = new Tab("Running");
 		var availableTab:Tab = new Tab("Available");
-		
-		
-		
-		
-		
-		
-		
 		
 		availableTab.addChild(availablePile);
 		
