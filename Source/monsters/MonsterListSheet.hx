@@ -1,5 +1,7 @@
 package monsters;
 
+import msignal.Signal.Signal1;
+import openfl.events.MouseEvent;
 import ui.PaperSheet;
 
 /**
@@ -8,12 +10,17 @@ import ui.PaperSheet;
  */
 class MonsterListSheet extends PaperSheet
 {
+	public var pickMode:Bool;
+	public var monsterPicked:Signal1<Monster>;
 	var gameManager:GameManager;
+	var avatars:Array<MonsterAvatar>;//WARNING: if we can sell monsters, remove monster from here
 
 	public function new(gameManager:GameManager, Width:Float=400, Height:Float=480) 
 	{
 		super(Width, Height);
 		this.gameManager = gameManager;
+		
+		monsterPicked = new Signal1<Monster>();
 		
 		gameManager.addMonster();
 		gameManager.addMonster();
@@ -33,12 +40,29 @@ class MonsterListSheet extends PaperSheet
 		var nbMonsters = monsters.length;
 		var nbCols = Std.int(Width / (avatarSize+avatarMargin));
 		
+		avatars = new Array<MonsterAvatar>();
+		
 		for (i in 0...monsters.length) {
-			var monster = monsters[i];
-			var avatar = new MonsterAvatar(monster.picture, avatarSize);
+			
+			var monster:Monster = monsters[i];
+			
+			var avatar = new MonsterAvatar(monster, avatarSize);
+			avatars.push(avatar);
 			avatar.x = (i % nbCols) * (avatarSize+avatarMargin);
 			avatar.y = Std.int(i / nbCols) * (avatarSize+avatarMargin);
 			content.addChild(avatar);
+			
+			avatar.alpha = monster.currentMission != null?0.5:1;
+			//avatar.alpha = 0.5;
+			
+			avatar.addEventListener(MouseEvent.CLICK, function(evt:MouseEvent) {
+				trace(pickMode);
+				trace(monster.currentMission);
+				if (pickMode && monster.currentMission == null) {
+					trace("pickMode & available monster");
+					monsterPicked.dispatch(monster);
+				}
+			});
 		}
 		
 	}

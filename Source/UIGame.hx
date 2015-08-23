@@ -23,6 +23,9 @@ class UIGame extends Sprite
 	var monsterFile:File;
 	var missionFile:File;
 	var gameManager:GameManager;
+	var monsterListSheet:monsters.MonsterListSheet;
+	var missionSheet:missions.MissionSheet;
+	var mission:missions.Mission;
 	
 
 	public function new(gameManager:GameManager) 
@@ -38,11 +41,18 @@ class UIGame extends Sprite
 		
 		var monster = Monster.get();
 		
-		var monsterListSheet = new MonsterListSheet(gameManager);
+		monsterListSheet = new MonsterListSheet(gameManager);
+		monsterListSheet.visible = false;
 		
-		var mission = Mission.get();
-		var missionSheet = new MissionSheet(mission);
-		missionSheet.x = 400;
+		mission = gameManager.availableMissions[0];
+		missionSheet = new MissionSheet(mission);
+		missionSheet.x = 200;
+
+		
+		monsterListSheet.monsterPicked.add(addMonsterToMission);
+		
+		missionSheet.monsterRequested.add(openMonsterList);
+		
 		
 		addChild(desk);
 		
@@ -51,5 +61,21 @@ class UIGame extends Sprite
 		
 		
 	}
+	
+	function addMonsterToMission(monster:Monster) 
+	{
+		trace("addMonsterToMission(" + monster);
+		missionSheet.addMonster(monster);
+		monsterListSheet.visible = false;
+	}
+	
+	function openMonsterList() 
+	{
+		monsterListSheet.pickMode = true;
+		monsterListSheet.visible = true;
+		
+	}
+	
+	
 	
 }

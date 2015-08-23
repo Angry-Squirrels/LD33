@@ -11,7 +11,7 @@ import openfl.display.BitmapData;
  */
 class Monster
 {
-	public var busy : Mission;
+	public var currentMission : Mission;
 	
 	public var stats : Stats;
 	

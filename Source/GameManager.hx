@@ -109,7 +109,7 @@ class GameManager
 	
 	public function launchMission(mission : Mission) {
 		for (monster in mission.assignedMonsters) 
-			monster.busy = mission;
+			monster.currentMission = mission;
 		
 		if (mission.assignedMonsters.length > 0){
 			availableMissions.remove(mission);

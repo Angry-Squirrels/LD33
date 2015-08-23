@@ -2,6 +2,7 @@ package missions;
 
 import monsters.Monster;
 import monsters.MonsterAvatar;
+import msignal.Signal;
 import openfl.Assets;
 import openfl.display.SimpleButton;
 import openfl.display.Sprite;
@@ -22,12 +23,18 @@ class MissionSheet extends PaperSheet
 	var titleTf:TF;
 	var descriptionTf:TF;
 	var probBar:ProbabilityBar;
+	var slots:Array<MonsterSlot>;
+	var mission:Mission;
+	public var monsterRequested:Signal0;
 	
 	
 	
 	public function new(mission:Mission, Width:Float=400, Height:Float=480) 
 	{
 		super(Width, Height);
+		this.mission = mission;
+		
+		monsterRequested = new Signal0();
 		
 		//var contentWidth = w - 2 * hMargin;
 		
@@ -49,26 +56,57 @@ class MissionSheet extends PaperSheet
 		var teamLine:DataLine = new DataLine("Team", "0/" + mission.teamSize+"monster" + ((mission.teamSize > 1)?"s":""), contentWidth, Styles.BLACK16);
 		
 		var currentSlotX:Float = 0;
+		
+		slots = new Array<MonsterSlot>();
 		var slotHolder = new Sprite();
 		//trace('plop');
 		for (i in 0...mission.teamSize) 
 		{
 			var slot = new MonsterSlot();
+			slots.push(slot);
 			slot.x = currentSlotX;
 			currentSlotX += slot.width + slotMargin;
 			slotHolder.addChild(slot);
 			slot.addEventListener(MouseEvent.CLICK, function(evt:MouseEvent)
 			{
-				trace('click');
+				//trace('click');
+				/*
 				var monster = Monster.get();
 				slot.addAvatar(new MonsterAvatar(monster.picture, 32));
 				mission.assignMonster(monster);
+				*/
+				
+				if (slot.avatar==null) {					
+					monsterRequested.dispatch();
+				}
+				else
+				{
+					mission.unassignMonster(slot.avatar.monster);
+				}
 			});
 		}
+		
+		
 		
 		mission.successChanceChanged.add(function() {
 			trace(mission.successChance);
 			probBar.setPercentage(mission.successChance);
+		});
+		
+		mission.assignedMonstersChanged.add(function() {
+			
+			
+			
+			for (i in 0...slots.length) {
+				var slot = slots[i];
+				if (mission.assignedMonsters[i] != null)
+				{
+					var monster = mission.assignedMonsters[i];
+					slot.removeAvatar();
+					slot.setAvatar(new MonsterAvatar(mission.assignedMonsters[i], 32));
+				}
+				
+			}
 		});
 		
 		var requirementsTf = new TF("Requirement", Styles.BLACK16);
@@ -140,6 +178,22 @@ class MissionSheet extends PaperSheet
 		content.addChild(startButton);
 		currentY += startButton.height;
 		
+	}
+	
+	public function addMonster(monster:Monster) 
+	{
+		for (slot in slots)
+		{
+			if (slot.avatar==null)
+			{
+				slot.setAvatar(new MonsterAvatar(monster, 32));
+				mission.assignMonster(monster);				
+			}
+			else
+			{
+				continue;
+			}
+		}
 	}
 	
 	

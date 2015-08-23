@@ -44,11 +44,12 @@ class Mission
 	public var reward : Reward;
 	public var teamSize : UInt = 1;
 	public var type : String;
+	
 	public var successChance : Float = 0;
+	public var successChanceChanged : Signal0;
 	
 	public var assignedMonsters : Array<Monster>;
-	
-	public var successChanceChanged : Signal0;
+	public var assignedMonstersChanged : Signal0;
 	
 	static var mJson : Dynamic;
 	static var mListInited : Bool;
@@ -136,6 +137,7 @@ class Mission
 	{
 		requiredStats = new Stats();
 		assignedMonsters = new Array<Monster>();
+		assignedMonstersChanged = new Signal0();
 		successChanceChanged = new Signal0();
 	}
 	
@@ -146,21 +148,22 @@ class Mission
 	public function onRepportRead() 
 	{
 		for (monster in assignedMonsters) {
-			monster.busy = null;
+			monster.currentMission = null;
 		}
 	}
 	
 	public function assignMonster(monster : Monster) {
 		if (assignedMonsters.length < cast teamSize)
 			assignedMonsters.push(monster);
-			
 		computeSuccess();
+		assignedMonstersChanged.dispatch();
 	}
 	
 	public function unassignMonster(monster : Monster) {
 		assignedMonsters.remove(monster);
 		
 		computeSuccess();
+		assignedMonstersChanged.dispatch();
 	}
 	
 	function computeSuccess():Void 

@@ -9,10 +9,12 @@ import openfl.display.Sprite;
  */
 class MonsterSlot extends Sprite
 {
+	public var avatar:MonsterAvatar;
 	
 	public function new() 
 	{
 		super();
+		buttonMode = true;
 		
 		graphics.lineStyle(2, 0x000000);
 		graphics.beginFill(0x000000, 0);
@@ -25,9 +27,19 @@ class MonsterSlot extends Sprite
 		graphics.lineTo(16, 20);
 	}
 	
-	public function addAvatar(monsterAvatar:MonsterAvatar) 
+	public function setAvatar(monsterAvatar:MonsterAvatar) 
 	{
+		removeAvatar();
+		this.avatar = monsterAvatar;
 		addChild(monsterAvatar);
+	}
+	
+	public function removeAvatar()
+	{
+		if (avatar != null && avatar.parent == this) {			
+			removeChild(avatar);
+		}
+		avatar = null;
 	}
 	
 }
