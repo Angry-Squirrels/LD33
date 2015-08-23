@@ -7,67 +7,75 @@ package;
 class Stats
 {
 
-	public static inline var AGILITY = 0;
-	public static inline var STRENGHT = 1;
-	public static inline var INTEL = 2;
+	public static var statsName : Array<String>;
+	static var inited = false;
 	
 	public var g : Array<UInt>;
 	
-	public static function make(tier : UInt, coefA : Float = -1, coefS : Float = -1, coefI : Float = -1) : Stats {
+	public static function init() {
+		if (!inited) {
+			inited = true;
+			statsName = GameManager.getInstance().config.statsNames;
+		}	
+	}
+	
+	public static function make(tier : UInt, coefs : Array<Float> = null) : Stats {
+		init();
 		var stats = new Stats();
 		
-		if(coefA == -1 && coefS == -1 && coefI == -1){
-			var statType = Std.random(3);
-			switch(statType) {
-				case AGILITY :
-					coefA = 2;
-					coefS = 1;
-					coefI = 1;
-				case STRENGHT :
-					coefS = 2;
-					coefA = 1;
-					coefI = 1;
-				case INTEL :
-					coefI = 2;
-					coefA = 1;
-					coefS = 1;
-			}
+		if (coefs == null) {
+			coefs = new Array<Float>();
+			var statType = stats.g.length;
+			for (i in 0 ... 4) 
+				if (i + 1 == statType)
+					coefs.push(2.0);
+				else
+					coefs.push(1.0);
 		}
 		
 		for (i in 0 ... stats.g.length) 
-			stats.g[i] = Std.random(5) * tier;
-			
-		stats.g[AGILITY] = Std.int(stats.g[AGILITY] * coefA);
-		stats.g[STRENGHT] = Std.int(stats.g[STRENGHT] * coefS);
-		stats.g[INTEL] = Std.int(stats.g[INTEL] * coefI);
-		
-		stats.g[AGILITY] ++;
-		stats.g[STRENGHT] ++;
-		stats.g[INTEL] ++;
+			stats.g[i] = Std.int(Std.random(5) * tier * coefs[i] + 1);
 		
 		return stats;
 	}
 	
 	public function new() {
-		g = [0, 0, 0];
+		init();
+		g = new Array<UInt>();
+		for (i in 0 ... statsName.length)
+			g.push(0);
 	}
 	
-	public function getTier() : UInt {
+	public function getLevel() : UInt {
 		var bestStat = g[0];
 		for (stat in g)
 			if (stat > bestStat)
 				bestStat = stat;
 			
-		var tier = Math.ceil(bestStat / 10);
-		return tier;
+		var level = Math.ceil(bestStat / 10);
+		return level;
 	}
 	
 	public function toString() : String {
-		return "{A : " + g[Stats.AGILITY] + " S : " + g[Stats.STRENGHT] + " I : " + g[Stats.INTEL] + " tier : " + getTier() + "}";
+		var rep = "[";
+		var i = 0;
+		for (name in statsName){
+			rep += name + ": " + g[i];
+			i++;
+			if (i < statsName.length)
+				rep += ", ";
+			else
+				rep += "]";
+		}
+		rep += ", level: " + getLevel();
+		return rep;
 	}
 	
 	public function getTotal() : UInt {
-		return g[0] + g[1] + g[2];
+		var sum = 0;
+		for ( i in 0 ... g.length)
+			sum += g[i];
+		return sum;
 	}
 	
 }

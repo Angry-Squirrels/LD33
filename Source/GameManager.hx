@@ -85,7 +85,7 @@ class GameManager
 	public function getMonstersTiers() : Int {
 		var moy : Float = 0;
 		for (monster in monsters) 
-			moy += monster.stats.getTier();
+			moy += monster.stats.getLevel();
 		moy /= monsters.length;
 		moy = Math.ceil(moy);
 		if (moy == 0) moy = 1;
@@ -149,8 +149,6 @@ class GameManager
 			if (monster.currentMission == null)
 				rep.push(monster);
 				
-		if (rep.length == 0)
-			return null;
 		return rep;
 	}
 	

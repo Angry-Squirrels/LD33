@@ -107,10 +107,7 @@ class MissionSheet extends PaperSheet
 		});
 		
 		var requirementsTf = new TF("Requirement", Styles.BLACK16);
-		var brainDL:DataLine = new DataLine("Brain", cast(mission.requiredStats.g[Stats.INTEL]), contentWidth, Styles.BLACK12);
-		var agilityDL:DataLine = new DataLine("Agility", cast(mission.requiredStats.g[Stats.AGILITY]), contentWidth, Styles.BLACK12);
-		var muscleDL:DataLine = new DataLine("Muscle", cast(mission.requiredStats.g[Stats.STRENGHT]), contentWidth, Styles.BLACK12);
-		
+				
 		probBar = new ProbabilityBar(contentWidth, 32);
 		
 		startButton = new StartButton();
@@ -152,18 +149,13 @@ class MissionSheet extends PaperSheet
 		requirementsTf.y = currentY;
 		content.addChild(requirementsTf);
 		currentY += requirementsTf.height;
-		
-		brainDL.y = currentY;
-		content.addChild(brainDL);
-		currentY += brainDL.height;
-		
-		agilityDL.y = currentY;
-		content.addChild(agilityDL);
-		currentY += agilityDL.height;
-		
-		muscleDL.y = currentY;
-		content.addChild(muscleDL);
-		currentY += muscleDL.height;
+
+		for (i in 0 ... Stats.statsName.length) {
+			var statDL : DataLine = new DataLine(Stats.statsName[i], cast(mission.requiredStats.g[i]), contentWidth, Styles.BLACK12);
+			statDL.y = currentY;
+			content.addChild(statDL);
+			currentY += statDL.height;
+		}
 		
 		currentY += vMargin;
 		
