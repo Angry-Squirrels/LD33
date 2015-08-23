@@ -223,8 +223,8 @@ class Mission
 				monsterStats[i] += 1;
 			else {
 				var diff = statRequiredPerMonster[i] - monsterStats[i];
-				var gain = 0.1 * diff * diff;
-				monsterStats[i] += Std.int(gain);
+				var gain = 0.1 * (diff * diff)/2;
+				monsterStats[i] += Std.int(gain) + 1;
 			}
 		}
 	}

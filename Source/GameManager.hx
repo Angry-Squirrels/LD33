@@ -23,6 +23,7 @@ class GameManager
 	public var ongoingMissions : Array<Mission>;
 	public var endedMission : Array<Mission>;
 	public var archivedMission : Array<Mission>;
+	public var maxMissionNb : UInt = 5;
 	
 	public var gold : UInt;
 	public var day : UInt;
@@ -64,16 +65,27 @@ class GameManager
 		
 		message("A new sun arise... Day " + day);
 		
-		for (mission in ongoingMissions) {
-			mission.remainingTime--;
-			if (mission.remainingTime < 0) 
-				endedMission.push(mission);
+		
+		for(i in 0 ... maxMissionNb){
+			if (availableMissions.length < maxMissionNb){
+				var missionTier = getMonstersTiers() + Std.random(5) - 2;
+				if (missionTier < 1) missionTier = 1;
+				addMission(missionTier);
+			}
+			else
+				break;
 		}
 		
-		for (mission in endedMission) {
-			mission.end();
-			ongoingMissions.remove(mission);
+		for (mission in ongoingMissions) {
+			mission.remainingTime--;
+			if (mission.remainingTime < 0){ 
+				endedMission.push(mission);
+				mission.end();
+			}
 		}
+		
+		for (mission in endedMission) 
+			ongoingMissions.remove(mission);
 		
 		// check that a capture mission is available
 		var captureAvailable = false;

@@ -149,7 +149,7 @@ class ConsoleMain
 		var i = 0;
 		var availble = new Array<Monster>();
 		for (monster in mGame.monsters) {
-			if (monster.busy == null){
+			if (monster.currentMission == null){
 				i++;
 				Lib.println(i + " : " + monster);
 				availble.push(monster);
