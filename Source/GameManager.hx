@@ -36,12 +36,12 @@ class GameManager
 	public var endedMissionsChanged:Signal0;
 	public var archivedMission : Array<Mission>;
 	public var archivedMissionsChanged:Signal0;
-	public var maxMissionNb : UInt = 10;
-	public var maxMonsterNb : UInt = 5;
+	public var maxMissionNb : Int = 10;
+	public var maxMonsterNb : Int = 5;
 	public var market : MonsterMarket;
 	
 	public var gold : Int;
-	public var day : UInt;
+	public var day : Int;
 	public var maxDay : UInt;
 	public var config : Dynamic;
 	
