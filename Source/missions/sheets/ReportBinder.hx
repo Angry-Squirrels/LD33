@@ -1,4 +1,4 @@
-package rewards;
+package missions.sheets;
 import missions.sheets.ArchivedMissionSheet;
 import missions.sheets.EndedMissionSheet;
 import ui.Binder;

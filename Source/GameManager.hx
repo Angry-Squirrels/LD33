@@ -108,6 +108,7 @@ class GameManager
 		
 		for (mission in ongoingMissions) {
 			mission.remainingTime--;
+			mission.remainingTimeChanged.dispatch(mission.remainingTime);
 			if (mission.remainingTime < 0){ 
 				endedMission.push(mission);
 				mission.end();
