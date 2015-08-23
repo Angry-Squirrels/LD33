@@ -58,9 +58,9 @@ class SheetPile extends Sprite
 		trace("next?");
 		if (currentSheetIndex < sheets.length - 1) {
 			trace("next!");
-			sheets[currentSheetIndex].visible = false;
+			sheets[currentSheetIndex].disactivate();
 			currentSheetIndex++;
-			sheets[currentSheetIndex].visible = true;
+			sheets[currentSheetIndex].activate();
 			
 		}
 	}
@@ -69,9 +69,9 @@ class SheetPile extends Sprite
 		trace("prev?");
 		if (currentSheetIndex > 0) {
 			trace("prev!");
-			sheets[currentSheetIndex].visible = false;
+			sheets[currentSheetIndex].disactivate();
 			currentSheetIndex--;
-			sheets[currentSheetIndex].visible = true;
+			sheets[currentSheetIndex].activate();
 			
 		}
 	}

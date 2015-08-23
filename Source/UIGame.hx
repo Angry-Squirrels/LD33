@@ -40,18 +40,18 @@ class UIGame extends Sprite
 		desk = new Desk();
 		
 		monsterBinder = new MonsterBinder();
-		monsterBinder.monsterPicked.add(addMonsterToMission);
-		
-		
-		//monsterFile.x = monsterFile.y = 16;
-		
-		
-		
+		monsterBinder.rotation = -10;
+
 		missionBinder = new MissionBinder();
-		missionBinder.monsterRequested.add(openMonsterList);
-		
 		missionBinder.x = 400;
 		missionBinder.rotation = 5;
+		
+		monsterBinder.monsterPicked.add(addMonsterToMission);
+		missionBinder.monsterRequested.add(openMonsterListForPicking);
+		
+		monsterBinder.isOpenedChanged.add(closeOthersThanMonsterBinder);
+		missionBinder.isOpenedChanged.add(closeOthersThanMissionBinder);
+		
 		//reportFile = new ReportFile();
 		//researchFile = new File();
 		
@@ -85,15 +85,31 @@ class UIGame extends Sprite
 		
 	}
 	
+	function closeOthersThanMissionBinder(isOpened:Bool) 
+	{
+		if (isOpened) {
+			monsterBinder.close();
+			//...
+		}
+	}
+	
+	function closeOthersThanMonsterBinder(isOpened:Bool) 
+	{
+		if (isOpened) {
+			missionBinder.close();
+		}
+	}
+	
 	function addMonsterToMission(monster:Monster) 
 	{
 		trace("addMonsterToMission(" + monster);
 		cast(missionBinder.availablePile.getCurrentSheet(), MissionSheet).addMonster(monster);
 		monsterBinder.listSheet.pickMode = false;
-		monsterBinder.close();
+		//monsterBinder.close();
+		missionBinder.open();
 	}
 	
-	function openMonsterList() 
+	function openMonsterListForPicking() 
 	{
 		trace("openMonsterList");
 		monsterBinder.listSheet.pickMode = true;

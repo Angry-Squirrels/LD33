@@ -20,4 +20,12 @@ class PaperSheet extends PaperObject
 		bg.graphics.endFill();
 	}
 	
+	public function activate() {
+		visible = true;
+	}
+	
+	public function disactivate() {
+		visible = false;
+	}
+	
 }

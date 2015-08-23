@@ -238,7 +238,12 @@ class MissionSheet extends PaperSheet
 		startButton.buttonMode = true;
 	}
 	
-	
+	override public function disactivate() {
+		super.disactivate();
+		for (monster in mission.assignedMonsters) {
+			mission.unassignMonster(monster);
+		}
+	}
 	
 }
 
