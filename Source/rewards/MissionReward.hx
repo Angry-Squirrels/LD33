@@ -15,8 +15,15 @@ class MissionReward extends Reward
 	
 	override public function take(monsters:Array<Monster>) 
 	{
-		for(i in 0 ... mQuantity)
-			GameManager.getInstance().addMission("Contract");
+		var tooMuchMissions = false;
+		for (i in 0 ... mQuantity) {
+			if(GameManager.getInstance().availableMissions.length < GameManager.getInstance().maxMissionNb * Upgrades.maxMissionUpgrade)
+				GameManager.getInstance().addMission("Contract");
+			else
+				tooMuchMissions = true;
+		}
+		if(tooMuchMissions)
+			GameManager.getInstance().message("You reached your max pending contract number. You need to upgrade to stock more contract.");
 	}
 	
 	public function toString() : String {

@@ -22,14 +22,14 @@ class Monster
 	public var name : String;
 	public var picture : BitmapData;
 	
-	public var costOfLife(get, null) : UInt;
+	public var costOfLife(get, null) : Int;
 	
-	public var sellValue(get, null) : UInt;
-	public var buyValue(get, null) : UInt;
+	public var sellValue(get, null) : Int;
+	public var buyValue(get, null) : Int;
 	
 	var mCostOfLife : Float = 0;
-	var mSellValue : UInt = 0;
-	var mBuyValue : UInt = 0;
+	var mSellValue : Int = 0;
+	var mBuyValue : Int = 0;
 	
 	public static function get(level : UInt = 1) : Monster {
 		var monster = new monsters.Monster();
