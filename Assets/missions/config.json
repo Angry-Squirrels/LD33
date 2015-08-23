@@ -57,6 +57,16 @@
 			"duration" : 2,
 			"teamSize" : 1,
 			"rewardType" : "Mission"
+		},
+		{
+			"title" : "Upgrade : Better price",
+			"desc" : "\"Kindly\" ask your minions to to train to negociate, allowing your to buy slaves at a lower price.",
+			"statCoef" : [1, 1, 7, 4],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 7,
+			"teamSize" : 3,
+			"rewardType" : "BuyUpgrade"
 		}
 	]
 }

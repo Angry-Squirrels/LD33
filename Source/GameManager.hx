@@ -36,7 +36,8 @@ class GameManager
 	public var endedMissionsChanged:Signal0;
 	public var archivedMission : Array<Mission>;
 	public var archivedMissionsChanged:Signal0;
-	public var maxMissionNb : UInt = 5;
+	public var maxMissionNb : UInt = 10;
+	public var maxMonsterNb : UInt = 5;
 	public var market : MonsterMarket;
 	
 	public var gold : Int;
@@ -92,19 +93,17 @@ class GameManager
 		return Std.int(moy);
 	}
 	
-	public function startNewDay() {
+	public function checkUpgrade() {
+		// update with upgrade
+		maxMissionNb = Upgrades.maxMissionUpgrade * 10;
+		maxMonsterNb = Upgrades.maxMonsterUpgrade * 5;
+	}
+	
+	public function startNewDay() {		
 		day++;
 		
 		message("A new sun arise... Day " + day);
 		market.newDay();
-		
-		
-		/*for(i in 0 ... maxMissionNb){
-			if (availableMissions.length < cast maxMissionNb)
-				addMission();
-			else
-				break;
-		}*/
 		
 		for (mission in ongoingMissions) {
 			mission.remainingTime--;

@@ -3,7 +3,7 @@
 	
 	<meta title="LD33" package="com.sample.ld33" version="1.0.0" company="Company Name" />
 	<app main="Main" path="Export" file="LD33" />
-	<window width="800" height="480" framerate="60" />
+	<window width="800" height="480" framerate="60" background="#000000" />
 	
 	<source path="Source" />
 	

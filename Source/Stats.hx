@@ -34,7 +34,7 @@ class Stats
 		
 		while (availablePoints > 0) {
 			var statToAsign = Std.random(coefs.length);
-			var pointToGive = coefs[statToAsign];
+			var pointToGive : UInt = coefs[statToAsign];
 			if (pointToGive > availablePoints)
 				pointToGive = availablePoints;
 			availablePoints -= pointToGive;
