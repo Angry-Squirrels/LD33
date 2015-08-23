@@ -18,7 +18,7 @@ class Reward
 	public function computeQuantity(tier:UInt, mission:Mission){
 	}
 	
-	public function onTake() {
+	public function take() {
 		trace("You take " + this);
 	}
 	

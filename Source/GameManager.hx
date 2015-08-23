@@ -88,7 +88,8 @@ class GameManager
 	}
 	
 	public function endDay() {
-		
+		message("A new moon is rising!");
+		startNewDay();
 	}
 	
 	public function getDate() : UInt {
@@ -115,6 +116,7 @@ class GameManager
 			mission.remainingTime = mission.duration;
 			ongoingMissions.push(mission);
 			mission.started = true;
+			message("Mission " + mission.title + " launched.");
 		}
 	}
 	

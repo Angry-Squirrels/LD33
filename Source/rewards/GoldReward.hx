@@ -16,9 +16,9 @@ class GoldReward extends Reward
 		mQuantity = points;
 	}
 	
-	override public function onTake() 
+	override public function take() 
 	{
-		super.onTake();
+		GameManager.getInstance().gold += mQuantity;
 	}
 	
 	public function toString() : String {

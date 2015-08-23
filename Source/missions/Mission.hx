@@ -1,5 +1,5 @@
 package missions;
-import flash.Boot;
+
 import monsters.Monster;
 import msignal.Signal;
 import openfl.desktop.ClipboardTransferMode;
@@ -37,7 +37,7 @@ class Mission
 	public var requiredStats : Stats;
 	
 	public var duration : UInt = 1;
-	public var remainingTime : UInt;
+	public var remainingTime : Int;
 	public var creationDate : UInt;
 	public var title : String;
 	public var description : String;
@@ -152,9 +152,9 @@ class Mission
 	
 	public function onRepportRead() 
 	{
-		for (monster in assignedMonsters) {
+		for (monster in assignedMonsters) 
 			monster.busy = null;
-		}
+		reward.take();
 	}
 	
 	public function assignMonster(monster : Monster) {
@@ -180,11 +180,48 @@ class Mission
 			succeed = true;
 		else
 			succeed = false;
-			
-		for (monster in assignedMonsters)
-			monster.busy = null;
-			
 		
+		for (monster in assignedMonsters) {
+			
+			var beforeXp = new Array<UInt>();
+			var afterXp = new Array<UInt>();
+			
+			for (g in monster.stats.g)
+				beforeXp.push(g);
+				
+			// compute xp gain
+			if (succeed)
+				giveXP(monster);
+			
+			for (g in monster.stats.g)
+				afterXp.push(g);
+				
+			var newProgress = {before : beforeXp, after : afterXp};
+			
+			monsterProgress[monster] = newProgress;
+		}
+		
+		GameManager.getInstance().message("Mission " + title + " ended.");
+		
+	}
+	
+	function giveXP(monster : Monster){
+		var agiRequiered = requiredStats.g[Stats.AGILITY] / assignedMonsters.length;
+		var strRequired = requiredStats.g[Stats.STRENGHT] / assignedMonsters.length;
+		var intRequired = requiredStats.g[Stats.INTEL] / assignedMonsters.length;
+		
+		var statRequiredPerMonster : Array<Float> = [agiRequiered, strRequired, intRequired];
+		
+		var monsterStats = monster.stats.g;
+		for (i in 0 ... monsterStats.length) {
+			if (monsterStats[i] >= statRequiredPerMonster[i])
+				monsterStats[i] += 1;
+			else {
+				var diff = statRequiredPerMonster[i] - monsterStats[i];
+				var gain = 0.1 * diff * diff;
+				monsterStats[i] += Std.int(gain);
+			}
+		}
 	}
 	
 	function computeSuccess():Void 
@@ -207,7 +244,7 @@ class Mission
 		if (successS > 1) successS = 1;
 		if (successI > 1) successI = 1;
 		
-		var successChance = (successA + successS + successI) / 3;
+		successChance = (successA + successS + successI) / 3;
 		successChanceChanged.dispatch();
 	}
 	

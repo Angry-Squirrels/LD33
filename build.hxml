@@ -4,4 +4,5 @@
 -neko test.n 
 -lib openfl 
 -lib lime 
+-lib msignal
 --macro include("rewards")
