@@ -1,6 +1,6 @@
 package ui;
 
-import missions.MissionSheet;
+import missions.AbstractMissionSheet;
 import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.display.Sprite;

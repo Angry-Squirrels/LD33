@@ -56,7 +56,7 @@ class MissionBinder extends Binder
 		
 		var missions = gameManager.ongoingMissions;
 		for (mission in missions) {
-			var missionSheet = new MissionSheet(mission);
+			var missionSheet = new RunningMissionSheet(mission);
 			runningPile.addSheet(missionSheet);
 		}
 	}
@@ -68,7 +68,7 @@ class MissionBinder extends Binder
 		var missions = gameManager.availableMissions;
 		for(mission in missions)
 		{
-			var missionSheet = new MissionSheet(mission);
+			var missionSheet = new AvailableMissionSheet(mission);
 			missionSheet.monsterRequested.add(monsterRequested.dispatch);
 			availablePile.addSheet(missionSheet);
 		}

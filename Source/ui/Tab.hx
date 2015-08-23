@@ -31,7 +31,7 @@ class Tab extends PaperObject
 		bg.alpha = 0.5;
 		bg.height -= 32;
 		bg.y = 32;
-		draw();
+		drawBg();
 		bg.graphics.endFill();
 		
 		label.addChild(titleBg);

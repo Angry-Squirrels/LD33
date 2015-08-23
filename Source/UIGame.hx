@@ -1,8 +1,9 @@
 package;
 
+import missions.AvailableMissionSheet;
 import missions.Mission;
 import missions.MissionBinder;
-import missions.MissionSheet;
+import missions.AbstractMissionSheet;
 import missions.ReportFile;
 import monsters.Monster;
 import monsters.MonsterBinder;
@@ -103,7 +104,7 @@ class UIGame extends Sprite
 	function addMonsterToMission(monster:Monster) 
 	{
 		trace("addMonsterToMission(" + monster);
-		cast(missionBinder.availablePile.getCurrentSheet(), MissionSheet).addMonster(monster);
+		cast(missionBinder.availablePile.getCurrentSheet(), AvailableMissionSheet).addMonster(monster);
 		monsterBinder.listSheet.pickMode = false;
 		//monsterBinder.close();
 		missionBinder.open();

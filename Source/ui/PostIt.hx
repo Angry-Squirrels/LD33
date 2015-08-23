@@ -14,7 +14,7 @@ class PostIt extends PaperObject
 		super(Width, Height, hMargin, vMargin);
 		
 		graphics.beginFill(0xffffa0);
-		draw();
+		drawBg();
 		graphics.endFill();
 		
 	}
