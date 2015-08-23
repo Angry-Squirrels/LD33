@@ -3,6 +3,7 @@ package missions;
 import monsters.Monster;
 import monsters.MonsterAvatar;
 import msignal.Signal;
+import msignal.Slot;
 import openfl.Assets;
 import openfl.display.SimpleButton;
 import openfl.display.Sprite;
@@ -25,12 +26,14 @@ class MissionSheet extends PaperSheet
 	var probBar:ProbabilityBar;
 	var slots:Array<MonsterSlot>;
 	var mission:Mission;
+	var startButton:StartButton;
 	public var monsterRequested:Signal0;
 	
 	
 	
-	public function new(mission:Mission, Width:Float=400, Height:Float=480) 
+	public function new(mission:Mission, Width:Float=400, Height:Float=420) 
 	{
+		trace("missionSheet");
 		super(Width, Height);
 		this.mission = mission;
 		
@@ -67,23 +70,7 @@ class MissionSheet extends PaperSheet
 			slot.x = currentSlotX;
 			currentSlotX += slot.width + slotMargin;
 			slotHolder.addChild(slot);
-			slot.addEventListener(MouseEvent.CLICK, function(evt:MouseEvent)
-			{
-				//trace('click');
-				/*
-				var monster = Monster.get();
-				slot.addAvatar(new MonsterAvatar(monster.picture, 32));
-				mission.assignMonster(monster);
-				*/
-				
-				if (slot.avatar==null) {					
-					monsterRequested.dispatch();
-				}
-				else
-				{
-					mission.unassignMonster(slot.avatar.monster);
-				}
-			});
+			slot.addEventListener(MouseEvent.CLICK, onSlotClicked);
 		}
 		
 		
@@ -98,6 +85,13 @@ class MissionSheet extends PaperSheet
 			trace("assignedMonstersChanged");
 			
 			trace(mission.assignedMonsters);
+			
+			if (mission.assignedMonsters.length==0) {
+				disableStartButton();
+			}
+			else {
+				enableStartButton();
+			}
 			
 			for (i in 0...slots.length) {
 				var slot = slots[i];
@@ -118,7 +112,9 @@ class MissionSheet extends PaperSheet
 		
 		probBar = new ProbabilityBar(contentWidth, 32);
 		
-		var startButton:StartButton = new StartButton();
+		startButton = new StartButton();
+		disableStartButton();
+		
 		startButton.x = (contentWidth - startButton.width) / 2;
 		
 		var currentY:Float = vMargin;
@@ -182,6 +178,20 @@ class MissionSheet extends PaperSheet
 		
 	}
 	
+	private function onSlotClicked(evt:MouseEvent):Void 
+	{
+	
+			var slot:MonsterSlot = cast(evt.currentTarget);
+			if (slot.avatar==null) {					
+				monsterRequested.dispatch();
+			}
+			else
+			{
+				mission.unassignMonster(slot.avatar.monster);
+			}
+			
+	}
+	
 	public function addMonster(monster:Monster) 
 	{
 		for (slot in slots)
@@ -199,5 +209,32 @@ class MissionSheet extends PaperSheet
 	}
 	
 	
+	function launch(evt:MouseEvent = null) {
+		trace("launch");
+		GameManager.getInstance().launchMission(mission);
+			
+		disableStartButton();
+		
+		for (slot in slots) {
+			slot.removeEventListener(MouseEvent.CLICK, onSlotClicked);
+			slot.buttonMode = false;
+		}
+	}
+	
+	
+	function disableStartButton() {
+		startButton.removeEventListener(MouseEvent.CLICK, launch);
+		startButton.alpha = 0.5;
+		startButton.buttonMode = false;
+	}
+	
+	function enableStartButton() {
+		startButton.addEventListener(MouseEvent.CLICK, launch);
+		startButton.alpha = 1;
+		startButton.buttonMode = true;
+	}
+	
+	
 	
 }
+

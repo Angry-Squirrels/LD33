@@ -11,7 +11,7 @@ import ui.TF;
  * ...
  * @author damrem
  */
-class StartButton extends SimpleButton
+class StartButton extends Sprite
 {
 
 	public function new() 
@@ -24,7 +24,9 @@ class StartButton extends SimpleButton
 		startTf.y = (upState.height - startTf.height) / 4;
 		upState.addChild(startTf);
 		
-		super(upState);
+		addChild(upState);
+		
+		super();
 		
 	}
 	

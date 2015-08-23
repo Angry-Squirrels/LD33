@@ -7,7 +7,7 @@ import openfl.display.Sprite;
  * ...
  * @author damrem
  */
-class AbstractPaperObject extends Sprite
+class PaperObject extends Sprite
 {
 	var h:Float;
 	var w:Float;
