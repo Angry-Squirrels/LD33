@@ -13,7 +13,7 @@ import ui.RectShape;
 class MonsterAvatar extends Sprite
 {
 	public var monster:Monster;
-	public function new(monster:Monster, size:Float) 
+	public function new(monster:Monster, size:Float, fadeOnBusy:Bool=false) 
 	{
 		super();
 		this.monster = monster;
@@ -30,6 +30,16 @@ class MonsterAvatar extends Sprite
 		addChild(clicker);
 		
 		//width = height = size;
+		
+		if (fadeOnBusy) {
+			monster.currentMissionChanged.add(function(currentMission) {
+				if (currentMission == null) alpha = 1;
+				else 
+				{
+					alpha = 0.5;
+				}
+			});
+		}
 		
 	}
 	
