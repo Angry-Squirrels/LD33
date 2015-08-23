@@ -130,12 +130,9 @@ class ConsoleMain
 			Lib.println("Fail !");
 		for (monster in mission.assignedMonsters) {
 			Lib.println(monster.name);
-			Lib.println("\t agi " 	+ mission.monsterProgress[monster].before[Stats.AGILITY] + 
-						" --> " 	+ mission.monsterProgress[monster].after[Stats.AGILITY]);
-			Lib.println("\t str " 	+ mission.monsterProgress[monster].before[Stats.STRENGHT] + 
-						" --> " 	+ mission.monsterProgress[monster].after[Stats.STRENGHT]);
-			Lib.println("\t int " 	+ mission.monsterProgress[monster].before[Stats.INTEL] + 
-						" --> " 	+ mission.monsterProgress[monster].after[Stats.INTEL]);
+			for (i in 0 ... Stats.statsName.length)
+				Lib.println("\t" + Stats.statsName[i]+": " + mission.monsterProgress[monster].before[i] + 
+						" --> " 	+ mission.monsterProgress[monster].after[i]);
 		}
 		Lib.println("Enter to go back.");
 		var rep = Sys.stdin().readLine();

@@ -117,13 +117,9 @@ class Mission
 		var missionType : MissionType = null;
 		for (type in mTypeList)
 			if (type.name == missionDesc.type)
-				missionType = type;
+				missionType = type;	
 		
-		var coefA = missionType.statCoef[Stats.AGILITY];		
-		var coefS = missionType.statCoef[Stats.STRENGHT];		
-		var coefI = missionType.statCoef[Stats.INTEL];		
-		
-		mission.requiredStats = Stats.make(tier, coefA, coefS, coefI);
+		mission.requiredStats = Stats.make(tier, missionType.statCoef);
 		
 		var rewardClass : Class<Dynamic> = Type.resolveClass("rewards." + missionDesc.rewardType+"Reward");
 		mission.reward = Type.createInstance(rewardClass, []);
@@ -164,7 +160,6 @@ class Mission
 	}
 	
 	public function unassignMonster(monster : Monster) {
-		trace("unassignMonster(" + monster);
 		assignedMonsters.remove(monster);
 		monster.currentMission = null;
 		
@@ -205,11 +200,9 @@ class Mission
 	}
 	
 	function giveXP(monster : Monster){
-		var agiRequiered = requiredStats.g[Stats.AGILITY] / assignedMonsters.length;
-		var strRequired = requiredStats.g[Stats.STRENGHT] / assignedMonsters.length;
-		var intRequired = requiredStats.g[Stats.INTEL] / assignedMonsters.length;
-		
-		var statRequiredPerMonster : Array<Float> = [agiRequiered, strRequired, intRequired];
+		var statRequiredPerMonster = new Array<Float>();
+		for (i in 0 ... monster.stats.g.length) 
+			statRequiredPerMonster.push(requiredStats.g[i] / assignedMonsters.length);
 		
 		var monsterStats = monster.stats.g;
 		for (i in 0 ... monsterStats.length) {
@@ -224,26 +217,26 @@ class Mission
 	}
 	
 	function computeSuccess():Void 
-	{
-		var sumAgi = 0;
-		var sumStr = 0;
-		var sumInt = 0;
+	{	
+		var sumStat = new Array<UInt>();
+		for (i in 0 ... requiredStats.g.length) 
+			sumStat.push(0);
 		
-		for (monster in assignedMonsters) {
-			sumAgi += monster.stats.g[Stats.AGILITY];
-			sumStr += monster.stats.g[Stats.STRENGHT];
-			sumInt += monster.stats.g[Stats.INTEL];
+		for (monster in assignedMonsters) 
+			for(i in 0 ... monster.stats.g.length)
+				sumStat[i] += monster.stats.g[i];
+			
+		var successStat = new Array<Float>();		
+		successChance = 0;
+		
+		for (i in 0 ... requiredStats.g.length){
+			successStat.push(sumStat[i] / requiredStats.g[i]);
+			if (successStat[i] > 1) successStat[i] = 1;
+			successChance += successStat[i];
 		}
 		
-		var successA = sumAgi / requiredStats.g[Stats.AGILITY];
-		var successS = sumStr / requiredStats.g[Stats.STRENGHT];
-		var successI = sumInt / requiredStats.g[Stats.INTEL];
+		successChance /= successStat.length;
 		
-		if (successA > 1) successA = 1;
-		if (successS > 1) successS = 1;
-		if (successI > 1) successI = 1;
-		
-		successChance = (successA + successS + successI) / 3;
 		successChanceChanged.dispatch();
 	}
 	
