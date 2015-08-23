@@ -92,13 +92,7 @@ class GameManager
 		if (moy == 0) moy = 1;
 		return Std.int(moy);
 	}
-	
-	public function checkUpgrade() {
-		// update with upgrade
-		maxMissionNb = Upgrades.maxMissionUpgrade * 10;
-		maxMonsterNb = Upgrades.maxMonsterUpgrade * 5;
-	}
-	
+
 	public function startNewDay() {		
 		day++;
 		
