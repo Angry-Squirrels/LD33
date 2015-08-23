@@ -7,7 +7,7 @@ import openfl.display.Sprite;
  * ...
  * @author damrem
  */
-class PaperSheet extends AbstractPaperObject
+class PaperSheet extends PaperObject
 {
 
 	public function new(Width:Float=400, Height:Float=480) 

@@ -1,11 +1,11 @@
-package ui;
-import openfl.display.Sprite;
+package missions;
+import ui.Binder;
 
 /**
  * ...
  * @author damrem
  */
-class File extends Sprite
+class ReportFile extends Binder
 {
 
 	public function new() 

@@ -1,6 +1,7 @@
 package;
 import missions.Mission;
 import monsters.Monster;
+import msignal.Signal.Signal0;
 
 /**
  * ...
@@ -20,9 +21,13 @@ class GameManager
 	public var monsters : Array<Monster>;
 	
 	public var availableMissions : Array<Mission>;
+	public var availableMissionsChanged:Signal0;
 	public var ongoingMissions : Array<Mission>;
+	public var ongoingMissionsChanged:Signal0;
 	public var endedMission : Array<Mission>;
+	public var endedMissionsChanged:Signal0;
 	public var archivedMission : Array<Mission>;
+	public var archivedMissionsChanged:Signal0;
 	
 	public var gold : UInt;
 	public var day : UInt;
@@ -32,9 +37,13 @@ class GameManager
 	{
 		monsters = new Array<Monster>();
 		availableMissions = new Array<Mission>();
+		availableMissionsChanged = new Signal0();
 		ongoingMissions = new Array<Mission>();
+		ongoingMissionsChanged = new Signal0();
 		endedMission = new Array<Mission>();
+		endedMissionsChanged = new Signal0();
 		archivedMission = new Array<Mission>();
+		archivedMissionsChanged = new Signal0();
 		
 		day = 0;
 		maxDay = 42;
@@ -47,6 +56,7 @@ class GameManager
 	
 	public function addMission(type : String = "") {
 		availableMissions.push(Mission.get(getMonstersTiers(), type));
+		availableMissionsChanged.dispatch();
 	}
 	
 	public function getMonstersTiers() : UInt {
@@ -66,13 +76,16 @@ class GameManager
 		
 		for (mission in ongoingMissions) {
 			mission.remainingTime--;
-			if (mission.remainingTime < 0) 
+			if (mission.remainingTime < 0) {
 				endedMission.push(mission);
+				endedMissionsChanged.dispatch();
+			}
 		}
 		
 		for (mission in endedMission) {
 			mission.end();
 			ongoingMissions.remove(mission);
+			ongoingMissionsChanged.dispatch();
 		}
 		
 		// check that a capture mission is available
@@ -105,15 +118,19 @@ class GameManager
 	
 	public function archiveMission(mission : Mission) {
 		endedMission.remove(mission);
+		endedMissionsChanged.dispatch();
 		archivedMission.push(mission);
+		archivedMissionsChanged.dispatch();
 		mission.onRepportRead();
 	}
 	
 	public function launchMission(mission : Mission) {
 		if (mission.assignedMonsters.length > 0){
 			availableMissions.remove(mission);
+			availableMissionsChanged.dispatch();
 			mission.remainingTime = mission.duration;
 			ongoingMissions.push(mission);
+			ongoingMissionsChanged.dispatch();
 			mission.started = true;
 		}
 	}

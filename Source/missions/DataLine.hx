@@ -3,6 +3,7 @@ import openfl.display.Sprite;
 import openfl.text.TextField;
 import openfl.text.TextFieldAutoSize;
 import openfl.text.TextFormat;
+import ui.Styles;
 import ui.TF;
 
 /**
@@ -25,11 +26,9 @@ class DataLine extends Sprite
 		super();
 		
 		var labelTf:TF = new TF(label, format);
-		labelTf.embedFonts = true;
 		labelTf.height = heightLine;
 		
-		valueTf = new TF(value, format, TextFieldAutoSize.RIGHT);
-		labelTf.embedFonts = true;
+		valueTf = new TF(value, format/*, TextFieldAutoSize.RIGHT*/);
 		valueTf.height = heightLine;
 		valueTf.x = Width - valueTf.width;
 		

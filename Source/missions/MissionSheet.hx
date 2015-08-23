@@ -31,7 +31,7 @@ class MissionSheet extends PaperSheet
 	
 	
 	
-	public function new(mission:Mission, Width:Float=400, Height:Float=480) 
+	public function new(mission:Mission, Width:Float=400, Height:Float=420) 
 	{
 		super(Width, Height);
 		this.mission = mission;

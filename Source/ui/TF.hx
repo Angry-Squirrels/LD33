@@ -16,9 +16,11 @@ class TF extends TextField
 		super();
 		selectable = false;
 		defaultTextFormat = format;
+		embedFonts = true;
 		autoSize = (autosize == null)?TextFieldAutoSize.LEFT:autosize;
 		mouseEnabled = false;
 		text = Text;
+		setTextFormat(format);
 		
 	}
 	

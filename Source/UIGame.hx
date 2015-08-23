@@ -1,15 +1,18 @@
 package;
 
 import missions.Mission;
+import missions.MissionBinder;
 import missions.MissionSheet;
+import missions.ReportFile;
 import monsters.Monster;
+import monsters.MonsterBinder;
 import monsters.MonsterListSheet;
 import openfl.Assets;
 import openfl.display.Sprite;
 import openfl.text.TextFormat;
 import openfl.text.TextFormatAlign;
 import ui.Desk;
-import ui.File;
+import ui.Binder;
 
 /**
  * ...
@@ -19,13 +22,14 @@ class UIGame extends Sprite
 {
 	
 	var desk:Desk;
-	var researchFile:File;
-	var monsterFile:File;
-	var missionFile:File;
+	var researchFile:Binder;
+	var monsterFile:Binder;
+	var missionFile:Binder;
 	var gameManager:GameManager;
 	var monsterListSheet:monsters.MonsterListSheet;
 	var missionSheet:missions.MissionSheet;
 	var mission:missions.Mission;
+	var reportFile:missions.ReportFile;
 	
 
 	public function new(gameManager:GameManager) 
@@ -35,9 +39,19 @@ class UIGame extends Sprite
 		
 		desk = new Desk();
 		
-		monsterFile = new File();
-		missionFile = new File();
-		researchFile = new File();
+		monsterFile = new MonsterBinder();
+		//monsterFile.x = monsterFile.y = 16;
+		
+		missionFile = new MissionBinder();
+		reportFile = new ReportFile();
+		//researchFile = new File();
+		
+		addChild(monsterFile);
+		addChild(missionFile);
+		//addChild(monsterFile);
+		
+		/*
+		
 		
 		var monster = Monster.get();
 		
@@ -58,7 +72,7 @@ class UIGame extends Sprite
 		
 		addChild(missionSheet);
 		addChild(monsterListSheet);
-		
+		*/
 		
 	}
 	

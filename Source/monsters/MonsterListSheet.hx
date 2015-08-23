@@ -15,10 +15,10 @@ class MonsterListSheet extends PaperSheet
 	var gameManager:GameManager;
 	var avatars:Array<MonsterAvatar>;//WARNING: if we can sell monsters, remove monster from here
 
-	public function new(gameManager:GameManager, Width:Float=400, Height:Float=480) 
+	public function new(Width:Float=400, Height:Float=480) 
 	{
 		super(Width, Height);
-		this.gameManager = gameManager;
+		this.gameManager = GameManager.getInstance();
 		
 		monsterPicked = new Signal1<Monster>();
 		
