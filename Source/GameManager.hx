@@ -146,12 +146,19 @@ class GameManager
 	}
 	
 	public function launchMission(mission : Mission) {
-		if (mission.assignedMonsters.length > 0){
+		if (mission.assignedMonsters.length > 0 && mission.areRequirementFilled()){
 			availableMissions.remove(mission);
 			mission.remainingTime = mission.duration;
 			ongoingMissions.push(mission);
 			mission.started = true;
 			message("Mission " + mission.title + " launched.");
+		}else {
+			if (mission.assignedMonsters.length < 1)
+				message("No monster assigned to this mission.");
+			else if (!mission.areRequirementFilled())
+				message("Your monsters doesn't fill the requirements for this mission.");
+			for (monster in mission.assignedMonsters)
+				mission.unassignMonster(monster);
 		}
 	}
 	

@@ -44,6 +44,7 @@ class Mission
 	public var reward : Reward;
 	public var teamSize : UInt = 1;
 	public var type : String;
+	public var requires : Array<String>;
 	
 	public var successChance : Float = 0;
 	public var successChanceChanged:Signal0;
@@ -111,6 +112,7 @@ class Mission
 		mission.description = missionDesc.desc;
 		mission.teamSize = missionDesc.teamSize;
 		mission.type = missionDesc.type;
+		mission.requires = missionDesc.requires;
 		
 		var missionType : MissionType = null;
 		for (type in mTypeList)
@@ -141,7 +143,7 @@ class Mission
 	}
 	
 	public function toString() {
-		return title + " ; " + description + " stats : " + requiredStats + " reward : " + reward;
+		return title + " ; " + description + " stats : " + requiredStats + " requirements : " + requires + " reward : " + reward;
 	}
 	
 	public function onRepportRead() 
@@ -243,6 +245,21 @@ class Mission
 		
 		successChance = (successA + successS + successI) / 3;
 		successChanceChanged.dispatch();
+	}
+	
+	public function areRequirementFilled() : Bool {
+		var rep = true;
+		for (requirement in requires) {
+			var requirementFilled = false;
+			for (monster in assignedMonsters) 
+				if (monster.traits.indexOf(requirement) != -1)
+					requirementFilled = true;
+			if (!requirementFilled){
+				rep = false;
+				break;
+			}
+		}
+		return rep;
 	}
 	
 }
