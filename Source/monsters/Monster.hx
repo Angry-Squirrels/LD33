@@ -25,14 +25,16 @@ class Monster
 	public var costOfLife(get, null) : UInt;
 	
 	public var sellValue(get, null) : UInt;
+	public var buyValue(get, null) : UInt;
 	
 	var mCostOfLife : Float = 0;
 	var mSellValue : UInt = 0;
+	var mBuyValue : UInt = 0;
 	
-	public static function get(tier : UInt = 1) : Monster {
+	public static function get(level : UInt = 1) : Monster {
 		var monster = new monsters.Monster();
 		monster.name = NameGenerator.getName();
-		monster.stats = Stats.make(tier);	
+		monster.stats = Stats.make(level);	
 		var nbTraitProb = Std.random(100);
 		var nbTrait = 0;
 		if (nbTraitProb >= 40) nbTrait = 1;
@@ -69,7 +71,26 @@ class Monster
 	function get_sellValue():UInt 
 	{
 		mSellValue = (stats.getTotal() + 3 * traits.length) * 10;
+		var priceUpper = Upgrades.betterSellUpgrade * 0.05;
+		if (priceUpper > 1)
+			priceUpper = 1;
+		mSellValue = Std.int(mSellValue * (1 + priceUpper));
+		
 		return mSellValue;
+	}
+	
+	function get_buyValue():UInt 
+	{
+		mBuyValue = (stats.getTotal() + 3 * traits.length) * 10 * 2;
+		var priceDiscount = Upgrades.betterBuyUpgrade * 0.05;
+		if (priceDiscount > 0.8)
+			priceDiscount = 0.8;
+		mBuyValue = Std.int(mBuyValue * ( 1 - priceDiscount));
+		
+		if (mBuyValue < sellValue)
+			mBuyValue = mSellValue;
+			
+		return mBuyValue;
 	}
 	
 }

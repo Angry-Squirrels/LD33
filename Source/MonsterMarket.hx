@@ -24,7 +24,7 @@ class MonsterMarket
 	
 	public function sellMonster(monster : Monster) {
 		if(monster.currentMission == null){
-			if(mGame.monsters.remove(monster)){
+			if (mGame.monsters.remove(monster)) {
 				mGame.gold += monster.sellValue;
 				mGame.message("Sold " + monster.name + " for $" + monster.sellValue);
 				monsterOnMarket.push(monster);
@@ -33,15 +33,17 @@ class MonsterMarket
 	}
 	
 	public function buyMonster(monster : Monster) {
-		var monsterBuyValue : Int = Std.int(monster.sellValue * buyValueMultiplier);
-		if (mGame.gold >= monsterBuyValue &&
-			monsterOnMarket.remove(monster)) {
+		if (mGame.gold >= monster.buyValue &&
+			monsterOnMarket.remove(monster) &&
+			mGame.monsters.length < Upgrades.maxMonsterUpgrade * 5) {
 				
-			mGame.gold -= monsterBuyValue;
+			mGame.gold -= monster.buyValue;
 			mGame.monsters.push(monster);
-			mGame.message("Bought " + monster.name + " for $" + monsterBuyValue);
-		}else
+			mGame.message("Bought " + monster.name + " for $" + monster.buyValue);
+		}else if(mGame.gold < monster.buyValue)
 			mGame.message("Not enough muney.");
+		else
+			mGame.message("Not enough space for monster.");
 	}
 	
 	public function newDay() {

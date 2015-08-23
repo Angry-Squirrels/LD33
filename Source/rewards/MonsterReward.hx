@@ -1,5 +1,6 @@
 package rewards;
 import missions.Mission;
+import monsters.Monster;
 
 /**
  * ...
@@ -16,7 +17,7 @@ class MonsterReward extends Reward
 		return '$mQuantity monsters';		
 	}
 	
-	override public function take() 
+	override public function take(monsters : Array<Monster>) 
 	{
 		for (i in 0 ... mQuantity)
 			GameManager.getInstance().addMonster();

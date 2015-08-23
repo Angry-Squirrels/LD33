@@ -189,7 +189,7 @@ class ConsoleMain
 		var i = 0 ;
 		for (monster in mGame.market.monsterOnMarket) {
 			i++;
-			Lib.println("\t"+i+": " + monster + " cost : $" + monster.sellValue * mGame.market.buyValueMultiplier);
+			Lib.println("\t"+i+": " + monster + " cost : $" + monster.buyValue);
 		}
 		var choice = Std.parseInt(Sys.stdin().readLine());
 		if (choice > 0 && choice <= i)

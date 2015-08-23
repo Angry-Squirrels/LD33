@@ -1,0 +1,82 @@
+{
+	"possibleTraits" : [
+		"wings",
+		"tentacles",
+		"ugly",
+		"giant",
+		"small",
+		"fast",
+		"heavy",
+		"cute",
+		"mean",
+		"kind"
+	],
+	"statsNames" : [
+		"agi",
+		"str",
+		"int",
+		"chr"
+	],
+	"missions" : [
+		{
+			"title" : "Actor",
+			"desc" : "for a shady anim production studio",
+			"statCoef" : [2,3,1,4],
+			"type" : "Contract",
+			"requires" : ["tentacles"],
+			"duration" : 3,
+			"teamSize" : 1,
+			"rewardType" : "Gold"
+		},
+		{
+			"title" : "Builder",
+			"desc" : "construct a bridge in a dangerous area.",
+			"statCoef" : [2,4,1,1],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 5,
+			"teamSize" : 2,
+			"rewardType" : "Gold"
+		},
+		{
+			"title" : "Capture",
+			"desc" : "Get some more slav... employees!",
+			"statCoef" : [2, 3, 1, 1],
+			"type" : "Capture",
+			"requires" : [],
+			"duration" : 2,
+			"teamSize" : 1,
+			"rewardType" : "Monster"
+		},
+		{
+			"title" : "Get some contract",
+			"desc" : "Send your minion to other companies to offer \"your\" services",
+			"statCoef" : [1, 1, 3, 4],
+			"type" : "Prospect",
+			"requires" : [],
+			"duration" : 2,
+			"teamSize" : 1,
+			"rewardType" : "Mission"
+		},
+		{
+			"title" : "Upgrade : Better price",
+			"desc" : "\"Kindly\" ask your minions to to train to negociate, allowing your to buy slaves at a lower price.",
+			"statCoef" : [1, 1, 7, 4],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 7,
+			"teamSize" : 3,
+			"rewardType" : "BuyUpgrade"
+		},
+		{
+			"title" : "Upgrade : Better selling skills",
+			"desc" : "\"Kindly\" ask your minions to to train to negociate, allowing your to sell slaves at a better price.",
+			"statCoef" : [1, 1, 7, 4],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 7,
+			"teamSize" : 3,
+			"rewardType" : "SellUpgrade"
+		}
+	]
+}

@@ -19,22 +19,27 @@ class Stats
 		}	
 	}
 	
-	public static function make(tier : UInt, coefs : Array<Float> = null) : Stats {
+	public static function make(level : UInt, coefs : Array<Int> = null) : Stats {
 		init();
 		var stats = new Stats();
 		
+		var availablePoints = level * 10;
+		
 		if (coefs == null) {
-			coefs = new Array<Float>();
+			coefs = new Array<Int>();
 			var statType = stats.g.length;
 			for (i in 0 ... 4) 
-				if (i + 1 == statType)
-					coefs.push(2.0);
-				else
-					coefs.push(1.0);
+				coefs.push(Std.random(5)+1);
 		}
 		
-		for (i in 0 ... stats.g.length) 
-			stats.g[i] = Std.int(Std.random(5) * tier * coefs[i] + 1);
+		while (availablePoints > 0) {
+			var statToAsign = Std.random(coefs.length);
+			var pointToGive : UInt = coefs[statToAsign];
+			if (pointToGive > availablePoints)
+				pointToGive = availablePoints;
+			availablePoints -= pointToGive;
+			stats.g[statToAsign] += pointToGive;
+		}
 		
 		return stats;
 	}
@@ -47,13 +52,7 @@ class Stats
 	}
 	
 	public function getLevel() : UInt {
-		var bestStat = g[0];
-		for (stat in g)
-			if (stat > bestStat)
-				bestStat = stat;
-			
-		var level = Math.ceil(bestStat / 10);
-		return level;
+		return Std.int(Math.max(getTotal() / 10, 1.0));
 	}
 	
 	public function toString() : String {
