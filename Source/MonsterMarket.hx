@@ -25,6 +25,7 @@ class MonsterMarket
 	public function sellMonster(monster : Monster) {
 		if(monster.currentMission == null){
 			if (mGame.monsters.remove(monster)) {
+				mGame.monstersChanged.dispatch();
 				mGame.gold += monster.sellValue;
 				mGame.message("Sold " + monster.name + " for $" + monster.sellValue);
 				monsterOnMarket.push(monster);
@@ -39,6 +40,7 @@ class MonsterMarket
 				
 			mGame.gold -= monster.buyValue;
 			mGame.monsters.push(monster);
+			mGame.monstersChanged.dispatch();
 			mGame.message("Bought " + monster.name + " for $" + monster.buyValue);
 		}else if(mGame.gold < monster.buyValue)
 			mGame.message("Not enough muney.");

@@ -32,13 +32,21 @@ class MonsterListSheet extends PaperSheet
 		gameManager.addMonster();
 		gameManager.addMonster();
 		
+		gameManager.monstersChanged.add(update);
+		
+		update();
+	}
+	
+	function update()
+	{
+		while (content.numChildren>0) content.removeChildAt(0);
 		
 		var monsters = gameManager.monsters;
 		var avatarSize = 64;
 		var avatarMargin = 8;
 		
 		var nbMonsters = monsters.length;
-		var nbCols = Std.int(Width / (avatarSize+avatarMargin));
+		var nbCols = Std.int(w / (avatarSize+avatarMargin));
 		
 		avatars = new Array<MonsterAvatar>();
 		
@@ -93,8 +101,6 @@ class MonsterListSheet extends PaperSheet
 		
 	}
 	
-	function update() {
-		
-	}
+
 	
 }

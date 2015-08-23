@@ -27,6 +27,7 @@ class GameManager
 	}
 
 	public var monsters : Array<Monster>;
+	public var monstersChanged:Signal0;
 	
 	public var availableMissions : Array<Mission>;
 	public var availableMissionsChanged:Signal0;
@@ -57,6 +58,8 @@ class GameManager
 		config = Json.parse(rawText);
 		
 		monsters = new Array<Monster>();
+		monstersChanged = new Signal0();
+		
 		availableMissions = new Array<Mission>();
 		availableMissionsChanged = new Signal0();
 		ongoingMissions = new Array<Mission>();
@@ -74,6 +77,7 @@ class GameManager
 	
 	public function addMonster() {
 		monsters.push(Monster.get(getMonstersTiers()));
+		monstersChanged.dispatch();
 	}
 	
 	public function addMission(type : String = "") {
