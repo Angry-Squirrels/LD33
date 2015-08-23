@@ -11,13 +11,15 @@ class MissionReward extends Reward
 
 	override public function computeQuantity(tier:UInt, mission:Mission) {
 		mQuantity = Math.ceil(tier * tier / 2) + 1;
+		var rewardBonus = Upgrades.betterMissionRewardUpgrade * 0.05 + 1;
+		mQuantity = Std.int(mQuantity * rewardBonus);
 	}
 	
 	override public function take(monsters:Array<Monster>) 
 	{
 		var tooMuchMissions = false;
 		for (i in 0 ... mQuantity) {
-			if(GameManager.getInstance().availableMissions.length < GameManager.getInstance().maxMissionNb * Upgrades.maxMissionUpgrade)
+			if(GameManager.getInstance().availableMissions.length < GameManager.maxMissionNb * Upgrades.maxMissionUpgrade)
 				GameManager.getInstance().addMission("Contract");
 			else
 				tooMuchMissions = true;
