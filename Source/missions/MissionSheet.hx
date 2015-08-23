@@ -95,14 +95,16 @@ class MissionSheet extends PaperSheet
 		
 		mission.assignedMonstersChanged.add(function() {
 			
+			trace("assignedMonstersChanged");
 			
+			trace(mission.assignedMonsters);
 			
 			for (i in 0...slots.length) {
 				var slot = slots[i];
+				slot.removeAvatar();
 				if (mission.assignedMonsters[i] != null)
 				{
 					var monster = mission.assignedMonsters[i];
-					slot.removeAvatar();
 					slot.setAvatar(new MonsterAvatar(mission.assignedMonsters[i], 32));
 				}
 				
