@@ -1,5 +1,6 @@
 package monsters;
 import missions.Mission;
+import msignal.Signal.Signal1;
 import NameGenerator;
 import openfl.Assets;
 import openfl.display.BitmapData;
@@ -12,6 +13,7 @@ import openfl.display.BitmapData;
 class Monster
 {
 	public var currentMission : Mission;
+	public var currentMissionChanged:Signal1<Mission>;
 	
 	public var stats : Stats;
 	
@@ -43,6 +45,8 @@ class Monster
 		monster.mCostOfLife = Math.random()*0.2+0.05;
 		
 		monster.picture = Assets.getBitmapData("images/monster.png");
+		
+		monster.currentMissionChanged = new Signal1<Mission>();
 		
 		return monster;
 	}

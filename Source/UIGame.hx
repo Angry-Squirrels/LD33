@@ -23,13 +23,13 @@ class UIGame extends Sprite
 	
 	var desk:Desk;
 	var researchFile:Binder;
-	var monsterFile:Binder;
-	var missionFile:Binder;
+	var monsterBinder:MonsterBinder;
+	var missionBinder:MissionBinder;
 	var gameManager:GameManager;
-	var monsterListSheet:monsters.MonsterListSheet;
-	var missionSheet:missions.MissionSheet;
-	var mission:missions.Mission;
-	var reportFile:missions.ReportFile;
+	//var monsterListSheet:monsters.MonsterListSheet;
+	//var missionSheet:missions.MissionSheet;
+	//var mission:missions.Mission;
+	//var reportFile:missions.ReportFile;
 	
 
 	public function new(gameManager:GameManager) 
@@ -39,20 +39,24 @@ class UIGame extends Sprite
 		
 		desk = new Desk();
 		
-		monsterFile = new MonsterBinder();
-	
+		monsterBinder = new MonsterBinder();
+		monsterBinder.monsterPicked.add(addMonsterToMission);
+		
+		
 		//monsterFile.x = monsterFile.y = 16;
 		
 		
 		
-		missionFile = new MissionBinder();
+		missionBinder = new MissionBinder();
+		missionBinder.monsterRequested.add(openMonsterList);
 		
-		missionFile.x = 400;
-		reportFile = new ReportFile();
+		missionBinder.x = 400;
+		missionBinder.rotation = 5;
+		//reportFile = new ReportFile();
 		//researchFile = new File();
 		
-		addChild(monsterFile);
-		addChild(missionFile);
+		addChild(monsterBinder);
+		addChild(missionBinder);
 		//addChild(monsterFile);
 		
 		/*
@@ -70,7 +74,7 @@ class UIGame extends Sprite
 		
 		monsterListSheet.monsterPicked.add(addMonsterToMission);
 		
-		missionSheet.monsterRequested.add(openMonsterList);
+		
 		
 		
 		addChild(desk);
@@ -84,14 +88,17 @@ class UIGame extends Sprite
 	function addMonsterToMission(monster:Monster) 
 	{
 		trace("addMonsterToMission(" + monster);
-		missionSheet.addMonster(monster);
-		monsterListSheet.visible = false;
+		cast(missionBinder.availablePile.getCurrentSheet(), MissionSheet).addMonster(monster);
+		monsterBinder.listSheet.pickMode = false;
+		monsterBinder.close();
 	}
 	
 	function openMonsterList() 
 	{
-		monsterListSheet.pickMode = true;
-		monsterListSheet.visible = true;
+		trace("openMonsterList");
+		monsterBinder.listSheet.pickMode = true;
+		monsterBinder.open();
+		//monsterListSheet.visible = true;
 		
 	}
 	

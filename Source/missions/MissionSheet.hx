@@ -94,6 +94,7 @@ class MissionSheet extends PaperSheet
 			}
 			
 			for (i in 0...slots.length) {
+				trace("slot");
 				var slot = slots[i];
 				slot.removeAvatar();
 				if (mission.assignedMonsters[i] != null)
@@ -194,12 +195,15 @@ class MissionSheet extends PaperSheet
 	
 	public function addMonster(monster:Monster) 
 	{
+		trace("addMonster");
+		var slot:MonsterSlot;
 		for (slot in slots)
 		{
 			if (slot.avatar==null)
 			{
-				slot.setAvatar(new MonsterAvatar(monster, 32));
-				mission.assignMonster(monster);				
+				//slot.setAvatar(new MonsterAvatar(monster, 32));
+				mission.assignMonster(monster);
+				break;
 			}
 			else
 			{

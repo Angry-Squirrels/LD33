@@ -29,6 +29,7 @@ class MonsterSlot extends Sprite
 	
 	public function setAvatar(monsterAvatar:MonsterAvatar) 
 	{
+		trace("setAvatar");
 		removeAvatar();
 		this.avatar = monsterAvatar;
 		addChild(monsterAvatar);
@@ -36,6 +37,7 @@ class MonsterSlot extends Sprite
 	
 	public function removeAvatar()
 	{
+		trace("removeAvatar");
 		if (avatar != null && avatar.parent == this) {			
 			removeChild(avatar);
 		}

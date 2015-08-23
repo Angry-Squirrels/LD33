@@ -1,6 +1,7 @@
 package missions;
 
 
+import msignal.Signal.Signal0;
 import openfl.display.Sprite;
 import ui.Binder;
 import ui.SheetPile;
@@ -12,7 +13,8 @@ import ui.Tab;
  */
 class MissionBinder extends Binder
 {
-	var availablePile:SheetPile;
+	public var monsterRequested:Signal0;
+	public var availablePile:SheetPile;
 	var gameManager:GameManager;
 
 	
@@ -22,8 +24,10 @@ class MissionBinder extends Binder
 		trace("missionBinder");
 		super();
 		
-		availablePile = new SheetPile();
+		availablePile = new SheetPile(384, 464);
 		availablePile.y = 32;
+		
+		monsterRequested = new Signal0();
 		
 		
 		gameManager = GameManager.getInstance();
@@ -32,13 +36,6 @@ class MissionBinder extends Binder
 		
 		var runningTab:Tab = new Tab("Running");
 		var availableTab:Tab = new Tab("Available");
-		
-		
-		
-		
-		
-		
-		
 		
 		availableTab.addChild(availablePile);
 		
@@ -55,6 +52,8 @@ class MissionBinder extends Binder
 		{
 			trace(mission);
 			var missionSheet = new MissionSheet(mission);
+			missionSheet.monsterRequested.add(monsterRequested.dispatch);
+			
 			//missionSheet.x = 200;
 			availablePile.addSheet(missionSheet);
 			trace(missionSheet.visible);

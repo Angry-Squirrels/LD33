@@ -46,7 +46,7 @@ class MonsterListSheet extends PaperSheet
 			
 			var monster:Monster = monsters[i];
 			
-			var avatar = new MonsterAvatar(monster, avatarSize);
+			var avatar = new MonsterAvatar(monster, avatarSize, true);
 			avatars.push(avatar);
 			avatar.x = (i % nbCols) * (avatarSize+avatarMargin);
 			avatar.y = Std.int(i / nbCols) * (avatarSize+avatarMargin);
@@ -56,6 +56,7 @@ class MonsterListSheet extends PaperSheet
 			//avatar.alpha = 0.5;
 			
 			avatar.addEventListener(MouseEvent.CLICK, function(evt:MouseEvent) {
+				
 				trace(pickMode);
 				trace(monster.currentMission);
 				if (pickMode && monster.currentMission == null) {
@@ -64,6 +65,10 @@ class MonsterListSheet extends PaperSheet
 				}
 			});
 		}
+		
+	}
+	
+	function update() {
 		
 	}
 	

@@ -150,9 +150,11 @@ class Mission
 	}
 	
 	public function assignMonster(monster : Monster) {
+		trace("assignMonster("+monster);
 		if (assignedMonsters.length < cast teamSize){
 			assignedMonsters.push(monster);
 			monster.currentMission = this;
+			monster.currentMissionChanged.dispatch(monster.currentMission);
 		}
 			
 		computeSuccess();
@@ -162,6 +164,7 @@ class Mission
 	public function unassignMonster(monster : Monster) {
 		assignedMonsters.remove(monster);
 		monster.currentMission = null;
+		monster.currentMissionChanged.dispatch(monster.currentMission);
 		
 		computeSuccess();
 		assignedMonstersChanged.dispatch();
