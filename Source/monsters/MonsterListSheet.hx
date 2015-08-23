@@ -65,16 +65,29 @@ class MonsterListSheet extends PaperSheet
 				}
 			});
 			
-			avatar.addEventListener(MouseEvent.MOUSE_OVER, function(evt:MouseEvent) {
-				
+			avatar.addEventListener(MouseEvent.ROLL_OVER, function(evt:MouseEvent) {
+				trace("mouseover");
+				content.addChild(avatar);
+				//avatar.mouseChildren = true;
 				if (avatar.card == null) {
 					avatar.card = new MonsterCard(monster);
 				}
-				avatar.card.x = evt.localX;
-				avatar.card.y = evt.localY;
-				addChild(avatar.card);
+				avatar.card.x = avatar.width/3;
+				avatar.card.y = avatar.height / 3;
+				avatar.card.rotation = Math.random() * 10 - 5;
+				avatar.addChild(avatar.card);
 			});
 			
+			avatar.addEventListener(MouseEvent.ROLL_OVER, function(evt:MouseEvent) {
+				trace("rollover");
+			});
+			
+			avatar.addEventListener(MouseEvent.ROLL_OUT, function(evt:MouseEvent) {
+				if (avatar.card != null && avatar.card.parent == avatar)
+				{
+					avatar.removeChild(avatar.card);
+				}
+			});
 			//avatar.addEventListener(MouseEvent.MOUSE_OUT, hideCard)
 		}
 		
