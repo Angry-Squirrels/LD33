@@ -6,20 +6,21 @@ import monsters.Monster;
  * ...
  * @author Thomas BAUDON
  */
-class BuyUpgradeReward extends Reward
+class SellUpgradeReward extends Reward
 {
 
 	public function toString() : String {
-		return "reduce monster buy price.";
+		return "boost your monster value.";
 	}
 	
-	override public function computeQuantity(tier:UInt, mission:Mission){
+	override public function computeQuantity(tier:UInt, mission:Mission) 
+	{
 		mQuantity = 1;
 	}
 	
 	override public function take(monsters:Array<Monster>) 
 	{
-		Upgrades.betterBuyUpgrade++;
+		Upgrades.betterSellUpgrade ++;
 	}
 	
 }

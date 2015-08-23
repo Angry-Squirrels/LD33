@@ -67,6 +67,16 @@
 			"duration" : 7,
 			"teamSize" : 3,
 			"rewardType" : "BuyUpgrade"
+		},
+		{
+			"title" : "Upgrade : Better selling skills",
+			"desc" : "\"Kindly\" ask your minions to to train to negociate, allowing your to sell slaves at a better price.",
+			"statCoef" : [1, 1, 7, 4],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 7,
+			"teamSize" : 3,
+			"rewardType" : "SellUpgrade"
 		}
 	]
 }
