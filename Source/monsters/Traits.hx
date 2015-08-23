@@ -7,9 +7,14 @@ package monsters;
 class Traits
 {
 	
-	static var traits = ["ugly", "tentacles", "none"];
+	static var inited : Bool = false;
+	static var traits : Array<String>;
 	
 	public static function getRandomTrait() : String {
+		if (!inited) {
+			traits = GameManager.getInstance().config.possibleTraits;
+			inited = true;
+		}
 		return traits[Std.random(traits.length)];
 	}
 	

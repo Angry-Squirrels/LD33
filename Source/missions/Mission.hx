@@ -2,14 +2,14 @@ package missions;
 
 import monsters.Monster;
 import msignal.Signal;
-import openfl.desktop.ClipboardTransferMode;
 import rewards.Reward;
 import haxe.Json;
-import openfl.Assets;
 
-#if neko
-import sys.io.File;
+#if !neko
+import openfl.Assets;
 #end
+
+
 
 /**
  * ...
@@ -65,16 +65,8 @@ class Mission
 	static private function initList(){
 		if (mListInited) return;
 		
-		var rawText : String = "";
-		#if neko
-		rawText = File.getContent("Assets/missions/missions.json");
-		#else
-		rawText = Assets.getText("missions/missions.json");
-		#end
-		mJson = Json.parse(rawText);
-		
-		mTypeList = mJson.missionsTypes;
-		mMissionList = mJson.missions;
+		mTypeList = GameManager.getInstance().config.missionsTypes;
+		mMissionList = GameManager.getInstance().config.missions;
 		
 		mListInited = true;
 	}
@@ -156,7 +148,7 @@ class Mission
 	{
 		for (monster in assignedMonsters) 
 			monster.currentMission = null;
-		reward.take();
+		if(succeed) reward.take();
 	}
 	
 	public function assignMonster(monster : Monster) {

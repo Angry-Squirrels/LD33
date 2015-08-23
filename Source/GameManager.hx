@@ -1,6 +1,14 @@
 package;
+import haxe.Json;
 import missions.Mission;
 import monsters.Monster;
+
+#if !neko
+import openfl.Assets;
+#else
+import sys.io.File; 
+#end
+
 
 /**
  * ...
@@ -25,12 +33,22 @@ class GameManager
 	public var archivedMission : Array<Mission>;
 	public var maxMissionNb : UInt = 5;
 	
-	public var gold : UInt;
+	public var gold : Int;
 	public var day : UInt;
 	public var maxDay : UInt;
+	public var config : Dynamic;
 	
 	function new() 
 	{
+		// load config
+		var rawText : String = "";
+		#if neko
+		rawText = File.getContent("Assets/missions/missions.json");
+		#else
+		rawText = Assets.getText("missions/missions.json");
+		#end
+		config = Json.parse(rawText);
+		
 		monsters = new Array<Monster>();
 		availableMissions = new Array<Mission>();
 		ongoingMissions = new Array<Mission>();
@@ -47,7 +65,9 @@ class GameManager
 	}
 	
 	public function addMission(type : String = "") {
-		availableMissions.push(Mission.get(getMonstersTiers(), type));
+		var missionTier : Int = Std.int(getMonstersTiers()) + Std.random(5) - 2;
+		if (missionTier < 1) missionTier = 1;
+		availableMissions.push(Mission.get(missionTier, type));
 	}
 	
 	public function getMonstersTiers() : UInt {
@@ -67,11 +87,8 @@ class GameManager
 		
 		
 		for(i in 0 ... maxMissionNb){
-			if (availableMissions.length < maxMissionNb){
-				var missionTier = getMonstersTiers() + Std.random(5) - 2;
-				if (missionTier < 1) missionTier = 1;
-				addMission(missionTier);
-			}
+			if (availableMissions.length < cast maxMissionNb)
+				addMission();
 			else
 				break;
 		}
@@ -101,6 +118,12 @@ class GameManager
 	
 	public function endDay() {
 		message("A new moon is rising!");
+		
+		for (monster in monsters) {
+			gold -= monster.costOfLife;
+			message(monster.name + " costed you " + monster.costOfLife + " to stay alive.");
+		}
+		
 		startNewDay();
 	}
 	

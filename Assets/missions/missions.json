@@ -1,4 +1,16 @@
 {
+	"possibleTraits" : [
+		"wings",
+		"tentacles",
+		"ugly",
+		"giant",
+		"small",
+		"fast",
+		"heavy",
+		"cute",
+		"mean",
+		"kind"
+	],
 	"missionsTypes" : [
 		{	
 			"name" : "Actor", 
@@ -27,7 +39,7 @@
 			"title" : "Builder",
 			"desc" : "construct a bridge in a dangerous area.",
 			"type" : "Worker",
-			"requires" : ["none"],
+			"requires" : [],
 			"duration" : 5,
 			"teamSize" : 2,
 			"rewardType" : "Gold"
@@ -36,7 +48,7 @@
 			"title" : "Capture",
 			"desc" : "Get some more slav... employees!",
 			"type" : "Capture",
-			"requires" : ["none"],
+			"requires" : [],
 			"duration" : 2,
 			"teamSize" : 1,
 			"rewardType" : "Monster"
