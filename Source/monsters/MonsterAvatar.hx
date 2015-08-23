@@ -13,6 +13,7 @@ import ui.RectShape;
 class MonsterAvatar extends Sprite
 {
 	public var monster:Monster;
+	public var card:MonsterCard;
 	public function new(monster:Monster, size:Float, fadeOnBusy:Bool=false) 
 	{
 		super();
@@ -40,6 +41,8 @@ class MonsterAvatar extends Sprite
 				}
 			});
 		}
+		
+		
 		
 	}
 	

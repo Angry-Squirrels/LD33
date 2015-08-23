@@ -64,6 +64,18 @@ class MonsterListSheet extends PaperSheet
 					monsterPicked.dispatch(monster);
 				}
 			});
+			
+			avatar.addEventListener(MouseEvent.MOUSE_OVER, function(evt:MouseEvent) {
+				
+				if (avatar.card == null) {
+					avatar.card = new MonsterCard(monster);
+				}
+				avatar.card.x = evt.localX;
+				avatar.card.y = evt.localY;
+				addChild(avatar.card);
+			});
+			
+			//avatar.addEventListener(MouseEvent.MOUSE_OUT, hideCard)
 		}
 		
 	}

@@ -27,7 +27,7 @@ class AbstractMissionSheet extends PaperSheet
 	var probBar:ProbabilityBar;
 	var slots:Array<MonsterSlot>;
 	var mission:Mission;
-	var currentY:Float;
+	
 	var slotMargin:Float;
 	
 	
