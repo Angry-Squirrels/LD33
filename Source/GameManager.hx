@@ -108,7 +108,6 @@ class GameManager
 			if (mission.remainingTime < 0){ 
 				endedMission.push(mission);
 				mission.end();
-			}
 				endedMissionsChanged.dispatch();
 			}
 		}

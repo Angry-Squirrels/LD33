@@ -22,6 +22,7 @@ class Binder extends Sprite
 	
 	function addTab(tab:Tab):UInt {
 		
+		trace("addtab");
 		var lastTab = tabs.length> 0?tabs[tabs.length - 1]:null;
 		tabs.push(tab);
 		

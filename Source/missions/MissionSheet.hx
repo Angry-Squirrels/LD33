@@ -33,6 +33,7 @@ class MissionSheet extends PaperSheet
 	
 	public function new(mission:Mission, Width:Float=400, Height:Float=420) 
 	{
+		trace("missionSheet");
 		super(Width, Height);
 		this.mission = mission;
 		

@@ -40,9 +40,14 @@ class UIGame extends Sprite
 		desk = new Desk();
 		
 		monsterFile = new MonsterBinder();
+	
 		//monsterFile.x = monsterFile.y = 16;
 		
+		
+		
 		missionFile = new MissionBinder();
+		
+		missionFile.x = 400;
 		reportFile = new ReportFile();
 		//researchFile = new File();
 		

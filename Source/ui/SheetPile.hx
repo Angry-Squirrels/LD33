@@ -18,10 +18,14 @@ class SheetPile extends Sprite
 		empty();
 		
 	}
-	public function addSheet(sheet) {
+	public function addSheet(sheet:PaperSheet) {
+		trace("addsheet");
+		if (sheets.length > 0) 
+		{
+			sheet.visible = false;
+		}
 		sheets.push(sheet);
 		addChild(sheet);
-		if (sheets.length > 0) sheet.visible = false;
 	}
 	
 	public function next() {
@@ -44,6 +48,7 @@ class SheetPile extends Sprite
 	
 	public function empty() 
 	{
+		trace("empty");
 		while (numChildren > 0) {
 			removeChildAt(0);
 		}

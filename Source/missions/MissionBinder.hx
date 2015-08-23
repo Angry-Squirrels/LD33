@@ -22,13 +22,19 @@ class MissionBinder extends Binder
 		trace("missionBinder");
 		super();
 		
+		availablePile = new SheetPile();
+		availablePile.y = 32;
+		
+		
 		gameManager = GameManager.getInstance();
+		gameManager.availableMissionsChanged.add(updateAvailable);
+		updateAvailable();
 		
 		var runningTab:Tab = new Tab("Running");
 		var availableTab:Tab = new Tab("Available");
 		
 		
-		availablePile= new SheetPile();
+		
 		
 		
 		
@@ -49,8 +55,10 @@ class MissionBinder extends Binder
 		{
 			trace(mission);
 			var missionSheet = new MissionSheet(mission);
-			missionSheet.x = 200;
+			//missionSheet.x = 200;
 			availablePile.addSheet(missionSheet);
+			trace(missionSheet.visible);
+			trace(missionSheet.parent);
 		}
 	}
 	
