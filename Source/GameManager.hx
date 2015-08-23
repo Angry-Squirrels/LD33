@@ -150,7 +150,15 @@ class GameManager
 			message(monster.name + " costed you " + monster.costOfLife + " to stay alive.");
 		}
 		
-		startNewDay();
+		if(gold >= 0)
+			startNewDay();
+		else
+			gameOver();
+	}
+	
+	function gameOver() 
+	{
+		message("You're a fucking looser!");
 	}
 	
 	public function getFreeMonster() : Array<Monster> {
