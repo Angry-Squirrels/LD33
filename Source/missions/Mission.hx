@@ -16,11 +16,6 @@ import openfl.Assets;
  * @author Thomas BAUDON
  */
 
-typedef MissionType = {
-	name : String, 
-	statCoef: Array<Float>
-};
-
 typedef MissionDesc = {
 	title : String,
 	desc : String,
@@ -28,7 +23,8 @@ typedef MissionDesc = {
 	requires : Array<String>,
 	duration : UInt,
 	teamSize : UInt,
-	rewardType : String
+	rewardType : String,
+	statCoef : Array<Float>
 };
  
 class Mission
@@ -60,13 +56,11 @@ class Mission
 	static var mJson : Dynamic;
 	static var mListInited : Bool;
 	
-	static var mTypeList : Array<MissionType>;
 	static var mMissionList : Array<MissionDesc>;
 	
 	static private function initList(){
 		if (mListInited) return;
 		
-		mTypeList = GameManager.getInstance().config.missionsTypes;
 		mMissionList = GameManager.getInstance().config.missions;
 		
 		mListInited = true;
@@ -102,7 +96,7 @@ class Mission
 		
 		var missionID = Std.random(mMissionList.length);
 		if (type != "") {
-			var possibleID = find( { type : "Capture" } );
+			var possibleID = find( { type : type } );
 			missionID = possibleID[Std.random(possibleID.length)];
 		}
 		
@@ -113,13 +107,7 @@ class Mission
 		mission.teamSize = missionDesc.teamSize;
 		mission.type = missionDesc.type;
 		mission.requires = missionDesc.requires;
-		
-		var missionType : MissionType = null;
-		for (type in mTypeList)
-			if (type.name == missionDesc.type)
-				missionType = type;	
-		
-		mission.requiredStats = Stats.make(tier, missionType.statCoef);
+		mission.requiredStats = Stats.make(tier, missionDesc.statCoef);
 		
 		var rewardClass : Class<Dynamic> = Type.resolveClass("rewards." + missionDesc.rewardType+"Reward");
 		mission.reward = Type.createInstance(rewardClass, []);
@@ -146,7 +134,7 @@ class Mission
 	{
 		for (monster in assignedMonsters) 
 			monster.currentMission = null;
-		if(succeed) reward.take();
+		if(succeed) reward.take(assignedMonsters);
 	}
 	
 	public function assignMonster(monster : Monster) {

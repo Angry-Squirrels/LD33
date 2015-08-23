@@ -1,5 +1,6 @@
 package rewards;
 import missions.Mission;
+import monsters.Monster;
 
 /**
  * ...
@@ -18,7 +19,8 @@ class Reward
 	public function computeQuantity(tier:UInt, mission:Mission){
 	}
 	
-	public function take() {
+	// monsters are the monster who took part in the mission, so you can give bonuses if you assigned good monsters
+	public function take(monsters : Array<Monster>) {
 		trace("You take " + this);
 	}
 	

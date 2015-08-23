@@ -49,9 +49,9 @@ class GameManager
 		// load config
 		var rawText : String = "";
 		#if neko
-		rawText = File.getContent("Assets/missions/missions.json");
+		rawText = File.getContent("Assets/missions/config.json");
 		#else
-		rawText = Assets.getText("missions/missions.json");
+		rawText = Assets.getText("missions/config.json");
 		#end
 		config = Json.parse(rawText);
 		
@@ -99,12 +99,12 @@ class GameManager
 		market.newDay();
 		
 		
-		for(i in 0 ... maxMissionNb){
+		/*for(i in 0 ... maxMissionNb){
 			if (availableMissions.length < cast maxMissionNb)
 				addMission();
 			else
 				break;
-		}
+		}*/
 		
 		for (mission in ongoingMissions) {
 			mission.remainingTime--;
@@ -130,6 +130,17 @@ class GameManager
 			
 		if (!captureAvailable)
 			addMission("Capture");
+			
+		// check that a prospect mission is available
+		var prospectAvailable = false;
+		for (mission in availableMissions)
+			if (mission.type == "Prospect") {
+				prospectAvailable = true;
+				break;
+			}
+			
+		if (!prospectAvailable)
+			addMission("Prospect");
 	}
 	
 	public function endDay() {

@@ -1,5 +1,6 @@
 package rewards;
 import missions.Mission;
+import monsters.Monster;
 
 /**
  * ...
@@ -14,7 +15,7 @@ class GoldReward extends Reward
 		mQuantity = points;
 	}
 	
-	override public function take() 
+	override public function take(monsters : Array<Monster>) 
 	{
 		GameManager.getInstance().gold += mQuantity;
 	}

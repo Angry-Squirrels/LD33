@@ -17,25 +17,12 @@
 		"int",
 		"chr"
 	],
-	"missionsTypes" : [
-		{	
-			"name" : "Actor", 
-			"statCoef" : [2.0,1.5,0.5,3.0]
-		},
-		{
-			"name" : "Worker",
-			"statCoef" : [1.5,2.0,0.5,0.2]
-		},
-		{
-			"name" : "Capture",
-			"statCoef" : [2.0, 3.0, 0.2, 0.2]
-		}
-	],
 	"missions" : [
 		{
 			"title" : "Actor",
 			"desc" : "for a shady anim production studio",
-			"type" : "Actor",
+			"statCoef" : [2.0,1.5,0.5,3.0],
+			"type" : "Contract",
 			"requires" : ["tentacles"],
 			"duration" : 3,
 			"teamSize" : 1,
@@ -44,7 +31,8 @@
 		{
 			"title" : "Builder",
 			"desc" : "construct a bridge in a dangerous area.",
-			"type" : "Worker",
+			"statCoef" : [1.5,2.0,0.5,0.2],
+			"type" : "Contract",
 			"requires" : [],
 			"duration" : 5,
 			"teamSize" : 2,
@@ -53,11 +41,22 @@
 		{
 			"title" : "Capture",
 			"desc" : "Get some more slav... employees!",
+			"statCoef" : [2.0, 3.0, 0.2, 0.2],
 			"type" : "Capture",
 			"requires" : [],
 			"duration" : 2,
 			"teamSize" : 1,
 			"rewardType" : "Monster"
+		},
+		{
+			"title" : "Get some contract",
+			"desc" : "Send your minion to other companies to offer \"your\" services",
+			"statCoef" : [0.5, 0.5, 2.0, 3.0],
+			"type" : "Prospect",
+			"requires" : [],
+			"duration" : 2,
+			"teamSize" : 1,
+			"rewardType" : "Mission"
 		}
 	]
 }
