@@ -24,7 +24,7 @@ typedef MissionDesc = {
 	duration : UInt,
 	teamSize : UInt,
 	rewardType : String,
-	statCoef : Array<Float>
+	statCoef : Array<Int>
 };
  
 class Mission
@@ -88,7 +88,7 @@ class Mission
 		return rep;
 	}
 
-	public static function get(tier : UInt = 1, type : String = "") : Mission {
+	public static function get(level : UInt = 1, type : String = "") : Mission {
 		if (!mListInited) initList();
 		
 		var mission = new Mission();
@@ -107,11 +107,11 @@ class Mission
 		mission.teamSize = missionDesc.teamSize;
 		mission.type = missionDesc.type;
 		mission.requires = missionDesc.requires;
-		mission.requiredStats = Stats.make(tier, missionDesc.statCoef);
+		mission.requiredStats = Stats.make(level, missionDesc.statCoef);
 		
 		var rewardClass : Class<Dynamic> = Type.resolveClass("rewards." + missionDesc.rewardType+"Reward");
 		mission.reward = Type.createInstance(rewardClass, []);
-		mission.reward.computeQuantity(tier, mission);
+		mission.reward.computeQuantity(level, mission);
 		
 		return mission;
 	}

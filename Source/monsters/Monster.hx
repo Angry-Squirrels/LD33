@@ -29,10 +29,10 @@ class Monster
 	var mCostOfLife : Float = 0;
 	var mSellValue : UInt = 0;
 	
-	public static function get(tier : UInt = 1) : Monster {
+	public static function get(level : UInt = 1) : Monster {
 		var monster = new monsters.Monster();
 		monster.name = NameGenerator.getName();
-		monster.stats = Stats.make(tier);	
+		monster.stats = Stats.make(level);	
 		var nbTraitProb = Std.random(100);
 		var nbTrait = 0;
 		if (nbTraitProb >= 40) nbTrait = 1;
