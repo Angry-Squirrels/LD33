@@ -80,7 +80,7 @@ class Binder extends Sprite
 		trace("close");
 		mouseChildren = false;
 		isOpened = false;
-		alpha = 0.5;
+		//alpha = 0.5;
 		addEventListener(MouseEvent.MOUSE_UP, open);
 		isOpenedChanged.dispatch(isOpened);
 	}

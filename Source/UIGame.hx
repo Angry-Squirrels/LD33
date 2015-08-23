@@ -1,10 +1,10 @@
 package;
 
-import missions.AvailableMissionSheet;
+import missions.sheets.AvailableMissionSheet;
 import missions.Mission;
 import missions.MissionBinder;
-import missions.AbstractMissionSheet;
-import missions.ReportFile;
+import missions.sheets.AbstractMissionSheet;
+import rewards.ReportBinder;
 import monsters.Monster;
 import monsters.MonsterBinder;
 import monsters.MonsterListSheet;
@@ -12,6 +12,7 @@ import openfl.Assets;
 import openfl.display.Sprite;
 import openfl.text.TextFormat;
 import openfl.text.TextFormatAlign;
+import ui.Calendar;
 import ui.Desk;
 import ui.Binder;
 
@@ -27,6 +28,7 @@ class UIGame extends Sprite
 	var monsterBinder:MonsterBinder;
 	var missionBinder:MissionBinder;
 	var gameManager:GameManager;
+	var reportBinder:rewards.ReportBinder;
 	//var monsterListSheet:monsters.MonsterListSheet;
 	//var missionSheet:missions.MissionSheet;
 	//var mission:missions.Mission;
@@ -47,19 +49,26 @@ class UIGame extends Sprite
 		missionBinder.x = 400;
 		missionBinder.rotation = 5;
 		
+		reportBinder = new ReportBinder();
+		reportBinder.x = 200;
+		
 		monsterBinder.monsterPicked.add(addMonsterToMission);
 		missionBinder.monsterRequested.add(openMonsterListForPicking);
 		
-		monsterBinder.isOpenedChanged.add(closeOthersThanMonsterBinder);
-		missionBinder.isOpenedChanged.add(closeOthersThanMissionBinder);
+		monsterBinder.isOpenedChanged.add(openMonsterBinder);
+		missionBinder.isOpenedChanged.add(openMissionBinder);
+		reportBinder.isOpenedChanged.add(openReportBinder);
 		
 		//reportFile = new ReportFile();
 		//researchFile = new File();
 		
+		addChild(reportBinder);
 		addChild(monsterBinder);
 		addChild(missionBinder);
 		//addChild(monsterFile);
 		
+		var calendar:Calendar = new Calendar();
+		addChild(calendar);
 		/*
 		
 		
@@ -86,18 +95,30 @@ class UIGame extends Sprite
 		
 	}
 	
-	function closeOthersThanMissionBinder(isOpened:Bool) 
+	function openMissionBinder(isOpened:Bool) 
 	{
 		if (isOpened) {
+			addChild(missionBinder);
 			monsterBinder.close();
-			//...
+			reportBinder.close();
 		}
 	}
 	
-	function closeOthersThanMonsterBinder(isOpened:Bool) 
+	function openMonsterBinder(isOpened:Bool) 
 	{
 		if (isOpened) {
+			addChild(monsterBinder);
 			missionBinder.close();
+			reportBinder.close();
+		}
+	}
+	
+	function openReportBinder(isOpened:Bool) 
+	{
+		if (isOpened) {
+			addChild(reportBinder);
+			missionBinder.close();
+			monsterBinder.close();
 		}
 	}
 	

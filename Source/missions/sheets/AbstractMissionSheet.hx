@@ -1,4 +1,4 @@
-package missions;
+package missions.sheets;
 
 import monsters.Monster;
 import monsters.MonsterAvatar;
@@ -11,6 +11,7 @@ import openfl.events.MouseEvent;
 import openfl.text.TextField;
 import openfl.text.TextFieldAutoSize;
 import openfl.text.TextFormat;
+import ui.DataLine;
 import ui.PaperSheet;
 import ui.Styles;
 import ui.TF;

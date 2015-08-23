@@ -1,4 +1,5 @@
-package missions;
+package missions.sheets;
+import missions.sheets.AbstractMissionSheet;
 import monsters.Monster;
 import msignal.Signal.Signal0;
 import openfl.events.MouseEvent;

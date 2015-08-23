@@ -1,4 +1,4 @@
-package missions;
+package ui;
 import openfl.display.Sprite;
 import openfl.text.TextField;
 import openfl.text.TextFieldAutoSize;

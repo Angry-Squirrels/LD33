@@ -38,6 +38,7 @@ class Mission
 	
 	public var duration : UInt = 1;
 	public var remainingTime : Int;
+	public var remainingTimeChanged:Signal1<Int>;
 	public var creationDate : UInt;
 	public var title : String;
 	public var description : String;
@@ -134,6 +135,7 @@ class Mission
 		assignedMonsters = new Array<Monster>();
 		assignedMonstersChanged = new Signal0();
 		successChanceChanged = new Signal0();
+		remainingTimeChanged = new Signal1<Int>();
 		
 		monsterProgress = new Map<Monster, {before : Array<UInt>, after : Array<UInt>}>();
 	}

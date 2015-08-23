@@ -28,7 +28,7 @@ class Tab extends PaperObject
 		titleBg.graphics.endFill();
 		
 		bg.graphics.beginFill(0xff00ff);
-		bg.alpha = 0.5;
+		//bg.alpha = 0.5;
 		bg.height -= 32;
 		bg.y = 32;
 		drawBg();

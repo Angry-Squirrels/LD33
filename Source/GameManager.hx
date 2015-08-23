@@ -34,7 +34,7 @@ class GameManager
 	public var ongoingMissionsChanged:Signal0;
 	public var endedMission : Array<Mission>;
 	public var endedMissionsChanged:Signal0;
-	public var archivedMission : Array<Mission>;
+	public var archivedMissions : Array<Mission>;
 	public var archivedMissionsChanged:Signal0;
 	public var maxMissionNb : UInt = 5;
 	public var market : MonsterMarket;
@@ -62,7 +62,7 @@ class GameManager
 		ongoingMissionsChanged = new Signal0();
 		endedMission = new Array<Mission>();
 		endedMissionsChanged = new Signal0();
-		archivedMission = new Array<Mission>();
+		archivedMissions = new Array<Mission>();
 		archivedMissionsChanged = new Signal0(); 
 		market = new MonsterMarket(this);
 		
@@ -167,7 +167,7 @@ class GameManager
 	public function archiveMission(mission : Mission) {
 		endedMission.remove(mission);
 		endedMissionsChanged.dispatch();
-		archivedMission.push(mission);
+		archivedMissions.push(mission);
 		archivedMissionsChanged.dispatch();
 		mission.onRepportRead();
 	}
@@ -177,6 +177,7 @@ class GameManager
 			availableMissions.remove(mission);
 			availableMissionsChanged.dispatch();
 			mission.remainingTime = mission.duration;
+			mission.remainingTimeChanged.dispatch(mission.remainingTime);
 			ongoingMissions.push(mission);
 			ongoingMissionsChanged.dispatch();
 			mission.started = true;
