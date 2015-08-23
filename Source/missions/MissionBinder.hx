@@ -15,6 +15,7 @@ class MissionBinder extends Binder
 {
 	public var monsterRequested:Signal0;
 	public var availablePile:SheetPile;
+	public var runningPile:SheetPile;
 	var gameManager:GameManager;
 
 	
@@ -23,24 +24,41 @@ class MissionBinder extends Binder
 	{
 		trace("missionBinder");
 		super();
-		
-		availablePile = new SheetPile(384, 464);
-		availablePile.y = 32;
+		gameManager = GameManager.getInstance();
 		
 		monsterRequested = new Signal0();
-		
-		
-		gameManager = GameManager.getInstance();
+		var availableTab:Tab = new Tab("Available");
+		availablePile = new SheetPile(384, 464);
+		availablePile.y = 32;
+		availableTab.addChild(availablePile);
 		gameManager.availableMissionsChanged.add(updateAvailable);
 		updateAvailable();
+		addTab(availableTab);
 		
 		var runningTab:Tab = new Tab("Running");
-		var availableTab:Tab = new Tab("Available");
-		
-		availableTab.addChild(availablePile);
-		
+		runningPile = new SheetPile(384, 464);
+		runningPile.y = 32;
+		runningTab.addChild(runningPile);
+		gameManager.ongoingMissionsChanged.add(updateRunning);
+		updateRunning();
 		addTab(runningTab);
-		addTab(availableTab);
+		
+		setCurrentTab(availableTab);
+		
+		
+		
+		
+	}
+	
+	function updateRunning() 
+	{
+		runningPile.empty();
+		
+		var missions = gameManager.ongoingMissions;
+		for (mission in missions) {
+			var missionSheet = new MissionSheet(mission);
+			runningPile.addSheet(missionSheet);
+		}
 	}
 	
 	function updateAvailable() {
@@ -50,14 +68,9 @@ class MissionBinder extends Binder
 		var missions = gameManager.availableMissions;
 		for(mission in missions)
 		{
-			trace(mission);
 			var missionSheet = new MissionSheet(mission);
 			missionSheet.monsterRequested.add(monsterRequested.dispatch);
-			
-			//missionSheet.x = 200;
 			availablePile.addSheet(missionSheet);
-			trace(missionSheet.visible);
-			trace(missionSheet.parent);
 		}
 	}
 	
