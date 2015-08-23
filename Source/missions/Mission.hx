@@ -44,7 +44,9 @@ class Mission
 	public var reward : Reward;
 	public var teamSize : UInt = 1;
 	public var type : String;
+	
 	public var successChance : Float = 0;
+	public var successChanceChanged:Signal0;
 	public var started : Bool = false;
 	public var ended : Bool = false;
 	public var succeed : Bool = false;
@@ -52,8 +54,7 @@ class Mission
 	public var monsterProgress : Map<Monster, {before : Array<UInt>, after : Array<UInt>}>;
 	
 	public var assignedMonsters : Array<Monster>;
-	
-	public var successChanceChanged : Signal0;
+	public var assignedMonstersChanged : Signal0;
 	
 	static var mJson : Dynamic;
 	static var mListInited : Bool;
@@ -141,6 +142,7 @@ class Mission
 	{
 		requiredStats = new Stats();
 		assignedMonsters = new Array<Monster>();
+		assignedMonstersChanged = new Signal0();
 		successChanceChanged = new Signal0();
 		
 		monsterProgress = new Map<Monster, {before : Array<UInt>, after : Array<UInt>}>();
@@ -153,24 +155,27 @@ class Mission
 	public function onRepportRead() 
 	{
 		for (monster in assignedMonsters) 
-			monster.busy = null;
+			monster.currentMission = null;
 		reward.take();
 	}
 	
 	public function assignMonster(monster : Monster) {
 		if (assignedMonsters.length < cast teamSize){
 			assignedMonsters.push(monster);
-			monster.busy = this;
+			monster.currentMission = this;
 		}
 			
 		computeSuccess();
+		assignedMonstersChanged.dispatch();
 	}
 	
 	public function unassignMonster(monster : Monster) {
+		trace("unassignMonster(" + monster);
 		assignedMonsters.remove(monster);
-		monster.busy = null;
+		monster.currentMission = null;
 		
 		computeSuccess();
+		assignedMonstersChanged.dispatch();
 	}
 	
 	public function end() {

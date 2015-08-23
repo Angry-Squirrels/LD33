@@ -3,6 +3,7 @@ package;
 import missions.Mission;
 import missions.MissionSheet;
 import monsters.Monster;
+import monsters.MonsterListSheet;
 import openfl.Assets;
 import openfl.display.Sprite;
 import openfl.text.TextFormat;
@@ -21,10 +22,16 @@ class UIGame extends Sprite
 	var researchFile:File;
 	var monsterFile:File;
 	var missionFile:File;
+	var gameManager:GameManager;
+	var monsterListSheet:monsters.MonsterListSheet;
+	var missionSheet:missions.MissionSheet;
+	var mission:missions.Mission;
+	
 
-	public function new() 
+	public function new(gameManager:GameManager) 
 	{
 		super();
+		this.gameManager = gameManager;
 		
 		desk = new Desk();
 		
@@ -34,15 +41,41 @@ class UIGame extends Sprite
 		
 		var monster = Monster.get();
 		
+		monsterListSheet = new MonsterListSheet(gameManager);
+		monsterListSheet.visible = false;
 		
-		var mission = Mission.get();
-		var missionSheet = new MissionSheet(mission);
+		mission = gameManager.availableMissions[0];
+		missionSheet = new MissionSheet(mission);
+		missionSheet.x = 200;
+
+		
+		monsterListSheet.monsterPicked.add(addMonsterToMission);
+		
+		missionSheet.monsterRequested.add(openMonsterList);
+		
 		
 		addChild(desk);
 		
 		addChild(missionSheet);
+		addChild(monsterListSheet);
 		
 		
 	}
+	
+	function addMonsterToMission(monster:Monster) 
+	{
+		trace("addMonsterToMission(" + monster);
+		missionSheet.addMonster(monster);
+		monsterListSheet.visible = false;
+	}
+	
+	function openMonsterList() 
+	{
+		monsterListSheet.pickMode = true;
+		monsterListSheet.visible = true;
+		
+	}
+	
+	
 	
 }

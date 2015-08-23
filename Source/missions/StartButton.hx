@@ -18,7 +18,7 @@ class StartButton extends SimpleButton
 	{
 		
 		var upState = new Sprite();
-		upState.addChild(new RectShape(240, 32, 0x0080ff, 8, 0xffffff));
+		upState.addChild(new RectShape(240, 32, 0x0080ff, 8, 0xaaaaaa));
 		var startTf = new TF("Start mission", Styles.WHITE16);
 		startTf.x = (upState.width - startTf.width) / 2;
 		startTf.y = (upState.height - startTf.height) / 4;

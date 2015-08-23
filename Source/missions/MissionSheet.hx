@@ -1,8 +1,12 @@
 package missions;
 
+import monsters.Monster;
+import monsters.MonsterAvatar;
+import msignal.Signal;
 import openfl.Assets;
 import openfl.display.SimpleButton;
 import openfl.display.Sprite;
+import openfl.events.MouseEvent;
 import openfl.text.TextField;
 import openfl.text.TextFieldAutoSize;
 import openfl.text.TextFormat;
@@ -18,14 +22,21 @@ class MissionSheet extends PaperSheet
 {
 	var titleTf:TF;
 	var descriptionTf:TF;
+	var probBar:ProbabilityBar;
+	var slots:Array<MonsterSlot>;
+	var mission:Mission;
+	public var monsterRequested:Signal0;
 	
 	
 	
-	public function new(mission:Mission) 
+	public function new(mission:Mission, Width:Float=400, Height:Float=480) 
 	{
-		super(400, 480);
+		super(Width, Height);
+		this.mission = mission;
 		
-		var contentWidth = w - 2 * hMargin;
+		monsterRequested = new Signal0();
+		
+		//var contentWidth = w - 2 * hMargin;
 		
 		var localVMargin:Float = 16;
 		var slotMargin:Float = 8;
@@ -45,21 +56,67 @@ class MissionSheet extends PaperSheet
 		var teamLine:DataLine = new DataLine("Team", "0/" + mission.teamSize+"monster" + ((mission.teamSize > 1)?"s":""), contentWidth, Styles.BLACK16);
 		
 		var currentSlotX:Float = 0;
+		
+		slots = new Array<MonsterSlot>();
 		var slotHolder = new Sprite();
+		//trace('plop');
 		for (i in 0...mission.teamSize) 
 		{
 			var slot = new MonsterSlot();
+			slots.push(slot);
 			slot.x = currentSlotX;
 			currentSlotX += slot.width + slotMargin;
 			slotHolder.addChild(slot);
+			slot.addEventListener(MouseEvent.CLICK, function(evt:MouseEvent)
+			{
+				//trace('click');
+				/*
+				var monster = Monster.get();
+				slot.addAvatar(new MonsterAvatar(monster.picture, 32));
+				mission.assignMonster(monster);
+				*/
+				
+				if (slot.avatar==null) {					
+					monsterRequested.dispatch();
+				}
+				else
+				{
+					mission.unassignMonster(slot.avatar.monster);
+				}
+			});
 		}
+		
+		
+		
+		mission.successChanceChanged.add(function() {
+			trace(mission.successChance);
+			probBar.setPercentage(mission.successChance);
+		});
+		
+		mission.assignedMonstersChanged.add(function() {
+			
+			trace("assignedMonstersChanged");
+			
+			trace(mission.assignedMonsters);
+			
+			for (i in 0...slots.length) {
+				var slot = slots[i];
+				slot.removeAvatar();
+				if (mission.assignedMonsters[i] != null)
+				{
+					var monster = mission.assignedMonsters[i];
+					slot.setAvatar(new MonsterAvatar(mission.assignedMonsters[i], 32));
+				}
+				
+			}
+		});
 		
 		var requirementsTf = new TF("Requirement", Styles.BLACK16);
 		var brainDL:DataLine = new DataLine("Brain", cast(mission.requiredStats.g[Stats.INTEL]), contentWidth, Styles.BLACK12);
 		var agilityDL:DataLine = new DataLine("Agility", cast(mission.requiredStats.g[Stats.AGILITY]), contentWidth, Styles.BLACK12);
 		var muscleDL:DataLine = new DataLine("Muscle", cast(mission.requiredStats.g[Stats.STRENGHT]), contentWidth, Styles.BLACK12);
 		
-		var probBar:ProbabilityBar = new ProbabilityBar(contentWidth, 32);
+		probBar = new ProbabilityBar(contentWidth, 32);
 		
 		var startButton:StartButton = new StartButton();
 		startButton.x = (contentWidth - startButton.width) / 2;
@@ -67,62 +124,78 @@ class MissionSheet extends PaperSheet
 		var currentY:Float = vMargin;
 		
 		titleTf.y = currentY;
-		addChild(titleTf);
+		content.addChild(titleTf);
 		currentY += titleTf.height;
 
 		descriptionTf.y = currentY;
-		addChild(descriptionTf);
+		content.addChild(descriptionTf);
 		currentY += descriptionTf.height;
 
 		currentY += vMargin;
 		
 		durationLine.y = currentY;
-		addChild(durationLine);
+		content.addChild(durationLine);
 		currentY += durationLine.height;
 		
 		rewardLine.y = currentY;
-		addChild(rewardLine);
+		content.addChild(rewardLine);
 		currentY += rewardLine.height;
 		
 		teamLine.y = currentY;
-		addChild(teamLine);
+		content.addChild(teamLine);
 		currentY += teamLine.height;
 		currentY += slotMargin;
 		
 		slotHolder.y = currentY;
-		addChild(slotHolder);
+		content.addChild(slotHolder);
 		currentY += slotHolder.height;
 		
 		currentY += vMargin;
 		
 		requirementsTf.y = currentY;
-		addChild(requirementsTf);
+		content.addChild(requirementsTf);
 		currentY += requirementsTf.height;
 		
 		brainDL.y = currentY;
-		addChild(brainDL);
+		content.addChild(brainDL);
 		currentY += brainDL.height;
 		
 		agilityDL.y = currentY;
-		addChild(agilityDL);
+		content.addChild(agilityDL);
 		currentY += agilityDL.height;
 		
 		muscleDL.y = currentY;
-		addChild(muscleDL);
+		content.addChild(muscleDL);
 		currentY += muscleDL.height;
 		
 		currentY += vMargin;
 		
 		probBar.y = currentY;
-		addChild(probBar);
+		content.addChild(probBar);
 		currentY += probBar.height;
 		
 		currentY += vMargin;
 		
 		startButton.y = currentY;
-		addChild(startButton);
+		content.addChild(startButton);
 		currentY += startButton.height;
 		
+	}
+	
+	public function addMonster(monster:Monster) 
+	{
+		for (slot in slots)
+		{
+			if (slot.avatar==null)
+			{
+				slot.setAvatar(new MonsterAvatar(monster, 32));
+				mission.assignMonster(monster);				
+			}
+			else
+			{
+				continue;
+			}
+		}
 	}
 	
 	

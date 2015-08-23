@@ -21,7 +21,7 @@ class Main extends Sprite {
 		mGameManager.startNewDay();
 		mGameManager.addMonster();
 		
-		addChild(new UIGame());
+		addChild(new UIGame(mGameManager));
 		
 	}
 	
