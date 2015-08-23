@@ -84,4 +84,9 @@ class SheetPile extends Sprite
 		}
 		sheets = new Array<PaperSheet>();
 	}
+	
+	public function getCurrentSheet():PaperSheet
+	{
+		return sheets[currentSheetIndex];
+	}
 }

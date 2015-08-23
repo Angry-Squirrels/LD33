@@ -194,11 +194,12 @@ class MissionSheet extends PaperSheet
 	
 	public function addMonster(monster:Monster) 
 	{
+		var slot:MonsterSlot;
 		for (slot in slots)
 		{
 			if (slot.avatar==null)
 			{
-				slot.setAvatar(new MonsterAvatar(monster, 32));
+				//slot.setAvatar(new MonsterAvatar(monster, 32));
 				mission.assignMonster(monster);				
 			}
 			else

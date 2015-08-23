@@ -56,6 +56,7 @@ class MonsterListSheet extends PaperSheet
 			//avatar.alpha = 0.5;
 			
 			avatar.addEventListener(MouseEvent.CLICK, function(evt:MouseEvent) {
+				
 				trace(pickMode);
 				trace(monster.currentMission);
 				if (pickMode && monster.currentMission == null) {

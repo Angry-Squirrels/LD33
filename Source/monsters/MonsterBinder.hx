@@ -1,6 +1,8 @@
 package monsters;
 
 import monsters.MonsterListSheet;
+import msignal.Signal.Signal0;
+import msignal.Signal.Signal1;
 import openfl.filesystem.File;
 import ui.Binder;
 import ui.Tab;
@@ -11,17 +13,21 @@ import ui.Tab;
  */
 class MonsterBinder extends Binder
 {
-	var monsterListSheet:MonsterListSheet;
+	public var monsterPicked:Signal1<Monster>;
+	public var listSheet:MonsterListSheet;
 
 	public function new() 
 	{
 		super();
 		
+		monsterPicked = new Signal1<Monster>();
+		
 		var tab = new Tab("Monster");
 		
-		monsterListSheet = new MonsterListSheet();
-		monsterListSheet.y = 32;
-		tab.addChild(monsterListSheet);
+		listSheet = new MonsterListSheet();
+		listSheet.monsterPicked.add(monsterPicked.dispatch);
+		listSheet.y = 32;
+		tab.addChild(listSheet);
 		
 		addTab(tab);
 	}

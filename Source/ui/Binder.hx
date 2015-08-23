@@ -1,4 +1,5 @@
 package ui;
+import msignal.Signal.Signal1;
 import openfl.display.Sprite;
 import openfl.events.MouseEvent;
 
@@ -11,13 +12,15 @@ class Binder extends Sprite
 	
 	var tabs:Array<Tab>;
 	var currentTab:Tab;
+	public var isOpened:Bool;
+	public var isOpenedChanged:Signal1<Bool>;
 
 	public function new() 
 	{
 		super();
-		
+		isOpenedChanged = new Signal1<Bool>();
 		tabs = new Array<Tab>();
-		
+		close();
 	}
 	
 	function addTab(tab:Tab):UInt {
@@ -39,6 +42,25 @@ class Binder extends Sprite
 	function setCurrentTab(tab:Tab) {
 		currentTab.swapChildren(tab, currentTab);
 		currentTab = tab;
+	}
+	
+	public function open(evt:MouseEvent = null) {
+		trace("open(" + evt);
+		mouseChildren = true;
+		removeEventListener(MouseEvent.MOUSE_UP, open);
+		alpha = 1;
+		isOpened = true;
+		isOpenedChanged.dispatch(isOpened);
+	}
+	
+	public function close()
+	{
+		trace("close");
+		mouseChildren = false;
+		isOpened = false;
+		alpha = 0.5;
+		addEventListener(MouseEvent.MOUSE_UP, open);
+		isOpenedChanged.dispatch(isOpened);
 	}
 	
 }
