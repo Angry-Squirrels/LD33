@@ -35,7 +35,7 @@ class MonsterMarket
 	public function buyMonster(monster : Monster) {
 		if (mGame.gold >= monster.buyValue &&
 			monsterOnMarket.remove(monster) &&
-			mGame.monsters.length < Upgrades.maxMonsterUpgrade * 5) {
+			mGame.monsters.length < Upgrades.maxMonsterUpgrade * mGame.maxMonsterNb) {
 				
 			mGame.gold -= monster.buyValue;
 			mGame.monsters.push(monster);

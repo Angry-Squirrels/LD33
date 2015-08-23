@@ -80,13 +80,23 @@
 		},
 		{
 			"title" : "Upgrade : Moar missions",
-			"desc" : "Upgrade your desk drawers so your cancelBubble stock more missions!",
+			"desc" : "Upgrade your desk drawers so your cab stock more missions!",
 			"statCoef" : [1, 1, 7, 4],
 			"type" : "Contract",
 			"requires" : [],
 			"duration" : 7,
 			"teamSize" : 3,
 			"rewardType" : "MissionNumberUpgrade"
+		},
+		{
+			"title" : "Upgrade : Moar monsters",
+			"desc" : "Upgrade your cages' size so you can stock more minions!",
+			"statCoef" : [1, 1, 7, 4],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 7,
+			"teamSize" : 3,
+			"rewardType" : "MonsterNumberUpgrade"
 		}
 	]
 }
