@@ -37,6 +37,7 @@ class GameManager
 	public var archivedMission : Array<Mission>;
 	public var archivedMissionsChanged:Signal0;
 	public var maxMissionNb : UInt = 5;
+	public var market : MonsterMarket;
 	
 	public var gold : Int;
 	public var day : UInt;
@@ -62,7 +63,8 @@ class GameManager
 		endedMission = new Array<Mission>();
 		endedMissionsChanged = new Signal0();
 		archivedMission = new Array<Mission>();
-		archivedMissionsChanged = new Signal0();
+		archivedMissionsChanged = new Signal0(); 
+		market = new MonsterMarket(this);
 		
 		day = 0;
 		maxDay = 42;
@@ -80,7 +82,7 @@ class GameManager
 		availableMissionsChanged.dispatch();
 	}
 	
-	public function getMonstersTiers() : UInt {
+	public function getMonstersTiers() : Int {
 		var moy : Float = 0;
 		for (monster in monsters) 
 			moy += monster.stats.getTier();
@@ -94,6 +96,7 @@ class GameManager
 		day++;
 		
 		message("A new sun arise... Day " + day);
+		market.newDay();
 		
 		
 		for(i in 0 ... maxMissionNb){
@@ -140,6 +143,17 @@ class GameManager
 		startNewDay();
 	}
 	
+	public function getFreeMonster() : Array<Monster> {
+		var rep = new Array<Monster>();
+		for (monster in monsters)
+			if (monster.currentMission == null)
+				rep.push(monster);
+				
+		if (rep.length == 0)
+			return null;
+		return rep;
+	}
+	
 	public function getDate() : UInt {
 		return day;
 	}
@@ -161,7 +175,7 @@ class GameManager
 	}
 	
 	public function launchMission(mission : Mission) {
-		if (mission.assignedMonsters.length > 0){
+		if (mission.assignedMonsters.length > 0 && mission.areRequirementFilled()){
 			availableMissions.remove(mission);
 			availableMissionsChanged.dispatch();
 			mission.remainingTime = mission.duration;
@@ -169,6 +183,13 @@ class GameManager
 			ongoingMissionsChanged.dispatch();
 			mission.started = true;
 			message("Mission " + mission.title + " launched.");
+		}else {
+			if (mission.assignedMonsters.length < 1)
+				message("No monster assigned to this mission.");
+			else if (!mission.areRequirementFilled())
+				message("Your monsters doesn't fill the requirements for this mission.");
+			for (monster in mission.assignedMonsters)
+				mission.unassignMonster(monster);
 		}
 	}
 	
