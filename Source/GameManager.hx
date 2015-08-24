@@ -200,10 +200,10 @@ class GameManager
 	
 	public function archiveMission(mission : Mission) {
 		endedMission.remove(mission);
-		endedMissionsChanged.dispatch();
 		archivedMissions.push(mission);
 		archivedMissionsChanged.dispatch();
 		mission.onRepportRead();
+		endedMissionsChanged.dispatch();
 	}
 	
 	public function launchMission(mission : Mission) {

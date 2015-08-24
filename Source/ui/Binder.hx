@@ -17,7 +17,7 @@ import openfl.Lib;
  * ...
  * @author damrem
  */
-class Binder extends Sprite
+class Binder extends PaperObject
 {
 	
 	var tabs:Array<Tab>;
@@ -36,7 +36,7 @@ class Binder extends Sprite
 
 	public function new(_title : String = "") 
 	{
-		super();
+		super(280, 360, 16, 16);
 		title = _title;
 		isOpenedChanged = new Signal1<Bool>();
 		tabs = new Array<Tab>();
@@ -51,6 +51,10 @@ class Binder extends Sprite
 		addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 		Lib.current.stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 		Lib.current.stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+		
+		drawBg();
+		bg.x -= bg.width / 2;
+		bg.y -= bg.height / 2;
 	}
 	
 	function onMouseMove(e:MouseEvent):Void 

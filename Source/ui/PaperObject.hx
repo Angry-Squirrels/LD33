@@ -1,4 +1,5 @@
 package ui;
+import openfl.Assets;
 import openfl.display.DisplayObject;
 import openfl.display.Shape;
 import openfl.display.Sprite;
@@ -38,7 +39,9 @@ class PaperObject extends Sprite
 	}
 	public function drawBg() 
 	{
+		bg.graphics.beginBitmapFill(Assets.getBitmapData("images/paper.jpg"));
 		bg.graphics.drawRect(0, 0, w, h);
+		bg.graphics.endFill();
 	}
 	
 }

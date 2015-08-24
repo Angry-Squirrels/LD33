@@ -31,7 +31,7 @@ class DataLine extends Sprite
 		valueTf = new TF(value, format/*, TextFieldAutoSize.RIGHT*/);
 		valueTf.height = heightLine;
 		valueTf.x = Width - valueTf.width;
-		valueTf.background = true;
+		//valueTf.background = true;
 		
 		
 		addChild(labelTf);
