@@ -38,14 +38,18 @@ class GameManager
 	public var endedMissionsChanged:Signal0;
 	public var archivedMissions : Array<Mission>;
 	public var archivedMissionsChanged:Signal0;
-	public var maxMissionNb : Int = 10;
-	public var maxMonsterNb : Int = 5;
+	
+	static public inline var maxMissionNb : Int = 10;
+	static public inline var maxMonsterNb : Int = 5;
+	static public inline var maxTime : Int = 30;
+	
 	public var market : MonsterMarket;
 	
 	public var gold(get, set) : Int;
 	var _gold:Int;
 	public var goldChanged:Signal1<Int>;
 	public var day : Int;
+	public var remainingTime : Int;
 	public var maxDay : UInt;
 	public var config : Dynamic;
 	
@@ -104,7 +108,8 @@ class GameManager
 	public function startNewDay() {		
 		day++;
 		
-		message("A new sun arise... Day " + day);
+		remainingTime = GameManager.maxTime - day;
+		message("A new sun arise... Day " + day + " / " + GameManager.maxTime);
 		market.newDay();
 		
 		for (mission in ongoingMissions) {
@@ -153,10 +158,18 @@ class GameManager
 			message(monster.name + " costed you " + monster.costOfLife + " to stay alive.");
 		}
 		
-		if(gold >= 0)
-			startNewDay();
+		if (gold >= 0)
+			if(remainingTime > 0)
+				startNewDay();
+			else
+				endGame();
 		else
 			gameOver();
+	}
+	
+	function endGame() 
+	{
+		message("This is the end ! Your final score : " + gold);
 	}
 	
 	function gameOver() 
