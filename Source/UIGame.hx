@@ -65,10 +65,12 @@ class UIGame extends Sprite
 		dayBlackTransition.graphics.beginFill(0);
 		dayBlackTransition.graphics.drawRect(0, 0, Lib.current.stage.stageWidth, Lib.current.stage.stageHeight);
 		
+		var objective = GameManager.objective;
+		
 		gameManager.message("Son,\n"+
 							"I sent you here to extend the Company.\n\n" + 
 							"Don't disapoint me.\n\n" +
-							"\tYou're on a trial and have a month to maximize your incomes." +
+							"\tYou're on a trial and have to get $" + objective + " as soon as possible." + 
 							"This world is full of cheap workforce! Use it!\n\n" +
 							"\tAll the folder you need are on your desk.\n\n" +
 							"\tYou'll first need a sla... employee to send him in mission.\n\n" +

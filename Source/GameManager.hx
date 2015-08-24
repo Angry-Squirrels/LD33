@@ -44,7 +44,7 @@ class GameManager
 	
 	static public inline var maxMissionNb : Int = 10;
 	static public inline var maxMonsterNb : Int = 5;
-	static public inline var maxTime : Int = 30;
+	static public inline var objective : UInt = 10000;
 	
 	public var market : MonsterMarket;
 	
@@ -52,7 +52,6 @@ class GameManager
 	var _gold:Int;
 	public var goldChanged:Signal1<Int>;
 	public var day : Int;
-	public var remainingTime : Int;
 	public var config : Dynamic;
 	
 	function new() 
@@ -84,7 +83,6 @@ class GameManager
 		day = 1;
 		goldChanged = new Signal1<Int>();
 		gold = 1000;
-		remainingTime = maxTime;
 	}
 	
 	public function addMonster() {
@@ -112,8 +110,7 @@ class GameManager
 	public function startNewDay() {		
 		day++;
 		
-		remainingTime = GameManager.maxTime - day;
-		trace("A new sun arise... Day " + day + " / " + GameManager.maxTime);
+		trace("A new sun arise... Day " + day + ".");
 		market.newDay();
 		
 		for (mission in ongoingMissions) {
@@ -187,12 +184,12 @@ class GameManager
 		}
 		
 		if (gold >= 0)
-			if (remainingTime > 0) {
+			if (_gold < objective) {
 				
 				return false;
 			}
 			else {
-				trace("no time ! " + remainingTime);
+				trace("objective reached");
 				return true;
 			}
 		else {
