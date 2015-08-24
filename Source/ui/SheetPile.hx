@@ -111,6 +111,8 @@ class SheetPile extends Sprite
 	
 	public function getCurrentSheet():PaperSheet
 	{
+		trace(sheets);
+		trace(currentSheetIndex);
 		return sheets[currentSheetIndex];
 	}
 }

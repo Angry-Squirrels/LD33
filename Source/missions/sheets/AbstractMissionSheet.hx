@@ -143,7 +143,8 @@ class AbstractMissionSheet extends PaperSheet
 			currentY += statDL.height;
 		}
 		if (mission.requires.length > 0) {
-			traitsTF = new TF("+ "+mission.requires.toString(), Styles.BLACK12);
+			traitsTF = new TF("+ " + mission.requires.toString(), Styles.BLACK12);
+			traitsTF.multiline = traitsTF.wordWrap = true;
 			traitsTF.width = contentWidth;
 			traitsTF.y = currentY;
 			content.addChild(traitsTF);

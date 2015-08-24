@@ -53,6 +53,8 @@ class UIGame extends Sprite
 		super();
 		this.gameManager = gameManager;
 		
+		
+		
 		desk = new Desk();
 		desk.addEventListener(MouseEvent.CLICK, onClickDesk);
 		addChild(desk);
@@ -211,7 +213,7 @@ class UIGame extends Sprite
 	{
 		if (isOpened) {
 			binderContainer.addChild(monster3dContainer);
-			missionBinder.close(true);
+			missionBinder.close(false);
 			reportBinder.close();
 			upgradeBinder.close();
 		}
@@ -241,6 +243,7 @@ class UIGame extends Sprite
 	function addMonsterToMission(monster:Monster) 
 	{
 		trace("addMonsterToMission(" + monster);
+		
 		cast(missionBinder.availablePile.getCurrentSheet(), AvailableMissionSheet).addMonster(monster);
 		monsterBinder.listSheet.cancelPicking();
 		//monsterBinder.close();
