@@ -247,11 +247,17 @@ class GameManager
 			mission.started = true;
 		}else {
 			if (mission.assignedMonsters.length < 1)
+			{
 				trace("No monster assigned to this mission.");
+			}
 			else if (!mission.areRequirementFilled())
+			{
 				trace("Your monsters doesn't fill the requirements for this mission.");
+			}
 			for (monster in mission.assignedMonsters)
+			{
 				mission.unassignMonster(monster);
+			}
 		}
 	}
 	

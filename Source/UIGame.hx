@@ -66,7 +66,7 @@ class UIGame extends Sprite
 							"Don't disapoint me.\n\n" +
 							"\tYou're on a trial and have a month to maximize your incomes." +
 							"This world is full of cheap workforce! Use it!\n\n" +
-							"\tAll the folder you need are on your desk.\n\n" +
+							"\tAll the folders you need are on your desk.\n\n" +
 							"\tYou'll first need a sla... employee to send him in mission.\n\n" +
 							"\tUse the monster folder\n" + 
 							"to bu... recruit one in the market section.\n\n" +

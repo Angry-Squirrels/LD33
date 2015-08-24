@@ -73,7 +73,7 @@ class AvatarGenerator
 		*/
 		
 		hat = new Array<BitmapData>();
-		for (i in 0...3)
+		for (i in 0...4)
 		{
 			hat.push(Assets.getBitmapData("images/hat" + i+".png"));
 		}

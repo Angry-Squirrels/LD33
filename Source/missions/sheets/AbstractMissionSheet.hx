@@ -29,6 +29,7 @@ class AbstractMissionSheet extends PaperSheet
 	var mission:Mission;
 	
 	var slotMargin:Float;
+	public var traitsTF:ui.TF;
 	
 	
 	
@@ -142,7 +143,7 @@ class AbstractMissionSheet extends PaperSheet
 			currentY += statDL.height;
 		}
 		if (mission.requires.length > 0) {
-			var traitsTF = new TF("+ "+mission.requires.toString(), Styles.BLACK12);
+			traitsTF = new TF("+ "+mission.requires.toString(), Styles.BLACK12);
 			traitsTF.width = contentWidth;
 			traitsTF.y = currentY;
 			content.addChild(traitsTF);
