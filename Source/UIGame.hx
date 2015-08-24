@@ -182,6 +182,7 @@ class UIGame extends Sprite
 		missionBinder.close();
 		reportBinder.close();
 		monsterBinder.close();
+		upgradeBinder.close();
 	}
 	
 	function openMissionBinder(isOpened:Bool) 

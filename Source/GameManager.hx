@@ -39,6 +39,8 @@ class GameManager
 	public var archivedMissions : Array<Mission>;
 	public var archivedMissionsChanged:Signal0;
 	
+	public var messages : Array<String>;
+	
 	static public inline var maxMissionNb : Int = 10;
 	static public inline var maxMonsterNb : Int = 5;
 	static public inline var maxTime : Int = 30;
@@ -63,6 +65,8 @@ class GameManager
 		rawText = Assets.getText("missions/config.json");
 		#end
 		config = Json.parse(rawText);
+		
+		messages = new Array<String>();
 		
 		monsters = new Array<Monster>();
 		monstersChanged = new Signal0();
@@ -159,19 +163,23 @@ class GameManager
 			
 			var chanceOfDeath = 0.05;
 			var rollChance = Math.random();
-			var die = rollChance > chanceOfDeath;
+			var die = rollChance < chanceOfDeath;
 			if (monster.currentMission == null) die = false;
 			if(!die){ 
 				gold -= monster.costOfLife;
 				message(monster.name + " costed you " + monster.costOfLife + " to stay alive.");
 			}else {
 				monster.alive = false;
-				message(monster.name + " died of exhaustion.");
+				message(monster.name + " died of exhaustion while working on " + monster.currentMission.title);
 				monsterToKill.push(monster);
+				monster.currentMission.unassignMonster(monster);
 			}
-			
-			for (monster in monsterToKill)
-				monsters.remove(monster);
+		}
+		
+		if (monsterToKill.length > 0) {
+			while (monsterToKill.length > 0)
+				monsters.remove(monsterToKill.pop());
+			monstersChanged.dispatch();
 		}
 		
 		if (gold >= 0)
