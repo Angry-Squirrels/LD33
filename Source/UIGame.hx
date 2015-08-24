@@ -179,16 +179,16 @@ class UIGame extends Sprite
 	private function onClickDesk(e:MouseEvent):Void 
 	{
 		trace("desk");
-		missionBinder.close();
+		missionBinder.close(true);
 		reportBinder.close();
-		monsterBinder.close();
+		monsterBinder.close(true);
 	}
 	
 	function openMissionBinder(isOpened:Bool) 
 	{
 		if (isOpened) {
 			binderContainer.addChild(mission3dContainer);
-			monsterBinder.close();
+			monsterBinder.close(true);
 			reportBinder.close();
 			upgradeBinder.close();
 		}
@@ -198,7 +198,7 @@ class UIGame extends Sprite
 	{
 		if (isOpened) {
 			binderContainer.addChild(monster3dContainer);
-			missionBinder.close();
+			missionBinder.close(true);
 			reportBinder.close();
 			upgradeBinder.close();
 		}
@@ -208,8 +208,8 @@ class UIGame extends Sprite
 	{
 		if (isOpened) {
 			binderContainer.addChild(repport3dContainer);
-			missionBinder.close();
-			monsterBinder.close();
+			missionBinder.close(true);
+			monsterBinder.close(true);
 			upgradeBinder.close();
 		}
 	}
@@ -219,8 +219,8 @@ class UIGame extends Sprite
 		if (isOpened)
 		{
 			binderContainer.addChild(upgrade3dContainer);
-			missionBinder.close();
-			monsterBinder.close();
+			missionBinder.close(true);
+			monsterBinder.close(true);
 			reportBinder.close();
 		}
 	}
@@ -229,8 +229,7 @@ class UIGame extends Sprite
 	{
 		trace("addMonsterToMission(" + monster);
 		cast(missionBinder.availablePile.getCurrentSheet(), AvailableMissionSheet).addMonster(monster);
-		monsterBinder.listSheet.pickMode = false;
-		monsterBinder.marketTab.visible = true;
+		monsterBinder.listSheet.cancelPicking();
 		//monsterBinder.close();
 		missionBinder.open();
 	}
@@ -239,6 +238,7 @@ class UIGame extends Sprite
 	{
 		trace("openMonsterList");
 		monsterBinder.listSheet.pickMode = true;
+		monsterBinder.listSheet.update();
 		
 		monsterBinder.open();
 		

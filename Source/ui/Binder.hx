@@ -165,7 +165,7 @@ class Binder extends PaperObject
 			Actuate.tween(parent, 0.5, { rotationX: 0, z:0, y:0} ).ease(Quad.easeOut);
 	}
 	
-	public function close()
+	public function close(cancelPicking:Bool=false)
 	{
 		buttonMode = true;
 		useHandCursor = true;

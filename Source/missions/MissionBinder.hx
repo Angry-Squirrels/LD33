@@ -95,6 +95,15 @@ class MissionBinder extends Binder
 		
 	}
 	
+	override public function close(cancelPicking:Bool=false)
+	{
+		if (availablePile != null && availablePile.getCurrentSheet() != null)
+		{
+			cast(availablePile.getCurrentSheet(), AvailableMissionSheet).unassignAllMonsters();
+		}
+		super.close(cancelPicking);
+	}
+	
 	
 	
 	

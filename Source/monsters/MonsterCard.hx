@@ -16,7 +16,7 @@ import ui.TF;
 class MonsterCard extends PostIt
 {
 
-	public function new(monster:Monster, isBuying:Bool=false) 
+	public function new(monster:Monster, isBuying:Bool=false, pickMode:Bool=false) 
 	{
 		super(320, 320, 16, 16);
 		
@@ -65,45 +65,28 @@ class MonsterCard extends PostIt
 		
 		currentY += 8;
 		
-		if (!isBuying)
+		if ( !pickMode)
 		{
-			var sellButton = new TextButton("Sell that morron");
-			sellButton.x = (contentWidth-sellButton.width) / 2+4;
-			sellButton.y = currentY;
-			content.addChild(sellButton);
-			
-			//bg.height = content.height + vMargin * 2;
-			
-			sellButton.addEventListener(MouseEvent.CLICK, function(evt:MouseEvent)
+			if (!isBuying)
 			{
-				GameManager.getInstance().market.sellMonster(monster);
-			});
-		}
-		else
-		{
-			var buyButton = new TextButton("Buy that vermin");
-			buyButton.x = (contentWidth-buyButton.width) / 2+4;
-			buyButton.y = currentY;
-			content.addChild(buyButton);
-			if (GameManager.getInstance().gold < monster.buyValue)
-			{
-				buyButton.disable();
+				var sellButton = new TextButton("Sell that morron");
+				sellButton.x = (contentWidth-sellButton.width) / 2+4;
+				sellButton.y = currentY;
+				content.addChild(sellButton);
+				
+				
+				sellButton.addEventListener(MouseEvent.CLICK, function(evt:MouseEvent)
+				{
+					GameManager.getInstance().market.sellMonster(monster);
+				});
 			}
 			else
 			{
-				buyButton.enable();
-			}
-			
-			//bg.height = content.height + vMargin * 2;
-			
-			buyButton.addEventListener(MouseEvent.CLICK, function(evt:MouseEvent)
-			{
-				GameManager.getInstance().market.buyMonster(monster);
-			});
-			/*
-			GameManager.getInstance().goldChanged.add(function(amount)
-			{
-				if (amount < monster.buyValue)
+				var buyButton = new TextButton("Buy that vermin");
+				buyButton.x = (contentWidth-buyButton.width) / 2+4;
+				buyButton.y = currentY;
+				content.addChild(buyButton);
+				if (GameManager.getInstance().gold < monster.buyValue)
 				{
 					buyButton.disable();
 				}
@@ -111,8 +94,14 @@ class MonsterCard extends PostIt
 				{
 					buyButton.enable();
 				}
-			});
-			*/
+				
+				
+				buyButton.addEventListener(MouseEvent.CLICK, function(evt:MouseEvent)
+				{
+					GameManager.getInstance().market.buyMonster(monster);
+				});
+				
+			}
 		}
 	}
 	

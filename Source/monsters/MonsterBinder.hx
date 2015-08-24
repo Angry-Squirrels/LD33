@@ -62,4 +62,13 @@ class MonsterBinder extends Binder
 		super.open(evt);
 	}
 	
+	override public function close(cancelPicking:Bool=false)
+	{
+		if (cancelPicking)
+		{
+			listSheet.cancelPicking();
+		}
+		super.close();
+	}
+	
 }

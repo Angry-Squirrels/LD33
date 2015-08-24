@@ -29,7 +29,7 @@ class MonsterListSheet extends PaperSheet
 		update();
 	}
 	
-	function update()
+	public function update()
 	{
 		while (content.numChildren>0) content.removeChildAt(0);
 		
@@ -72,7 +72,7 @@ class MonsterListSheet extends PaperSheet
 				content.addChild(avatar);
 				//avatar.mouseChildren = true;
 				if (avatar.card == null) {
-					avatar.card = new MonsterCard(monster);
+					avatar.card = new MonsterCard(monster, false, pickMode);
 				}
 				avatar.card.x = avatar.width/3;
 				avatar.card.y = avatar.height / 3;
@@ -94,6 +94,15 @@ class MonsterListSheet extends PaperSheet
 		}
 		
 	}
+	
+	public function cancelPicking()
+	{
+		pickMode = false;
+		update();
+		visible = true;
+	}
+	
+	
 	
 
 	

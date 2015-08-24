@@ -132,11 +132,15 @@ class AvailableMissionSheet extends AbstractMissionSheet
 	
 	override public function disactivate() {
 		super.disactivate();
+		unassignAllMonsters();
+	}
+	
+	public function unassignAllMonsters()
+	{
 		for (monster in mission.assignedMonsters) {
 			mission.unassignMonster(monster);
 		}
 	}
-	
 	
 	public function addMonster(monster:Monster) 
 	{
