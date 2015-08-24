@@ -10,10 +10,12 @@ import monsters.MonsterBinder;
 import monsters.MonsterListSheet;
 import motion.Actuate;
 import motion.easing.Cubic;
+import motion.easing.Linear;
 import openfl.Assets;
 import openfl.display.Sprite;
 import openfl.events.MouseEvent;
 import openfl.Lib;
+import openfl.text.TextFieldAutoSize;
 import openfl.text.TextFormat;
 import openfl.text.TextFormatAlign;
 import rewards.UpgradeBinder;
@@ -21,6 +23,8 @@ import ui.Calendar;
 import ui.Desk;
 import ui.Binder;
 import ui.DollarIndicator;
+import ui.Styles;
+import ui.TF;
 
 /**
  * ...
@@ -63,10 +67,12 @@ class UIGame extends Sprite
 		dayBlackTransition.graphics.beginFill(0);
 		dayBlackTransition.graphics.drawRect(0, 0, Lib.current.stage.stageWidth, Lib.current.stage.stageHeight);
 		
+		var objective = GameManager.objective;
+		
 		gameManager.message("Son,\n"+
 							"I sent you here to extend the Company.\n\n" + 
 							"Don't disapoint me.\n\n" +
-							"\tYou're on a trial and have a month to maximize your incomes." +
+							"\tYou're on a trial and have to get $" + objective + " as soon as possible." + 
 							"This world is full of cheap workforce! Use it!\n\n" +
 							"\tAll the folders you need are on your desk.\n\n" +
 							"\tYou'll first need a sla... employee to send him in mission.\n\n" +
@@ -284,10 +290,27 @@ class UIGame extends Sprite
 		if (!end) {
 			gameManager.startNewDay();
 			calendar.updateDate();
-			fadeIn(checkRepport);
+			showDay();
+			//fadeIn(checkRepport);
 		}else {
 			trace("this is the end.");
 		}
+	}
+	
+	function showDay() {
+		var dayTF : TF = new TF("Day : " + gameManager.getDate(), Styles.WHITE24, TextFieldAutoSize.LEFT);
+		dayTF.x = (Lib.current.stage.stageWidth - dayTF.width) / 2;
+		dayTF.y = Lib.current.stage.stageHeight;
+		Lib.current.stage.addChild(dayTF);
+		
+		var midScreen = Lib.current.stage.stageHeight / 2;
+		
+		Actuate.tween(dayTF, 0.2, { y:midScreen }, false).ease(Cubic.easeOut);
+		Actuate.tween(dayTF, 1, { y:midScreen - dayTF.height }, false).ease(Linear.easeNone).delay(0.2);
+		Actuate.tween(dayTF, 0.2, { y:0 - dayTF.height }, false).ease(Cubic.easeIn).delay(1.2).onComplete(function() {
+			Lib.current.stage.removeChild(dayTF);
+			fadeIn(checkRepport);
+		});
 	}
 	
 	function checkRepport() {
