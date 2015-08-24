@@ -153,9 +153,25 @@ class GameManager
 	public function endDay() : Bool {
 		message("A new moon is rising!");
 		
+		var monsterToKill = new Array<Monster>();
+		
 		for (monster in monsters) {
-			gold -= monster.costOfLife;
-			message(monster.name + " costed you " + monster.costOfLife + " to stay alive.");
+			
+			var chanceOfDeath = 0.05;
+			var rollChance = Math.random();
+			var die = rollChance > chanceOfDeath;
+			if (monster.currentMission == null) die = false;
+			if(!die){ 
+				gold -= monster.costOfLife;
+				message(monster.name + " costed you " + monster.costOfLife + " to stay alive.");
+			}else {
+				monster.alive = false;
+				message(monster.name + " died of exhaustion.");
+				monsterToKill.push(monster);
+			}
+			
+			for (monster in monsterToKill)
+				monsters.remove(monster);
 		}
 		
 		if (gold >= 0)
