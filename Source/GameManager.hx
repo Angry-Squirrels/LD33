@@ -3,6 +3,7 @@ import haxe.Json;
 import missions.Mission;
 import monsters.Monster;
 import msignal.Signal.Signal0;
+import msignal.Signal.Signal1;
 
 #if !neko
 import openfl.Assets;
@@ -41,7 +42,9 @@ class GameManager
 	public var maxMonsterNb : Int = 5;
 	public var market : MonsterMarket;
 	
-	public var gold : Int;
+	public var gold(get, set) : Int;
+	var _gold:Int;
+	public var goldChanged:Signal1<Int>;
 	public var day : Int;
 	public var maxDay : UInt;
 	public var config : Dynamic;
@@ -72,6 +75,7 @@ class GameManager
 		
 		day = 0;
 		maxDay = 42;
+		goldChanged = new Signal1<Int>();
 		gold = 1000;
 	}
 	
@@ -207,6 +211,19 @@ class GameManager
 			for (monster in mission.assignedMonsters)
 				mission.unassignMonster(monster);
 		}
+	}
+	
+	function get_gold():Int 
+	{
+		return _gold;
+	}
+	
+	function set_gold(value:Int):Int 
+	{
+		
+		_gold = value;
+		goldChanged.dispatch(_gold);
+		return  _gold;
 	}
 	
 	

@@ -15,6 +15,7 @@ import openfl.text.TextFormatAlign;
 import ui.Calendar;
 import ui.Desk;
 import ui.Binder;
+import ui.DollarIndicator;
 
 /**
  * ...
@@ -29,6 +30,7 @@ class UIGame extends Sprite
 	var missionBinder:MissionBinder;
 	var gameManager:GameManager;
 	var reportBinder:missions.ReportBinder;
+	var binderContainer:Sprite;
 	//var monsterListSheet:monsters.MonsterListSheet;
 	//var missionSheet:missions.MissionSheet;
 	//var mission:missions.Mission;
@@ -41,6 +43,9 @@ class UIGame extends Sprite
 		this.gameManager = gameManager;
 		
 		desk = new Desk();
+		
+		binderContainer = new Sprite();
+		addChild(binderContainer);
 		
 		monsterBinder = new MonsterBinder();
 		monsterBinder.rotation = -10;
@@ -62,13 +67,18 @@ class UIGame extends Sprite
 		//reportFile = new ReportFile();
 		//researchFile = new File();
 		
-		addChild(reportBinder);
-		addChild(monsterBinder);
-		addChild(missionBinder);
+		binderContainer.addChild(reportBinder);
+		binderContainer.addChild(monsterBinder);
+		binderContainer.addChild(missionBinder);
 		//addChild(monsterFile);
 		
 		var calendar:Calendar = new Calendar();
 		addChild(calendar);
+		
+		var dollarIndic = new DollarIndicator();
+		addChild(dollarIndic);
+		dollarIndic.y = 800 - dollarIndic.width;
+		
 		/*
 		
 		
@@ -100,7 +110,7 @@ class UIGame extends Sprite
 	function openMissionBinder(isOpened:Bool) 
 	{
 		if (isOpened) {
-			addChild(missionBinder);
+			binderContainer.addChild(missionBinder);
 			monsterBinder.close();
 			reportBinder.close();
 		}
@@ -109,7 +119,7 @@ class UIGame extends Sprite
 	function openMonsterBinder(isOpened:Bool) 
 	{
 		if (isOpened) {
-			addChild(monsterBinder);
+			binderContainer.addChild(monsterBinder);
 			missionBinder.close();
 			reportBinder.close();
 		}
@@ -118,7 +128,7 @@ class UIGame extends Sprite
 	function openReportBinder(isOpened:Bool) 
 	{
 		if (isOpened) {
-			addChild(reportBinder);
+			binderContainer.addChild(reportBinder);
 			missionBinder.close();
 			monsterBinder.close();
 		}

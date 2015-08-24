@@ -15,11 +15,11 @@ class Calendar extends PaperObject
 
 	public function new() 
 	{
-		super(256, 256, 32, 32);
+		super(64, 64, 32, 32);
 		
 		gameManager = GameManager.getInstance();
 		
-		bg.graphics.beginFill(0x808080);
+		bg.graphics.beginFill(0xffffff);
 		drawBg();
 		bg.graphics.endFill();
 		
