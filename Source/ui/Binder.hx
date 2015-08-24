@@ -26,17 +26,19 @@ class Binder extends Sprite
 	
 	public var isOpened:Bool;
 	public var isOpenedChanged:Signal1<Bool>;
+	public var title : String;
 	
 	var pressed : Bool;
 	var mouseDragPoint : Point;
 
-	public function new() 
+	public function new(_title : String = "") 
 	{
 		super();
+		title = _title;
 		isOpenedChanged = new Signal1<Bool>();
 		tabs = new Array<Tab>();
 		
-		cover = new BinderCover(this);
+		cover = new BinderCover(this, _title);
 		addChild(cover);
 		
 		close();

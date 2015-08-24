@@ -17,7 +17,7 @@ class ReportBinder extends Binder
 	
 	public function new() 
 	{
-		super();
+		super("Reports");
 		
 		gameManager = GameManager.getInstance();
 		

@@ -195,12 +195,12 @@ class UIGame extends Sprite
 	public function dayTransition() {
 		dayBlackTransition.alpha = 0;
 		Lib.current.stage.addChild(dayBlackTransition);
-		Actuate.tween(dayBlackTransition, 0.5, { alpha:1 } ).ease(Cubic.easeOut).onComplete(function() {	
+		Actuate.tween(dayBlackTransition, 0.25, { alpha:1 } ).ease(Cubic.easeOut).onComplete(function() {	
 			var gotoNextDay = gameManager.endDay();
 			if (gotoNextDay){
 				gameManager.startNewDay();
-				calendar.updateData();
-				Actuate.tween(dayBlackTransition, 0.5, { alpha:0 } ).ease(Cubic.easeOut);
+				calendar.updateDate();
+				Actuate.tween(dayBlackTransition, 0.25, { alpha:0 } ).ease(Cubic.easeOut);
 			}
 		});
 	}

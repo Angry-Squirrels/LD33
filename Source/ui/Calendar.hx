@@ -71,7 +71,7 @@ class Calendar extends Sprite
 		uigame.dayTransition();
 	}
 	
-	public function updateData() {
+	public function updateDate() {
 		tf.text = cast gameManager.getDate();
 	}
 	

@@ -25,7 +25,7 @@ class MissionBinder extends Binder
 	public function new() 
 	{
 		trace("missionBinder");
-		super();
+		super("Missions");
 		gameManager = GameManager.getInstance();
 		
 		monsterRequested = new Signal0();
