@@ -20,7 +20,7 @@ class MissionBinder extends Binder
 	public var runningPile:SheetPile;
 	var gameManager:GameManager;
 	var runningTab:Tab;
-	var availableTab:Tab;
+	public var availableTab:Tab;
 
 	
 	
@@ -67,12 +67,16 @@ class MissionBinder extends Binder
 			runningPile.addSheet(missionSheet);
 		}
 		
-		updateBg();
+		updateBgAndCover();
 	}
 	
-	function updateBg() 
+	function updateBgAndCover() 
 	{
 		bg.height = Math.max(runningTab.height, availableTab.height) + vMargin;
+		bg.y = -bg.height / 2;
+		
+		//cover.height = bg.height;
+		//cover.draw();
 	}
 	
 	function updateAvailable() {
@@ -87,7 +91,17 @@ class MissionBinder extends Binder
 			availablePile.addSheet(missionSheet);
 		}
 		
-		updateBg();
+		updateBgAndCover();
+		
+	}
+	
+	override public function close(cancelPicking:Bool=false)
+	{
+		if (availablePile != null && availablePile.getCurrentSheet() != null)
+		{
+			cast(availablePile.getCurrentSheet(), AvailableMissionSheet).unassignAllMonsters();
+		}
+		super.close(cancelPicking);
 	}
 	
 	

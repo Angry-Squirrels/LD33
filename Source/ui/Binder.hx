@@ -147,6 +147,8 @@ class Binder extends PaperObject
 		removeEventListener(MouseEvent.MOUSE_OVER, drawHalo);
 		removeEventListener(MouseEvent.MOUSE_OUT, removeHalo);
 		
+		
+		
 		trace("open(" + evt);
 		mouseChildren = true;
 		removeEventListener(MouseEvent.MOUSE_UP, open);
@@ -158,7 +160,7 @@ class Binder extends PaperObject
 			Actuate.tween(parent, 0.5, { rotationX: 0, z:0, y:0} ).ease(Quad.easeOut);
 	}
 	
-	public function close()
+	public function close(cancelPicking:Bool=false)
 	{
 		buttonMode = true;
 		useHandCursor = true;
