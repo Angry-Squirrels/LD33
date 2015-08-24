@@ -14,12 +14,15 @@ class ReportBinder extends Binder
 	public var endedPile:SheetPile;
 	var gameManager:GameManager;
 	var currentMessagePage:MessagePage;
+	var messagePages:Array<MessagePage>;
 	
 	public function new() 
 	{
 		super("Reports", 320, 448);
 		
 		gameManager = GameManager.getInstance();
+		
+		messagePages = new Array<MessagePage>();
 		
 		var endedTab:Tab = new Tab("Rewards", 304, 344);
 		
@@ -35,18 +38,19 @@ class ReportBinder extends Binder
 	}
 	
 	public function addMessagePage() {
-		currentMessagePage = new MessagePage(this);
-		addChild(currentMessagePage);
-		currentMessagePage.x = -currentMessagePage.width / 2;
-		currentMessagePage.y = -currentMessagePage.height / 2;
+		var messagePage = new MessagePage(this);
+		messagePages.push(messagePage);
+		addChild(messagePage);
+		messagePage.x = -messagePage.width / 2;
+		messagePage.y = -messagePage.height / 2;
 		addChild(cover);
 	}
 	
 	public function removeMessagePage() {
-		removeChild(currentMessagePage);
-		currentMessagePage = null;
+		removeChild(messagePages.pop());
 		
-		if (endedPile.sheets.length == 0)
+		
+		if (messagePages.length==0 && endedPile.sheets.length == 0)
 		{
 			close();
 		}
@@ -61,7 +65,7 @@ class ReportBinder extends Binder
 			var missionSheet = new EndedMissionSheet(mission);
 			endedPile.addSheet(missionSheet);
 		}
-		if (endedPile.sheets.length == 0)
+		if (messagePages.length==0 && endedPile.sheets.length == 0)
 		{
 			close();
 		}
