@@ -37,13 +37,7 @@ class Monster
 		var monster = new monsters.Monster();
 		monster.name = NameGenerator.getName();
 		monster.stats = Stats.make(level);	
-		var nbTraitProb = Std.random(100);
-		var nbTrait = 0;
-		if (nbTraitProb >= 40) nbTrait = 1;
-		if (nbTraitProb >= 70) nbTrait = 2;
-		if (nbTraitProb >= 88) nbTrait = 3;
-		if (nbTraitProb >= 95) nbTrait = 4;
-		if (nbTraitProb >= 98) nbTrait = 5;
+		var nbTrait = 1;
 		for (i in 0 ... nbTrait)
 			monster.traits.push(Traits.getRandomTrait());
 		monster.mCostOfLife = Math.random()*0.2+0.05;
