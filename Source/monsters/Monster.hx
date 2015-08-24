@@ -46,7 +46,7 @@ class Monster
 			monster.traits.push(Traits.getRandomTrait());
 		monster.mCostOfLife = Math.random()*0.2+0.05;
 		
-		monster.picture = Assets.getBitmapData("images/monster.png");
+		monster.picture = AvatarGenerator.getAvatar();
 		
 		monster.currentMissionChanged = new Signal1<Mission>();
 		
