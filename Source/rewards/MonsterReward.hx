@@ -21,6 +21,13 @@ class MonsterReward extends Reward
 	
 	override public function take(monsters : Array<Monster>) 
 	{
+		var maxMonster =  Upgrades.maxMonsterUpgrade * GameManager.maxMonsterNb;
+		var nbMonsters = GameManager.getInstance().monsters.length ;
+		var monsterToAdd = mQuantity;
+		if (monsterToAdd + nbMonsters > maxMonster){
+			monsterToAdd = maxMonster - nbMonsters;
+			GameManager.getInstance().message("You have to upgrade you Company with upgrade mission to stock more monsters.");
+		}
 		for (i in 0 ... mQuantity)
 			GameManager.getInstance().addMonster();
 	}
