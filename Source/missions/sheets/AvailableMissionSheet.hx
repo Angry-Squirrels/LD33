@@ -125,13 +125,21 @@ class AvailableMissionSheet extends AbstractMissionSheet
 	
 	function launch(evt:MouseEvent = null) {
 		trace("launch");
-		GameManager.getInstance().launchMission(mission);
-			
-		disableStartButton();
 		
-		for (slot in slots) {
-			slot.removeEventListener(MouseEvent.CLICK, onSlotClicked);
-			slot.buttonMode = false;
+		if (mission.areRequirementFilled())
+		{
+			GameManager.getInstance().launchMission(mission);
+				
+			disableStartButton();
+			
+			for (slot in slots) {
+				slot.removeEventListener(MouseEvent.CLICK, onSlotClicked);
+				slot.buttonMode = false;
+			}
+		}
+		else
+		{
+			traitsTF.text = "+"+mission.requires.toString()+" REQUIRED!";
 		}
 	}
 	

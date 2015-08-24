@@ -39,7 +39,16 @@ class NameGenerator
 			"Black",
 			"Green",
 			"Pinky",
-			"Punky"
+			"Punky",
+			"Ambiguous",
+			"Shady",
+			"Sir",
+			"Lady",
+			"Father",
+			"Master",
+			"Liar",
+			"Sloppy",
+			"Thug"
 			
 		];
 		mNameList = [
@@ -84,7 +93,9 @@ class NameGenerator
 			"Maria",
 			"Pinky",
 			"Rex",
-			"Roxane"
+			"Roxane",
+			"Tony",
+			"Zorglub"
 		];
 		
 		mInited = true;

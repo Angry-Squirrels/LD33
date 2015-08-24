@@ -58,6 +58,8 @@ class UIGame extends Sprite
 		super();
 		this.gameManager = gameManager;
 		
+		
+		
 		desk = new Desk();
 		desk.addEventListener(MouseEvent.CLICK, onClickDesk);
 		addChild(desk);
@@ -73,7 +75,7 @@ class UIGame extends Sprite
 							"Don't disapoint me.\n\n" +
 							"\tYou're on a trial and have to get $" + objective + " as soon as possible." + 
 							"This world is full of cheap workforce! Use it!\n\n" +
-							"\tAll the folder you need are on your desk.\n\n" +
+							"\tAll the folders you need are on your desk.\n\n" +
 							"\tYou'll first need a sla... employee to send him in mission.\n\n" +
 							"\tUse the monster folder\n" + 
 							"to bu... recruit one in the market section.\n\n" +
@@ -218,7 +220,7 @@ class UIGame extends Sprite
 	{
 		if (isOpened) {
 			binderContainer.addChild(monster3dContainer);
-			missionBinder.close(true);
+			missionBinder.close(false);
 			reportBinder.close();
 			upgradeBinder.close();
 		}
@@ -248,6 +250,7 @@ class UIGame extends Sprite
 	function addMonsterToMission(monster:Monster) 
 	{
 		trace("addMonsterToMission(" + monster);
+		
 		cast(missionBinder.availablePile.getCurrentSheet(), AvailableMissionSheet).addMonster(monster);
 		monsterBinder.listSheet.cancelPicking();
 		//monsterBinder.close();

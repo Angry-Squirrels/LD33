@@ -107,10 +107,13 @@ class SheetPile extends Sprite
 			holder.removeChildAt(0);
 		}
 		sheets = new Array<PaperSheet>();
+		currentSheetIndex = 0;
 	}
 	
 	public function getCurrentSheet():PaperSheet
 	{
+		trace(sheets);
+		trace(currentSheetIndex);
 		return sheets[currentSheetIndex];
 	}
 }
