@@ -46,6 +46,7 @@ class UIGame extends Sprite
 		this.gameManager = gameManager;
 		
 		desk = new Desk();
+		addChild(desk);
 		
 		binderContainer = new Sprite();
 		addChild(binderContainer);
@@ -102,11 +103,13 @@ class UIGame extends Sprite
 		//addChild(monsterFile);
 		
 		var calendar:Calendar = new Calendar();
+		calendar.x = 80;
+		calendar.y = 50;
 		addChild(calendar);
 		
 		var dollarIndic = new DollarIndicator();
 		addChild(dollarIndic);
-		dollarIndic.y = 800 - dollarIndic.width;
+		dollarIndic.x = 800 - dollarIndic.width;
 		
 		/*
 		
@@ -126,7 +129,7 @@ class UIGame extends Sprite
 		
 		
 		
-		addChild(desk);
+		
 		
 		addChild(missionSheet);
 		addChild(monsterListSheet);

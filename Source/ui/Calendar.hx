@@ -1,34 +1,49 @@
 package ui;
 
+import openfl.Assets;
+import openfl.display.Bitmap;
 import openfl.display.Sprite;
 import openfl.events.MouseEvent;
+import openfl.text.TextFieldAutoSize;
 
 /**
  * ...
  * @author damrem
  */
-class Calendar extends PaperObject
+class Calendar extends Sprite
 {
-	var next:ui.TF;
+	//var next:ui.TF;
 	var gameManager:GameManager;
 	var tf:ui.TF;
 
 	public function new() 
 	{
-		super(64, 64, 32, 32);
+		super();
+		
+		var block = new Bitmap(Assets.getBitmapData("images/calendar.png"));
+		addChild(block);
 		
 		gameManager = GameManager.getInstance();
 		
-		bg.graphics.beginFill(0xffffff);
-		drawBg();
-		bg.graphics.endFill();
+		var page = new Sprite();
 		
-		tf = new TF(cast(gameManager.getDate()), Styles.BLACK24);
-		content.addChild(tf);
+		addChild(page);
+		page.x = -60;
+		page.y = -100;
+		page.z = 500;
+		page.rotationX = 50;
 		
 		
-		next = new TF("Next day", Styles.BLACK12);
-		content.addChild(next);
+		
+		tf = new TF(cast(gameManager.getDate()), Styles.CALENDAR_BIG, TextFieldAutoSize.CENTER);
+		tf.scaleX = tf.scaleY = 1.5;
+		
+		//tf.rotationZ = 2.5;
+		page.addChild(tf);
+		
+		
+		//next = new TF("Next day", Styles.CALENDAR_SMALL);
+		//page.addChild(next);
 		
 		buttonMode = true;
 		
