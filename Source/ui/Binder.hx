@@ -5,7 +5,9 @@ import msignal.Signal.Signal1;
 import openfl.display.Sprite;
 import openfl.events.MouseEvent;
 import openfl.geom.Matrix;
+import openfl.geom.Matrix3D;
 import openfl.geom.Point;
+import openfl.geom.Vector3D;
 import openfl.Lib;
 
 /**
@@ -39,9 +41,22 @@ class Binder extends Sprite
 	
 	function onMouseMove(e:MouseEvent):Void 
 	{
-		if(pressed && isOpened){
-			x = e.stageX - mouseDragPoint.x;
-			y = e.stageY - mouseDragPoint.y;
+		if (pressed && isOpened) {
+		
+			var nextX = e.stageX - mouseDragPoint.x;
+			var nextY = e.stageY - mouseDragPoint.y;
+			
+			var diffX = nextX - x;
+			var diffY = nextY - y;
+			
+			/*var mat = transform.matrix3D;
+			
+			var rotMat = new Matrix3D();
+			rotMat.appendRotation(0.2, Vector3D.Z_AXIS, new Vector3D( -100, -100, 0));
+			mat.append(rotMat);*/
+			
+			x += diffX;
+			y += diffY;
 		}
 	}
 	
@@ -59,7 +74,7 @@ class Binder extends Sprite
 		
 		mouseDragPoint = globalToLocal(new Point(gx, gy));
 		var mat = new Matrix();
-		mat.rotate(rotationZ / 180 * Math.PI);
+		mat.rotate(rotation / 180 * Math.PI);
 		mouseDragPoint = mat.transformPoint(mouseDragPoint);
 	}
 	
@@ -80,8 +95,8 @@ class Binder extends Sprite
 		//tab.x = tab.y = 32;
 		//tab.label.y = 16;
 		addChild(tab);
-		//tab.x = -tab.width / 2;
-		//tab.y = -tab.height / 2;
+		tab.x = -tab.width / 2;
+		tab.y = -tab.height / 2;
 		tab.label.addEventListener(MouseEvent.CLICK, function(evt:MouseEvent) {
 			if (tab != currentTab)
 			{
@@ -114,8 +129,8 @@ class Binder extends Sprite
 		alpha = 1;
 		isOpened = true;
 		isOpenedChanged.dispatch(isOpened);
-		Actuate.tween(this, 0.5, { rotationX: 0, z:0} ).ease(Quad.easeOut);
-		
+		if(parent != null)
+			Actuate.tween(parent, 0.5, { rotationX: 0, z:0, y:0} ).ease(Quad.easeOut);
 	}
 	
 	public function close()
@@ -126,7 +141,8 @@ class Binder extends Sprite
 		//alpha = 0.5;
 		addEventListener(MouseEvent.MOUSE_UP, open);
 		isOpenedChanged.dispatch(isOpened);
-		Actuate.tween(this, 0.5, { rotationX:-50, z:400} ).ease(Quad.easeOut);
+		if(parent != null)
+			Actuate.tween(parent, 0.5, { rotationX:-60, z:500, y:200} ).ease(Quad.easeOut);
 	}
 	
 }
