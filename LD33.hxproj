@@ -18,13 +18,14 @@
   <classpaths>
     <class path="C:\HaxeToolkit\haxe\lib\openfl\3,3,1" />
     <class path="C:\HaxeToolkit\haxe\lib\lime\2,6,0" />
+    <class path="C:\HaxeToolkit\haxe\lib\actuate\1,8,6" />
     <class path="C:\HaxeToolkit\haxe\lib\msignal\1,2,2" />
     <class path="Source" />
     <class path="Export\flash\haxe" />
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="openfl=3.3.1&#xA;lime=2.6.0&#xA;msignal=1.2.2&#xA;openfl-next&#xA;tools=2.6.0&#xA;no-compilation&#xA;openfl-flash&#xA;web" />
+    <option directives="openfl=3.3.1&#xA;lime=2.6.0&#xA;actuate=1.8.6&#xA;msignal=1.2.2&#xA;openfl-next&#xA;tools=2.6.0&#xA;no-compilation&#xA;openfl-flash&#xA;web" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />

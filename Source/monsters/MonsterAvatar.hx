@@ -22,7 +22,7 @@ class MonsterAvatar extends Sprite
 		//useHandCursor = true;
 		buttonMode = true;
 		
-		var pic = new Bitmap(monster.picture);
+		var pic = new Bitmap(monster.picture, PixelSnapping.AUTO, true);
 		pic.width = pic.height = size;
 		addChild(pic);
 		

@@ -1,4 +1,6 @@
 package ui;
+import motion.Actuate;
+import motion.easing.Quad;
 import msignal.Signal.Signal1;
 import openfl.display.Sprite;
 import openfl.events.MouseEvent;
@@ -41,6 +43,8 @@ class Binder extends Sprite
 		//tab.x = tab.y = 32;
 		//tab.label.y = 16;
 		addChild(tab);
+		tab.x = -tab.width / 2;
+		tab.y = -tab.height / 2;
 		tab.label.addEventListener(MouseEvent.CLICK, function(evt:MouseEvent) {
 			if (tab != currentTab)
 			{
@@ -73,6 +77,8 @@ class Binder extends Sprite
 		alpha = 1;
 		isOpened = true;
 		isOpenedChanged.dispatch(isOpened);
+		Actuate.tween(this, 0.5, { rotationX: 0, z:0} ).ease(Quad.easeOut);
+		
 	}
 	
 	public function close()
@@ -83,6 +89,7 @@ class Binder extends Sprite
 		//alpha = 0.5;
 		addEventListener(MouseEvent.MOUSE_UP, open);
 		isOpenedChanged.dispatch(isOpened);
+		Actuate.tween(this, 0.5, { rotationX:-50, z:400} ).ease(Quad.easeOut);
 	}
 	
 }
