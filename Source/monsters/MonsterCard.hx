@@ -54,6 +54,16 @@ class MonsterCard extends PostIt
 			currentY += statLine.height;
 		}
 		
+		if (monster.traits.length > 0)
+		{
+			var traitsTf = new TF("+" + cast(monster.traits), Styles.BLACK12);
+			traitsTf.wordWrap = traitsTf.multiline = true;
+			traitsTf.width = contentWidth;
+			traitsTf.y = currentY;
+			content.addChild(traitsTf);
+			currentY += traitsTf.height;
+		}
+		
 		currentY += vMargin;
 		
 		var price = isBuying?monster.buyValue:monster.sellValue;
