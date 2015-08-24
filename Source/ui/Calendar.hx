@@ -4,6 +4,7 @@ import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.display.Sprite;
 import openfl.events.MouseEvent;
+import openfl.filters.GlowFilter;
 import openfl.text.TextFieldAutoSize;
 
 /**
@@ -15,10 +16,13 @@ class Calendar extends Sprite
 	//var next:ui.TF;
 	var gameManager:GameManager;
 	var tf:ui.TF;
+	var uigame : UIGame;
 
-	public function new() 
+	public function new(_uigame : UIGame) 
 	{
 		super();
+		
+		uigame = _uigame;
 		
 		var block = new Bitmap(Assets.getBitmapData("images/calendar.png"));
 		addChild(block);
@@ -48,12 +52,27 @@ class Calendar extends Sprite
 		buttonMode = true;
 		
 		addEventListener(MouseEvent.CLICK, nextDay);
+		addEventListener(MouseEvent.MOUSE_OVER, drawHalo);
+		addEventListener(MouseEvent.MOUSE_OUT, removeHalo);
+	}
+	
+	private function removeHalo(e:MouseEvent):Void 
+	{
+		filters = [];
+	}
+	
+	private function drawHalo(e:MouseEvent):Void 
+	{
+		filters = [new GlowFilter(0xffffff)];
 	}
 	
 	private function nextDay(e:MouseEvent=null):Void 
 	{
-		gameManager.startNewDay();
-		tf.text = cast(gameManager.getDate());
+		uigame.dayTransition();
+	}
+	
+	public function updateData() {
+		tf.text = cast gameManager.getDate();
 	}
 	
 }
