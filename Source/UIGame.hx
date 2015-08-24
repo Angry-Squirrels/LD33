@@ -67,8 +67,8 @@ class UIGame extends Sprite
 		
 		
 		upgradeBinder = new UpgradeBinder();
-		upgradeBinder.x = 600;
-		upgradeBinder.y = 300;
+		upgradeBinder.x = 150;
+		upgradeBinder.y = 230;
 		upgradeBinder.rotation = Math.random() * 20 - 10;
 		
 		upgrade3dContainer = new Sprite();
@@ -82,8 +82,8 @@ class UIGame extends Sprite
 		
 		
 		monsterBinder = new MonsterBinder();
-		monsterBinder.x = 150;
-		monsterBinder.y = 300;
+		monsterBinder.x = 400;
+		monsterBinder.y = 225;
 		monsterBinder.rotation = -10;
 		
 		monster3dContainer = new Sprite();
@@ -96,8 +96,8 @@ class UIGame extends Sprite
 		
 		
 		missionBinder = new MissionBinder();
-		missionBinder.x = 450;
-		missionBinder.y = 300;
+		missionBinder.x = 630;
+		missionBinder.y = 230;
 		missionBinder.rotation = 10;
 		
 		mission3dContainer = new Sprite();
@@ -110,8 +110,8 @@ class UIGame extends Sprite
 		
 		
 		reportBinder = new ReportBinder();
-		reportBinder.x = 300;
-		reportBinder.y = 300;
+		reportBinder.x = 180;
+		reportBinder.y = 250;
 		reportBinder.rotation = 0;
 		
 		repport3dContainer = new Sprite();
@@ -182,6 +182,12 @@ class UIGame extends Sprite
 		missionBinder.close(true);
 		reportBinder.close();
 		monsterBinder.close(true);
+		upgradeBinder.close(true);
+		trace(missionBinder.x, missionBinder.y);
+		trace(reportBinder.x, reportBinder.y);
+		trace(monsterBinder.x, monsterBinder.y);
+		trace(upgradeBinder.x, upgradeBinder.y);
+		
 	}
 	
 	function openMissionBinder(isOpened:Bool) 
