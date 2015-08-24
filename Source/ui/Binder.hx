@@ -34,9 +34,9 @@ class Binder extends PaperObject
 	
 	var dropShadow : DropShadowFilter;
 
-	public function new(_title : String = "") 
+	public function new(_title : String = "", Width:Float=320, Height:Float=416) 
 	{
-		super(280, 360, 16, 16);
+		super(320, 416, 16, 16);
 		title = _title;
 		isOpenedChanged = new Signal1<Bool>();
 		tabs = new Array<Tab>();
@@ -52,7 +52,10 @@ class Binder extends PaperObject
 		Lib.current.stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 		Lib.current.stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 		
+		bg.graphics.beginFill(0xff0000);
 		drawBg();
+		bg.graphics.endFill();
+		
 		bg.x -= bg.width / 2;
 		bg.y -= bg.height / 2;
 	}
@@ -100,21 +103,14 @@ class Binder extends PaperObject
 		
 		trace("addtab("+tab);
 		lastTab = tabs.length > 0?tabs[tabs.length - 1]:null;
-		/*
-		if (tabs.length == 0) {
-			setCurrentTab(tab);
-		}
-		else {
-			setCurrentTab(tabs[0]);
-		}*/
 		tabs.push(tab);
 		
-		tab.label.x = ((lastTab != null)?lastTab.label.x + lastTab.label.width:0) + 16;
+		tab.label.x = ((lastTab != null)?lastTab.label.x + lastTab.label.width:0) + 4;
 		//tab.x = tab.y = 32;
 		//tab.label.y = 16;
 		addChild(tab);
 		tab.x = -tab.width / 2;
-		tab.y = -tab.height / 2;
+		tab.y = -tab.getH() / 2;
 		tab.label.addEventListener(MouseEvent.CLICK, function(evt:MouseEvent) {
 			if (tab != currentTab)
 			{

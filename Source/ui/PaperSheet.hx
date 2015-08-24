@@ -10,7 +10,7 @@ import openfl.display.Sprite;
 class PaperSheet extends PaperObject
 {
 
-	public function new(Width:Float=400, Height:Float=480) 
+	public function new(Width:Float=304, Height:Float=344) 
 	{
 		super(Width, Height, 16, 16);
 		

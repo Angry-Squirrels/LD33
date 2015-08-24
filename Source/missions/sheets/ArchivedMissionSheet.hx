@@ -9,9 +9,9 @@ import missions.Mission;
 class ArchivedMissionSheet extends AbstractMissionSheet
 {
 
-	public function new(mission:Mission, Width:Float=400, Height:Float=420) 
+	public function new(mission:Mission) 
 	{
-		super(mission, Width, Height);
+		super(mission);
 		
 	}
 	

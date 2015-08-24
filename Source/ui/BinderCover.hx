@@ -48,7 +48,7 @@ class BinderCover extends Sprite
 	public function draw() {
 		mainShape.graphics.clear();
 		mainShape.graphics.beginBitmapFill(Assets.getBitmapData("images/paper.jpg"));
-		mainShape.graphics.drawRect(0, 0, binder.width, binder.height);
+		mainShape.graphics.drawRect(0, 0, binder.getW(), binder.getH());
 		
 		etiquette.x = (width - etiquette.width) / 2;
 		etiquette.y = (height - etiquette.height) / 2;

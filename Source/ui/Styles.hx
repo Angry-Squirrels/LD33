@@ -24,13 +24,13 @@ class Styles
 		
 		var ps2p = Assets.getFont("fonts/ps2p.ttf").fontName;
 		
-		BLACK24 = new TextFormat(ps2p, 24, 0x000000);
-		BLACK16 = new TextFormat(ps2p, 16, 0x000000);
-		BLACK12 = new TextFormat(ps2p, 12, 0x000000);
+		BLACK24 = new TextFormat(ps2p, 20, 0x000000);
+		BLACK16 = new TextFormat(ps2p, 15, 0x000000);
+		BLACK12 = new TextFormat(ps2p, 10, 0x000000);
 		
-		WHITE24 = new TextFormat(ps2p, 24, 0xffffff);
-		WHITE16 = new TextFormat(ps2p, 16, 0xffffff);
-		WHITE12 = new TextFormat(ps2p, 12, 0xffffff);
+		WHITE24 = new TextFormat(ps2p, 20, 0xffffff);
+		WHITE16 = new TextFormat(ps2p, 15, 0xffffff);
+		WHITE12 = new TextFormat(ps2p, 10, 0xffffff);
 		
 		var impact = Assets.getFont("fonts/impact.ttf").fontName;
 		CALENDAR_BIG = new TextFormat(impact, 48, 0xff0000);

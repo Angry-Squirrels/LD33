@@ -39,9 +39,21 @@ class PaperObject extends Sprite
 	}
 	public function drawBg() 
 	{
-		bg.graphics.beginBitmapFill(Assets.getBitmapData("images/paper.jpg"));
+		//bg.graphics.beginBitmapFill(Assets.getBitmapData("images/paper.jpg"));
 		bg.graphics.drawRect(0, 0, w, h);
-		bg.graphics.endFill();
+		//bg.graphics.endFill();
 	}
+	
+	public function getW()
+	{
+		return w;
+	}
+	
+	public function getH()
+	{
+		return h;
+	}
+	
+	
 	
 }
