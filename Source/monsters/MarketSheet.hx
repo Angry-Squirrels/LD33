@@ -15,7 +15,7 @@ class MarketSheet extends PaperSheet
 
 	public function new() 
 	{
-		super(304, 320);
+		super(304, 360);
 		this.gameManager = GameManager.getInstance();
 		
 		gameManager.market.monstersOnMarketChanged.add(update);

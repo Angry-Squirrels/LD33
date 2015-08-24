@@ -3,6 +3,8 @@ package monsters;
 import msignal.Signal.Signal1;
 import openfl.events.MouseEvent;
 import ui.PaperSheet;
+import ui.Styles;
+import ui.TF;
 
 /**
  * ...
@@ -10,15 +12,19 @@ import ui.PaperSheet;
  */
 class MonsterListSheet extends PaperSheet
 {
-	public var pickMode:Bool;
+	public var pickMode(get, set):Bool;
+	var _pickMode:Bool;
+	public var pickModeChanged:Signal1<Bool>;
 	public var monsterPicked:Signal1<Monster>;
 	var gameManager:GameManager;
 	var avatars:Array<MonsterAvatar>;//WARNING: if we can sell monsters, remove monster from here
 
 	public function new() 
 	{
-		super(304, 320);
+		super(304, 360);
 		this.gameManager = GameManager.getInstance();
+		
+		pickModeChanged = new Signal1<Bool>();
 		
 		monsterPicked = new Signal1<Monster>();
 		
@@ -31,7 +37,9 @@ class MonsterListSheet extends PaperSheet
 	
 	public function update()
 	{
-		while (content.numChildren>0) content.removeChildAt(0);
+		while (content.numChildren > 0) content.removeChildAt(0);
+		
+		currentY = 0;
 		
 		var monsters = gameManager.monsters;
 		var avatarSize = 64;
@@ -42,15 +50,44 @@ class MonsterListSheet extends PaperSheet
 		
 		avatars = new Array<MonsterAvatar>();
 		
-		for (i in 0...monsters.length) {
+		if (monsters.length == 0)
+		{
+			var tf = new TF("No monster, dude.", Styles.BLACK16);
+			tf.y = currentY;
+			content.addChild(tf);
+			currentY += tf.height + vMargin;
+		}
+		else if (pickMode)
+		{
+			var tf = new TF("Pick-a-Monster:", Styles.BLACK16);
+			tf.y = currentY;
+			content.addChild(tf);
+			currentY += tf.height + vMargin;
+		}
+		
+		
+		var _monsters:Array<Monster> = monsters.copy();
+		if (pickMode)
+		{
+			_monsters = monsters.filter(function(monster):Bool
+			{
+				return monster.currentMission == null;
+			});
+		}
+		
+		for (i in 0..._monsters.length) {
 			
-			var monster:Monster = monsters[i];
+			var monster:Monster = _monsters[i];
+			if (pickMode && monster.currentMission != null)
+			{
+				continue;
+			}
 			
 			var avatar = new MonsterAvatar(monster, avatarSize, true);
-			avatar.rotation = Math.random() * 10 - 5;
+			avatar.rotation = Math.random() * 2 - 1;
 			avatars.push(avatar);
 			avatar.x = (i % nbCols) * (avatarSize+avatarMargin);
-			avatar.y = Std.int(i / nbCols) * (avatarSize+avatarMargin);
+			avatar.y = currentY + Std.int(i / nbCols) * (avatarSize+avatarMargin);
 			content.addChild(avatar);
 			
 			trace("CURRENT MISSION="+monster.currentMission);
@@ -90,6 +127,7 @@ class MonsterListSheet extends PaperSheet
 					avatar.removeChild(avatar.card);
 				}
 			});
+			
 			//avatar.addEventListener(MouseEvent.MOUSE_OUT, hideCard)
 		}
 		
@@ -100,6 +138,17 @@ class MonsterListSheet extends PaperSheet
 		pickMode = false;
 		update();
 		visible = true;
+	}
+	
+	function get_pickMode():Bool 
+	{
+		return _pickMode;
+	}
+	
+	function set_pickMode(value:Bool):Bool 
+	{
+		pickModeChanged.dispatch(value);
+		return _pickMode = value;
 	}
 	
 	

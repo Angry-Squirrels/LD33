@@ -25,17 +25,20 @@ class MonsterBinder extends Binder
 		
 		monsterPicked = new Signal1<Monster>();
 		
-		monstersTab = new Tab("Monsters", 304, 320);
+		monstersTab = new Tab("Monsters", 304, 360);
 		
 		listSheet = new MonsterListSheet();
 		listSheet.monsterPicked.add(monsterPicked.dispatch);
+		listSheet.pickModeChanged.add(function(pickMode:Bool) {
+			
+		});
 		listSheet.y = 32;
 		monstersTab.addChild(listSheet);
 		
 		addTab(monstersTab);
 		
 		
-		marketTab = new Tab("Buy-a-Monster", 304, 320);
+		marketTab = new Tab("Buy-a-Monster", 304, 360);
 		
 		var marketSheet = new MarketSheet();
 		marketSheet.y = 32;
