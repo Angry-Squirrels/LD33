@@ -15,8 +15,77 @@ class NameGenerator
 	static function init() {
 		if (mInited) return;
 		
-		mAdjectiveList = ["Vaillant", "Happy", "Grumpy", "Brave", "Epic", "Floppy", "Jealous"];
-		mNameList = ["Bob", "Jerry", "Jhon", "Larry", "Terry", "Frodo", "Pukachi"];
+		mAdjectiveList = [
+			"Vaillant", 
+			"Happy", 
+			"Grumpy", 
+			"Brave", 
+			"Epic", 
+			"Floppy", 
+			"Jealous",
+			"Plumber",
+			"Farmer",
+			"Tomatoe",
+			"Potatoe",
+			"Desertic",
+			"Galactic",
+			"3 Legged ",
+			"One Eye",
+			"3 Eye-",
+			"Silent",
+			"Killer",
+			"Thief",
+			"White",
+			"Black",
+			"Green",
+			"Pinky",
+			"Punky"
+			
+		];
+		mNameList = [
+			"Bob", 
+			"Jerry", 
+			"John", 
+			"Johnny", 
+			"Harry", 
+			"Larry", 
+			"Terry", 
+			"Frodo", 
+			"Pukachi",
+			"Joe",
+			"Frank",
+			"Bill",
+			"Mike",
+			"José",
+			"Marco",
+			"Tom",
+			"Thomas",
+			"Freddy",
+			"Dona",
+			"Kelly",
+			"Kim",
+			"Kimberly",
+			"Sarah",
+			"Jonas",
+			"Mario",
+			"Luigi",
+			"Woody",
+			"Morris",
+			"Jim",
+			"Harrison",
+			"Luke",
+			"Walt",
+			"Walter",
+			"Donny",
+			"Rebecca",
+			"Divine",
+			"Mary",
+			"Giuseppe",
+			"Maria",
+			"Pinky",
+			"Rex",
+			"Roxane"
+		];
 		
 		mInited = true;
 	}
