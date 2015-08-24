@@ -8,8 +8,11 @@ import missions.ReportBinder;
 import monsters.Monster;
 import monsters.MonsterBinder;
 import monsters.MonsterListSheet;
+import motion.Actuate;
+import motion.easing.Cubic;
 import openfl.Assets;
 import openfl.display.Sprite;
+import openfl.Lib;
 import openfl.text.TextFormat;
 import openfl.text.TextFormatAlign;
 import rewards.UpgradeBinder;
@@ -41,7 +44,8 @@ class UIGame extends Sprite
 	//var missionSheet:missions.MissionSheet;
 	//var mission:missions.Mission;
 	//var reportFile:missions.ReportFile;
-	
+	var dayBlackTransition : Sprite;
+	var calendar:Calendar;
 
 	public function new(gameManager:GameManager) 
 	{
@@ -51,8 +55,12 @@ class UIGame extends Sprite
 		desk = new Desk();
 		addChild(desk);
 		
+		dayBlackTransition = new Sprite();
+		dayBlackTransition.graphics.beginFill(0);
+		dayBlackTransition.graphics.drawRect(0, 0, Lib.current.stage.stageWidth, Lib.current.stage.stageHeight);
+		
 		binderContainer = new Sprite();
-		addChild(binderContainer);
+		
 		
 		
 		
@@ -129,7 +137,7 @@ class UIGame extends Sprite
 		//binderContainer.addChild(missionBinder);
 		//addChild(monsterFile);
 		
-		var calendar:Calendar = new Calendar();
+		calendar = new Calendar(this);
 		calendar.x = 80;
 		calendar.y = 50;
 		addChild(calendar);
@@ -163,7 +171,7 @@ class UIGame extends Sprite
 		*/
 		
 		//GameManager.getInstance().endedMission.push(Mission.get());
-		
+		addChild(binderContainer);
 	}
 	
 	function openMissionBinder(isOpened:Bool) 
@@ -223,6 +231,19 @@ class UIGame extends Sprite
 		monsterBinder.open();
 		//monsterListSheet.visible = true;
 		
+	}
+	
+	public function dayTransition() {
+		dayBlackTransition.alpha = 0;
+		Lib.current.stage.addChild(dayBlackTransition);
+		Actuate.tween(dayBlackTransition, 0.5, { alpha:1 } ).ease(Cubic.easeOut).onComplete(function() {	
+			var gotoNextDay = gameManager.endDay();
+			if (gotoNextDay){
+				gameManager.startNewDay();
+				calendar.updateData();
+				Actuate.tween(dayBlackTransition, 0.5, { alpha:0 } ).ease(Cubic.easeOut);
+			}
+		});
 	}
 	
 	

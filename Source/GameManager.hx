@@ -150,7 +150,7 @@ class GameManager
 			addMission("Prospect");
 	}
 	
-	public function endDay() {
+	public function endDay() : Bool {
 		message("A new moon is rising!");
 		
 		for (monster in monsters) {
@@ -160,11 +160,11 @@ class GameManager
 		
 		if (gold >= 0)
 			if(remainingTime > 0)
-				startNewDay();
+				return true;
 			else
-				endGame();
+				return false;
 		else
-			gameOver();
+			return false;
 	}
 	
 	function endGame() 

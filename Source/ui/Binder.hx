@@ -3,7 +3,9 @@ import motion.Actuate;
 import motion.easing.Quad;
 import msignal.Signal.Signal1;
 import openfl.display.Sprite;
+import openfl.events.Event;
 import openfl.events.MouseEvent;
+import openfl.filters.GlowFilter;
 import openfl.geom.Matrix;
 import openfl.geom.Matrix3D;
 import openfl.geom.Point;
@@ -20,6 +22,7 @@ class Binder extends Sprite
 	var tabs:Array<Tab>;
 	var currentTab:Tab;
 	var lastTab:Tab;
+	var cover : BinderCover;
 	
 	public var isOpened:Bool;
 	public var isOpenedChanged:Signal1<Bool>;
@@ -32,6 +35,10 @@ class Binder extends Sprite
 		super();
 		isOpenedChanged = new Signal1<Bool>();
 		tabs = new Array<Tab>();
+		
+		cover = new BinderCover(this);
+		addChild(cover);
+		
 		close();
 		
 		addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
@@ -104,7 +111,8 @@ class Binder extends Sprite
 			}
 		});
 		
-		
+		cover.draw();
+		addChild(cover);
 		
 		return tabs.length - 1;
 	}
@@ -120,29 +128,54 @@ class Binder extends Sprite
 			anyTab.disactivate();
 		}
 		currentTab.activate();
+		addChild(cover);
 	}
 	
 	public function open(evt:MouseEvent = null) {
+		buttonMode = false;
+		useHandCursor = false;
+		removeHalo(null);
+		removeEventListener(MouseEvent.MOUSE_OVER, drawHalo);
+		removeEventListener(MouseEvent.MOUSE_OUT, removeHalo);
+		
 		trace("open(" + evt);
 		mouseChildren = true;
 		removeEventListener(MouseEvent.MOUSE_UP, open);
 		alpha = 1;
 		isOpened = true;
 		isOpenedChanged.dispatch(isOpened);
+		Actuate.tween(cover, 0.5, { rotationX:-240 } ).ease(Quad.easeOut);
 		if(parent != null)
 			Actuate.tween(parent, 0.5, { rotationX: 0, z:0, y:0} ).ease(Quad.easeOut);
 	}
 	
 	public function close()
 	{
+		buttonMode = true;
+		useHandCursor = true;
+		
+		addEventListener(MouseEvent.MOUSE_OVER, drawHalo);
+		addEventListener(MouseEvent.MOUSE_OUT, removeHalo);
+		
 		trace("close");
 		mouseChildren = false;
 		isOpened = false;
 		//alpha = 0.5;
 		addEventListener(MouseEvent.MOUSE_UP, open);
 		isOpenedChanged.dispatch(isOpened);
+		Actuate.tween(cover, 0.5, { rotationX:0 } ).ease(Quad.easeOut);
 		if(parent != null)
 			Actuate.tween(parent, 0.5, { rotationX:-60, z:500, y:200} ).ease(Quad.easeOut);
+	}
+	
+	private function removeHalo(e:MouseEvent):Void 
+	{
+		filters = [];
+	}
+	
+	private function drawHalo(e:MouseEvent):Void 
+	{
+		filters = [new GlowFilter(0xffffff)];
 	}
 	
 }

@@ -26,10 +26,6 @@ class MonsterAvatar extends Sprite
 		pic.width = pic.height = size;
 		addChild(pic);
 		
-		var clicker = new RectShape(size, size);
-		clicker.alpha = 0.5;
-		addChild(clicker);
-		
 		//width = height = size;
 		
 		if (fadeOnBusy) {
