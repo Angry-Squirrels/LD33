@@ -319,7 +319,7 @@ class UIGame extends Sprite
 			
 			var playAgainBtn : TextButton = new TextButton("Play again.");
 			playAgainBtn.alpha = 0;
-			Lib.current.stage.addChild(playAgainBtn);
+			//Lib.current.stage.addChild(playAgainBtn);
 			playAgainBtn.x = (Lib.current.stage.stageWidth - playAgainBtn.width) / 2;
 			playAgainBtn.y = phraseTF.y + phraseTF.height + 20;
 			
