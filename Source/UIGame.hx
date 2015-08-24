@@ -55,12 +55,12 @@ class UIGame extends Sprite
 		missionBinder = new MissionBinder();
 		missionBinder.x = 600;
 		missionBinder.y = 300;
-		missionBinder.rotationZ = Std.random(30)-15;
+		//missionBinder.rotationZ = Std.random(30)-15;
 		
 		reportBinder = new ReportBinder();
 		reportBinder.x = 400;
 		reportBinder.y = 300;
-		reportBinder.rotationZ = Std.random(30)-15;
+		//reportBinder.rotationZ = Std.random(30)-15;
 		
 		monsterBinder.monsterPicked.add(addMonsterToMission);
 		missionBinder.monsterRequested.add(openMonsterListForPicking);
