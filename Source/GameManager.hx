@@ -3,6 +3,7 @@ import haxe.Json;
 import missions.Mission;
 import monsters.Monster;
 import msignal.Signal.Signal0;
+import msignal.Signal.Signal1;
 
 #if !neko
 import openfl.Assets;
@@ -27,6 +28,7 @@ class GameManager
 	}
 
 	public var monsters : Array<Monster>;
+	public var monstersChanged:Signal0;
 	
 	public var availableMissions : Array<Mission>;
 	public var availableMissionsChanged:Signal0;
@@ -34,7 +36,7 @@ class GameManager
 	public var ongoingMissionsChanged:Signal0;
 	public var endedMission : Array<Mission>;
 	public var endedMissionsChanged:Signal0;
-	public var archivedMission : Array<Mission>;
+	public var archivedMissions : Array<Mission>;
 	public var archivedMissionsChanged:Signal0;
 	
 	static public inline var maxMissionNb : Int = 10;
@@ -43,7 +45,9 @@ class GameManager
 	
 	public var market : MonsterMarket;
 	
-	public var gold : Int;
+	public var gold(get, set) : Int;
+	var _gold:Int;
+	public var goldChanged:Signal1<Int>;
 	public var day : Int;
 	public var remainingTime : Int;
 	public var maxDay : UInt;
@@ -61,23 +65,27 @@ class GameManager
 		config = Json.parse(rawText);
 		
 		monsters = new Array<Monster>();
+		monstersChanged = new Signal0();
+		
 		availableMissions = new Array<Mission>();
 		availableMissionsChanged = new Signal0();
 		ongoingMissions = new Array<Mission>();
 		ongoingMissionsChanged = new Signal0();
 		endedMission = new Array<Mission>();
 		endedMissionsChanged = new Signal0();
-		archivedMission = new Array<Mission>();
+		archivedMissions = new Array<Mission>();
 		archivedMissionsChanged = new Signal0(); 
 		market = new MonsterMarket(this);
 		
 		day = 0;
 		maxDay = 42;
+		goldChanged = new Signal1<Int>();
 		gold = 1000;
 	}
 	
 	public function addMonster() {
 		monsters.push(Monster.get(getMonstersTiers()));
+		monstersChanged.dispatch();
 	}
 	
 	public function addMission(type : String = "") {
@@ -106,6 +114,7 @@ class GameManager
 		
 		for (mission in ongoingMissions) {
 			mission.remainingTime--;
+			mission.remainingTimeChanged.dispatch(mission.remainingTime);
 			if (mission.remainingTime < 0){ 
 				endedMission.push(mission);
 				mission.end();
@@ -192,7 +201,7 @@ class GameManager
 	public function archiveMission(mission : Mission) {
 		endedMission.remove(mission);
 		endedMissionsChanged.dispatch();
-		archivedMission.push(mission);
+		archivedMissions.push(mission);
 		archivedMissionsChanged.dispatch();
 		mission.onRepportRead();
 	}
@@ -202,6 +211,7 @@ class GameManager
 			availableMissions.remove(mission);
 			availableMissionsChanged.dispatch();
 			mission.remainingTime = mission.duration;
+			mission.remainingTimeChanged.dispatch(mission.remainingTime);
 			ongoingMissions.push(mission);
 			ongoingMissionsChanged.dispatch();
 			mission.started = true;
@@ -214,6 +224,19 @@ class GameManager
 			for (monster in mission.assignedMonsters)
 				mission.unassignMonster(monster);
 		}
+	}
+	
+	function get_gold():Int 
+	{
+		return _gold;
+	}
+	
+	function set_gold(value:Int):Int 
+	{
+		
+		_gold = value;
+		goldChanged.dispatch(_gold);
+		return  _gold;
 	}
 	
 	

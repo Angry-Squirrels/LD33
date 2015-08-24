@@ -48,7 +48,6 @@ class Monster
 		
 		monster.picture = AvatarGenerator.getAvatar();
 		
-		monster.currentMissionChanged = new Signal1<Mission>();
 		
 		return monster;
 	}
@@ -57,6 +56,7 @@ class Monster
 	{
 		stats = new Stats();
 		traits = new Array<String>();
+		currentMissionChanged = new Signal1<Mission>();
 	}
 	
 	public function toString() : String {

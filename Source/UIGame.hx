@@ -1,9 +1,10 @@
 package;
 
+import missions.sheets.AvailableMissionSheet;
 import missions.Mission;
 import missions.MissionBinder;
-import missions.MissionSheet;
-import missions.ReportFile;
+import missions.sheets.AbstractMissionSheet;
+import missions.ReportBinder;
 import monsters.Monster;
 import monsters.MonsterBinder;
 import monsters.MonsterListSheet;
@@ -11,8 +12,10 @@ import openfl.Assets;
 import openfl.display.Sprite;
 import openfl.text.TextFormat;
 import openfl.text.TextFormatAlign;
+import ui.Calendar;
 import ui.Desk;
 import ui.Binder;
+import ui.DollarIndicator;
 
 /**
  * ...
@@ -26,6 +29,8 @@ class UIGame extends Sprite
 	var monsterBinder:MonsterBinder;
 	var missionBinder:MissionBinder;
 	var gameManager:GameManager;
+	var reportBinder:missions.ReportBinder;
+	var binderContainer:Sprite;
 	//var monsterListSheet:monsters.MonsterListSheet;
 	//var missionSheet:missions.MissionSheet;
 	//var mission:missions.Mission;
@@ -39,25 +44,40 @@ class UIGame extends Sprite
 		
 		desk = new Desk();
 		
+		binderContainer = new Sprite();
+		addChild(binderContainer);
+		
 		monsterBinder = new MonsterBinder();
-		monsterBinder.monsterPicked.add(addMonsterToMission);
-		
-		
-		//monsterFile.x = monsterFile.y = 16;
-		
-		
-		
+		monsterBinder.rotation = -10;
+
 		missionBinder = new MissionBinder();
-		missionBinder.monsterRequested.add(openMonsterList);
-		
 		missionBinder.x = 400;
 		missionBinder.rotation = 5;
+		
+		reportBinder = new ReportBinder();
+		reportBinder.x = 200;
+		
+		monsterBinder.monsterPicked.add(addMonsterToMission);
+		missionBinder.monsterRequested.add(openMonsterListForPicking);
+		
+		monsterBinder.isOpenedChanged.add(openMonsterBinder);
+		missionBinder.isOpenedChanged.add(openMissionBinder);
+		reportBinder.isOpenedChanged.add(openReportBinder);
+		
 		//reportFile = new ReportFile();
 		//researchFile = new File();
 		
-		addChild(monsterBinder);
-		addChild(missionBinder);
+		binderContainer.addChild(reportBinder);
+		binderContainer.addChild(monsterBinder);
+		binderContainer.addChild(missionBinder);
 		//addChild(monsterFile);
+		
+		var calendar:Calendar = new Calendar();
+		addChild(calendar);
+		
+		var dollarIndic = new DollarIndicator();
+		addChild(dollarIndic);
+		dollarIndic.y = 800 - dollarIndic.width;
 		
 		/*
 		
@@ -83,17 +103,47 @@ class UIGame extends Sprite
 		addChild(monsterListSheet);
 		*/
 		
+		//GameManager.getInstance().endedMission.push(Mission.get());
+		
+	}
+	
+	function openMissionBinder(isOpened:Bool) 
+	{
+		if (isOpened) {
+			binderContainer.addChild(missionBinder);
+			monsterBinder.close();
+			reportBinder.close();
+		}
+	}
+	
+	function openMonsterBinder(isOpened:Bool) 
+	{
+		if (isOpened) {
+			binderContainer.addChild(monsterBinder);
+			missionBinder.close();
+			reportBinder.close();
+		}
+	}
+	
+	function openReportBinder(isOpened:Bool) 
+	{
+		if (isOpened) {
+			binderContainer.addChild(reportBinder);
+			missionBinder.close();
+			monsterBinder.close();
+		}
 	}
 	
 	function addMonsterToMission(monster:Monster) 
 	{
 		trace("addMonsterToMission(" + monster);
-		cast(missionBinder.availablePile.getCurrentSheet(), MissionSheet).addMonster(monster);
+		cast(missionBinder.availablePile.getCurrentSheet(), AvailableMissionSheet).addMonster(monster);
 		monsterBinder.listSheet.pickMode = false;
-		monsterBinder.close();
+		//monsterBinder.close();
+		missionBinder.open();
 	}
 	
-	function openMonsterList() 
+	function openMonsterListForPicking() 
 	{
 		trace("openMonsterList");
 		monsterBinder.listSheet.pickMode = true;

@@ -15,6 +15,7 @@ class PaperObject extends Sprite
 	var vMargin:Float;
 	var content:Sprite;
 	var contentWidth:Float;
+	var currentY:Float=0;
 
 	public var bg:Shape;
 	
@@ -35,7 +36,7 @@ class PaperObject extends Sprite
 		content.y = vMargin;
 		addChild(content);
 	}
-	public function draw() 
+	public function drawBg() 
 	{
 		bg.graphics.drawRect(0, 0, w, h);
 	}

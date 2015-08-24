@@ -1,4 +1,4 @@
-package missions;
+package ui;
 import openfl.display.Sprite;
 import openfl.text.TextField;
 import openfl.text.TextFieldAutoSize;
@@ -21,7 +21,7 @@ class DataLine extends Sprite
 	 * @param	Width
 	 * @param	fontSize
 	 */
-	public function new(label:String, value:String, Width:Float, format:TextFormat, heightLine:Float=240) 
+	public function new(label:String, value:String, Width:Float, format:TextFormat, heightLine:Float=24) 
 	{
 		super();
 		
@@ -31,6 +31,8 @@ class DataLine extends Sprite
 		valueTf = new TF(value, format/*, TextFieldAutoSize.RIGHT*/);
 		valueTf.height = heightLine;
 		valueTf.x = Width - valueTf.width;
+		valueTf.background = true;
+		
 		
 		addChild(labelTf);
 		addChild(valueTf);

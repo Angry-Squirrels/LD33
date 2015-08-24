@@ -16,8 +16,16 @@ class PaperSheet extends PaperObject
 		
 		bg.graphics.beginBitmapFill(Assets.getBitmapData ("images/paper.jpg"));
 		//bg.graphics.beginFill(0xff0000);
-		super.draw();
+		drawBg();
 		bg.graphics.endFill();
+	}
+	
+	public function activate() {
+		visible = true;
+	}
+	
+	public function disactivate() {
+		visible = false;
 	}
 	
 }
