@@ -27,7 +27,7 @@
 			"desc" : "Good morning Sir, I need an actor for my next anime project. The action takes place in a girl highschool near tokyo. what do you have for me?",
 			"statCoef" : [2,3,1,4],
 			"type" : "Contract",
-			"requires" : ["tentacles","ugly"],
+			"requires" : ["tentacles"],
 			"duration" : 2,
 			"teamSize" : 1,
 			"rewardType" : "Gold"
