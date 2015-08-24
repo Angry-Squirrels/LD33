@@ -113,7 +113,7 @@ class GameManager
 		day++;
 		
 		remainingTime = GameManager.maxTime - day;
-		message("A new sun arise... Day " + day + " / " + GameManager.maxTime);
+		trace("A new sun arise... Day " + day + " / " + GameManager.maxTime);
 		market.newDay();
 		
 		for (mission in ongoingMissions) {
@@ -155,7 +155,7 @@ class GameManager
 	}
 	
 	public function endDay() : Bool {
-		message("A new moon is rising!");
+		trace("A new moon is rising!");
 		
 		var monsterToKill = new Array<Monster>();
 		
@@ -218,7 +218,7 @@ class GameManager
 		#if neko
 		neko.Lib.println(message);
 		#else
-		trace(message);
+		messages.push(message);
 		#end
 	}
 	
@@ -239,12 +239,11 @@ class GameManager
 			ongoingMissions.push(mission);
 			ongoingMissionsChanged.dispatch();
 			mission.started = true;
-			message("Mission " + mission.title + " launched.");
 		}else {
 			if (mission.assignedMonsters.length < 1)
-				message("No monster assigned to this mission.");
+				trace("No monster assigned to this mission.");
 			else if (!mission.areRequirementFilled())
-				message("Your monsters doesn't fill the requirements for this mission.");
+				trace("Your monsters doesn't fill the requirements for this mission.");
 			for (monster in mission.assignedMonsters)
 				mission.unassignMonster(monster);
 		}

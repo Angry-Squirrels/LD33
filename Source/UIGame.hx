@@ -253,6 +253,20 @@ class UIGame extends Sprite
 				gameManager.startNewDay();
 				calendar.updateDate();
 				Actuate.tween(dayBlackTransition, 0.25, { alpha:0 } ).ease(Cubic.easeOut);
+				
+				var openReport = false;
+				
+				if (gameManager.messages.length > 0)
+				{
+					reportBinder.addMessagePage();
+					openReport = true;
+				}
+				
+				if (gameManager.endedMission.length > 0)
+					openReport = true;
+				
+				if (openReport)
+					reportBinder.open();
 			}
 		});
 	}
