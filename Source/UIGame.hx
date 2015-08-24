@@ -61,7 +61,6 @@ class UIGame extends Sprite
 		dayBlackTransition.graphics.beginFill(0);
 		dayBlackTransition.graphics.drawRect(0, 0, Lib.current.stage.stageWidth, Lib.current.stage.stageHeight);
 		
-		
 		gameManager.message("Son,\n"+
 							"I sent you here to extend the Company.\n\n" + 
 							"Don't disapoint me.\n\n" +
@@ -90,9 +89,6 @@ class UIGame extends Sprite
 		upgrade3dContainer.z = 500;
 		upgrade3dContainer.y = 200;
 		
-		
-		
-		
 		monsterBinder = new MonsterBinder();
 		monsterBinder.x = 150;
 		monsterBinder.y = 300;
@@ -104,8 +100,6 @@ class UIGame extends Sprite
 		monster3dContainer.rotationX = -60;
 		monster3dContainer.z = 500;
 		monster3dContainer.y = 200;
-
-		
 		
 		missionBinder = new MissionBinder();
 		missionBinder.x = 450;
@@ -119,8 +113,6 @@ class UIGame extends Sprite
 		mission3dContainer.z = 500;
 		mission3dContainer.y = 200;
 		
-		
-		
 		reportBinder = new ReportBinder();
 		reportBinder.x = 300;
 		reportBinder.y = 300;
@@ -132,8 +124,6 @@ class UIGame extends Sprite
 		repport3dContainer.rotationX = -60;
 		repport3dContainer.z = 500;
 		repport3dContainer.y = 200;
-		
-		
 		
 		monsterBinder.monsterPicked.add(addMonsterToMission);
 		missionBinder.monsterRequested.add(openMonsterListForPicking);
