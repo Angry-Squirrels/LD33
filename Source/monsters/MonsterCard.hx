@@ -60,28 +60,38 @@ class MonsterCard extends PostIt
 		
 		var priceDL = new DataLine("Sell Price", cast(price), contentWidth, Styles.BLACK12);
 		priceDL.y = currentY;
-		content.addChild(priceDL);
-		currentY += priceDL.height;
 		
-		currentY += 8;
 		
 		if ( !pickMode)
 		{
 			if (!isBuying)
 			{
-				var sellButton = new TextButton("Sell that morron");
-				sellButton.x = (contentWidth-sellButton.width) / 2+4;
-				sellButton.y = currentY;
-				content.addChild(sellButton);
-				
-				
-				sellButton.addEventListener(MouseEvent.CLICK, function(evt:MouseEvent)
+				if (monster.currentMission == null)
 				{
-					GameManager.getInstance().market.sellMonster(monster);
-				});
+					content.addChild(priceDL);
+					currentY += priceDL.height;
+					
+					currentY += 8;
+					
+					var sellButton = new TextButton("Sell that morron");
+					sellButton.x = (contentWidth-sellButton.width) / 2+4;
+					sellButton.y = currentY;
+					content.addChild(sellButton);
+					
+					
+					sellButton.addEventListener(MouseEvent.CLICK, function(evt:MouseEvent)
+					{
+						GameManager.getInstance().market.sellMonster(monster);
+					});
+				}
 			}
 			else
 			{
+				content.addChild(priceDL);
+				currentY += priceDL.height;
+		
+				currentY += 8;
+		
 				var buyButton = new TextButton("Buy that vermin");
 				buyButton.x = (contentWidth-buyButton.width) / 2+4;
 				buyButton.y = currentY;
