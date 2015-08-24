@@ -139,7 +139,7 @@ class AvailableMissionSheet extends AbstractMissionSheet
 		}
 		else
 		{
-			traitsTF.text = "+"+cast(mission.requires)+" REQUIRED!";
+			traitsTF.text = "+"+mission.requires.toString()+" REQUIRED!";
 		}
 	}
 	
