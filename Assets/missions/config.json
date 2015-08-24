@@ -164,7 +164,7 @@
 		},
 		{
 			"title" : "A friend",
-			"desc" : "I need a friend for my son. He never go outside and spend all his time on World of Weirdo. He's already 57 you know, he need to Get outerHeight! HELP ME!",
+			"desc" : "I need a friend for my son. He never go outside and spend all his time on World of Weirdo. He's already 57 you know, he need to get out! HELP ME!",
 			"statCoef" : [1,1,1,10],
 			"type" : "Contract",
 			"requires" : ["kind"],

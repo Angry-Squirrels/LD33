@@ -1,4 +1,5 @@
 package;
+import haxe.EnumTools.EnumValueTools;
 import haxe.Json;
 import missions.Mission;
 import missions.sheets.AvailableMissionSheet;
@@ -46,6 +47,15 @@ class GameManager
 	static public inline var maxMonsterNb : Int = 5;
 	static public inline var objective : UInt = 10000;
 	static public inline var startGold : UInt = 1000;
+	
+	var saidSup2 : Bool;
+	var saidSup5 : Bool;
+	var saidSup7 : Bool;
+	var saidSup9 : Bool;
+	
+	var saidInf2 : Bool;
+	var saidInf5 : Bool;
+	var saidInf10 : Bool;
 	
 	public var market : MonsterMarket;
 	
@@ -158,6 +168,45 @@ class GameManager
 	
 	public function endDay() : Bool {
 		trace("A new moon is rising!");
+		
+		if (day == 1) {
+			message("Rent-A-Monster");
+			message("A Ludum Dare entry by:\n\n" + 
+					"\t\t- @damrem\n\n" +
+					"\t\t- @thomas_baudon");
+		}
+		
+		if (gold < startGold / 10 && !saidInf10){ 
+			message("You're not my son anymore.");
+			saidInf10 = true;
+		}
+		else if (gold < startGold / 5 && !saidInf5){ 
+			message("Son, I'm deeply disappointed. Start making actual money and maybe I'll reconsider my opinion.");
+			saidInf5 = true;
+		}
+		else if (gold < startGold / 2 && !saidInf2) {
+			message("Son, I see you have less than half the money I gave you to establish our financial superiority in this world.\n\n" +
+					"\tStop fooling arround and start exploiting those pesky monster!");
+			saidInf2 = true;
+		}
+			
+		if (gold > Std.int(startGold * 9) && !saidSup9){
+			message("What exactly didn't you understand in \"As fats as possible\" ?\n\nWe need that money!");
+			saidSup9 = true;
+		}
+		else if (gold > Std.int(startGold * 7.5) && !saidSup7){
+			message("Come on, you can't be my son. I was far more tallented than you at the same age. Could you send me some saliva samples ?");
+			saidSup7 = true;
+		}
+		else if (gold > Std.int(startGold * 5) && !saidSup5){
+			message("You're not getting rich anytime soon at this rate!");
+			saidSup5 = true;
+		}
+		else if (gold > Std.int(startGold * 2) && !saidSup2){
+			message("Did it really take you " + getDate() + " days only to double the amount I gave you ?");
+			saidSup2 = true;
+		}
+		
 		
 		var monsterToKill = new Array<Monster>();
 		
