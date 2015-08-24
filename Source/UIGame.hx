@@ -12,6 +12,7 @@ import openfl.Assets;
 import openfl.display.Sprite;
 import openfl.text.TextFormat;
 import openfl.text.TextFormatAlign;
+import rewards.UpgradeBinder;
 import ui.Calendar;
 import ui.Desk;
 import ui.Binder;
@@ -34,6 +35,8 @@ class UIGame extends Sprite
 	var mission3dContainer:openfl.display.Sprite;
 	var monster3dContainer:openfl.display.Sprite;
 	var repport3dContainer:openfl.display.Sprite;
+	var upgradeBinder:UpgradeBinder;
+	var upgrade3dContainer:Sprite;
 	//var monsterListSheet:monsters.MonsterListSheet;
 	//var missionSheet:missions.MissionSheet;
 	//var mission:missions.Mission;
@@ -51,8 +54,25 @@ class UIGame extends Sprite
 		binderContainer = new Sprite();
 		addChild(binderContainer);
 		
+		
+		
+		upgradeBinder = new UpgradeBinder();
+		upgradeBinder.x = 600;
+		upgradeBinder.y = 300;
+		upgradeBinder.rotation = Math.random() * 20 - 10;
+		
+		upgrade3dContainer = new Sprite();
+		binderContainer.addChild(upgrade3dContainer);
+		upgrade3dContainer.addChild(upgradeBinder);
+		upgrade3dContainer.rotationX = -60;
+		upgrade3dContainer.z = 500;
+		upgrade3dContainer.y = 200;
+		
+		
+		
+		
 		monsterBinder = new MonsterBinder();
-		monsterBinder.x = 200;
+		monsterBinder.x = 150;
 		monsterBinder.y = 300;
 		monsterBinder.rotation = -10;
 		
@@ -63,8 +83,10 @@ class UIGame extends Sprite
 		monster3dContainer.z = 500;
 		monster3dContainer.y = 200;
 
+		
+		
 		missionBinder = new MissionBinder();
-		missionBinder.x = 600;
+		missionBinder.x = 450;
 		missionBinder.y = 300;
 		missionBinder.rotation = 10;
 		
@@ -75,8 +97,10 @@ class UIGame extends Sprite
 		mission3dContainer.z = 500;
 		mission3dContainer.y = 200;
 		
+		
+		
 		reportBinder = new ReportBinder();
-		reportBinder.x = 400;
+		reportBinder.x = 300;
 		reportBinder.y = 300;
 		reportBinder.rotation = 0;
 		
@@ -87,12 +111,15 @@ class UIGame extends Sprite
 		repport3dContainer.z = 500;
 		repport3dContainer.y = 200;
 		
+		
+		
 		monsterBinder.monsterPicked.add(addMonsterToMission);
 		missionBinder.monsterRequested.add(openMonsterListForPicking);
 		
 		monsterBinder.isOpenedChanged.add(openMonsterBinder);
 		missionBinder.isOpenedChanged.add(openMissionBinder);
 		reportBinder.isOpenedChanged.add(openReportBinder);
+		upgradeBinder.isOpenedChanged.add(openUpgradeBinder);
 		
 		//reportFile = new ReportFile();
 		//researchFile = new File();
@@ -145,6 +172,7 @@ class UIGame extends Sprite
 			binderContainer.addChild(mission3dContainer);
 			monsterBinder.close();
 			reportBinder.close();
+			upgradeBinder.close();
 		}
 	}
 	
@@ -154,6 +182,7 @@ class UIGame extends Sprite
 			binderContainer.addChild(monster3dContainer);
 			missionBinder.close();
 			reportBinder.close();
+			upgradeBinder.close();
 		}
 	}
 	
@@ -163,6 +192,18 @@ class UIGame extends Sprite
 			binderContainer.addChild(repport3dContainer);
 			missionBinder.close();
 			monsterBinder.close();
+			upgradeBinder.close();
+		}
+	}
+	
+	function openUpgradeBinder(isOpened:Bool)
+	{
+		if (isOpened)
+		{
+			binderContainer.addChild(upgrade3dContainer);
+			missionBinder.close();
+			monsterBinder.close();
+			reportBinder.close();
 		}
 	}
 	

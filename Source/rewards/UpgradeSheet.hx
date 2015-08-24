@@ -18,11 +18,11 @@ class UpgradeSheet extends PaperSheet
 	{
 		super(Width, Height);
 		
-		addUpgrade("upgrade-monsters", "Max monster", Upgrades.maxMonsterUpgrade);
-		addUpgrade("upgrade-contracts", "Max contract", Upgrades.maxMonsterUpgrade);
-		addUpgrade("upgrade-rewards", "Max monster", Upgrades.maxMonsterUpgrade);
-		addUpgrade("upgrade-monsters", "Max monster", Upgrades.maxMonsterUpgrade);
-		addUpgrade("upgrade-monsters", "Max monster", Upgrades.maxMonsterUpgrade);
+		addUpgrade("upgrade-monsters", "Max monsters", Upgrades.maxMonsterUpgrade);
+		addUpgrade("upgrade-contracts", "Max contracts", Upgrades.maxMissionUpgrade);
+		addUpgrade("upgrade-rewards", "Contract rewards", Upgrades.betterMissionRewardUpgrade);
+		addUpgrade("upgrade-buy", "Buying", Upgrades.betterBuyUpgrade);
+		addUpgrade("upgrade-sell", "Selling", Upgrades.betterSellUpgrade);
 		
 		/*Upgrades.betterBuyUpgrade
 		Upgrades.betterMissionRewardUpgrade
@@ -37,6 +37,7 @@ class UpgradeSheet extends PaperSheet
 		var container = new Sprite();
 		
 		var pix = new Bitmap(Assets.getBitmapData("images/" + asset + ".png"));
+		pix.alpha = 0.25;
 		container.addChild(pix);
 		
 		var dl = new DataLine(title, cast(value), contentWidth, Styles.BLACK16);
@@ -44,7 +45,7 @@ class UpgradeSheet extends PaperSheet
 		container.addChild(dl);
 		
 		container.y = currentY;
-		addChild(container);
+		content.addChild(container);
 		currentY += container.height + vMargin;
 		
 	}
