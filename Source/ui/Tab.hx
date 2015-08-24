@@ -1,6 +1,10 @@
 package ui;
+import openfl.Assets;
+import openfl.display.Bitmap;
+import openfl.display.BitmapData;
 import openfl.display.Shape;
 import openfl.display.Sprite;
+import openfl.geom.ColorTransform;
 
 /**
  * ...
@@ -16,7 +20,9 @@ class Tab extends PaperObject
 		super(Width, Height, 0, 0);
 		this.title = title;
 		
+		
 		label = new Sprite();
+		label.buttonMode = true;
 		
 		var tf = new TF(title, Styles.BLACK12);
 		tf.x = 16;
@@ -27,8 +33,11 @@ class Tab extends PaperObject
 		titleBg.graphics.drawRoundRect(0, 0, tf.width + 32, 32, 4);
 		titleBg.graphics.endFill();
 		
-		bg.graphics.beginFill(0xff00ff);
-		bg.alpha = 0.5;
+		var paperData = Assets.getBitmapData("images/paper.jpg");
+		var bmpdt = new BitmapData(paperData.width, paperData.height,false);
+		bmpdt.draw(paperData, null, new ColorTransform(1, 0.75, 0.5));
+		bg.graphics.beginBitmapFill(bmpdt);
+		//bg.alpha = 0.5;
 		bg.height -= 32;
 		bg.y = 32;
 		drawBg();

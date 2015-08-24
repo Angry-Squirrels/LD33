@@ -2,11 +2,14 @@ package ui;
 import motion.Actuate;
 import motion.easing.Quad;
 import msignal.Signal.Signal1;
+import openfl.Assets;
+import openfl.display.BitmapData;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
 import openfl.filters.DropShadowFilter;
 import openfl.filters.GlowFilter;
+import openfl.geom.ColorTransform;
 import openfl.geom.Matrix;
 import openfl.geom.Matrix3D;
 import openfl.geom.Point;
@@ -52,7 +55,10 @@ class Binder extends PaperObject
 		Lib.current.stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 		Lib.current.stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 		
-		bg.graphics.beginFill(0xff0000);
+		var paperData = Assets.getBitmapData("images/paper.jpg");
+		var bmpdt = new BitmapData(paperData.width, paperData.height,false);
+		bmpdt.draw(paperData, null, new ColorTransform(0.75, 0.5, 0.25));
+		bg.graphics.beginBitmapFill(bmpdt);
 		drawBg();
 		bg.graphics.endFill();
 		

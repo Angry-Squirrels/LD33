@@ -1,6 +1,9 @@
 package ui;
 
+import openfl.Assets;
+import openfl.display.BitmapData;
 import openfl.display.Sprite;
+import openfl.geom.ColorTransform;
 
 /**
  * ...
@@ -13,7 +16,10 @@ class PostIt extends PaperObject
 	{
 		super(Width, Height, hMargin, vMargin);
 		
-		bg.graphics.beginFill(0xffffa0);
+		var paperData = Assets.getBitmapData("images/paper.jpg");
+		var bmpdt = new BitmapData(paperData.width, paperData.height,false);
+		bmpdt.draw(paperData, null, new ColorTransform(1.5, 1.5, 0.75));
+		bg.graphics.beginBitmapFill(bmpdt);
 		drawBg();
 		bg.graphics.endFill();
 		
