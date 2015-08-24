@@ -74,6 +74,7 @@ class UIGame extends Sprite
 							"Good luck !");
 							
 		gameManager.market.newDay();
+		gameManager.addBaseMissions();
 		
 		binderContainer = new Sprite();
 		

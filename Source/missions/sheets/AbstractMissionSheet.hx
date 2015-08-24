@@ -93,7 +93,7 @@ class AbstractMissionSheet extends PaperSheet
 	
 	function drawTeamLineAndSlots() 
 	{
-		var teamLine:DataLine = new DataLine("Team", mission.teamSize+"monster" + ((mission.teamSize > 1)?"s":""), contentWidth, Styles.BLACK12);
+		var teamLine:DataLine = new DataLine("Team", mission.teamSize+" monster" + ((mission.teamSize > 1)?"s":""), contentWidth, Styles.BLACK12);
 		teamLine.y = currentY;
 		content.addChild(teamLine);
 		currentY += teamLine.height;

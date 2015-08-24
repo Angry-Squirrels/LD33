@@ -29,7 +29,7 @@ class MissionReward extends Reward
 	}
 	
 	public function toString() : String {
-		return '$mQuantity missions.';
+		return '$mQuantity missions';
 	}
 	
 }

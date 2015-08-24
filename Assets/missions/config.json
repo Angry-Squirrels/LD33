@@ -27,7 +27,7 @@
 			"desc" : "Good morning Sir, I need an actor for my next anime project. The action takes place in a girl highschool near tokyo. what do you have for me?",
 			"statCoef" : [2,3,1,4],
 			"type" : "Contract",
-			"requires" : ["tentacles","ugly"],
+			"requires" : ["tentacles"],
 			"duration" : 2,
 			"teamSize" : 1,
 			"rewardType" : "Gold"
@@ -133,33 +133,43 @@
 			"rewardType" : "Gold"
 		},
 		{
-			"title" : "Builder",
-			"desc" : "construct a bridge in a dangerous area.",
-			"statCoef" : [2,4,1,1],
+			"title" : "Hamster parcour tester",
+			"desc" : "Good morning, I need some smart creature to test my latest Hamster toy, do you have something like that ?",
+			"statCoef" : [7,1,3,1],
 			"type" : "Contract",
-			"requires" : [],
-			"duration" : 2,
-			"teamSize" : 2,
+			"requires" : ["small"],
+			"duration" : 3,
+			"teamSize" : 1,
 			"rewardType" : "Gold"
 		},
 		{
-			"title" : "Builder",
-			"desc" : "construct a bridge in a dangerous area.",
-			"statCoef" : [2,4,1,1],
+			"title" : "Homework helper",
+			"desc" : "I want someone to do my homework. I'll use my dad credit card to pay. I promise I'll pay!",
+			"statCoef" : [1,1,8,1],
 			"type" : "Contract",
 			"requires" : [],
-			"duration" : 2,
-			"teamSize" : 2,
+			"duration" : 1,
+			"teamSize" : 1,
 			"rewardType" : "Gold"
 		},
 		{
-			"title" : "Builder",
-			"desc" : "construct a bridge in a dangerous area.",
-			"statCoef" : [2,4,1,1],
+			"title" : "Burger flipper",
+			"desc" : "Send me someone who can flip burgers. Now.",
+			"statCoef" : [6,1,1,1],
 			"type" : "Contract",
 			"requires" : [],
-			"duration" : 2,
-			"teamSize" : 2,
+			"duration" : 7,
+			"teamSize" : 1,
+			"rewardType" : "Gold"
+		},
+		{
+			"title" : "A friend",
+			"desc" : "I need a friend for my son. He never go outside and spend all his time on World of Weirdo. He's already 57 you know, he need to Get outerHeight! HELP ME!",
+			"statCoef" : [1,1,1,10],
+			"type" : "Contract",
+			"requires" : ["kind"],
+			"duration" : 15,
+			"teamSize" : 1,
 			"rewardType" : "Gold"
 		},
 		{

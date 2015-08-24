@@ -68,7 +68,7 @@ class MonsterCard extends PostIt
 		
 		var price = isBuying?monster.buyValue:monster.sellValue;
 		
-		var priceDL = new DataLine("Sell Price", cast(price), contentWidth, Styles.BLACK12);
+		var priceDL = new DataLine("Value: ", cast(price), contentWidth, Styles.BLACK12);
 		priceDL.y = currentY;
 		
 		

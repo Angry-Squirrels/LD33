@@ -131,6 +131,10 @@ class GameManager
 			ongoingMissionsChanged.dispatch();
 		}
 		
+		addBaseMissions();
+	}
+	
+	public function addBaseMissions() {
 		// check that a capture mission is available
 		var captureAvailable = false;
 		for (mission in availableMissions)
@@ -151,7 +155,7 @@ class GameManager
 			}
 			
 		if (!prospectAvailable)
-			addMission("Prospect");
+			addMission("Prospect");	
 	}
 	
 	public function endDay() : Bool {
