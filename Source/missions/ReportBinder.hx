@@ -12,8 +12,6 @@ import ui.Tab;
 class ReportBinder extends Binder
 {
 	public var endedPile:SheetPile;
-	public var archivedPile:SheetPile;
-	
 	var gameManager:GameManager;
 	var currentMessagePage:MessagePage;
 	
@@ -26,7 +24,6 @@ class ReportBinder extends Binder
 		var endedTab:Tab = new Tab("Rewards", 304, 344);
 		
 		endedPile = new SheetPile(304, 344);
-		//endedPile.y = 32;
 		endedTab.addChild(endedPile);
 		
 		gameManager.endedMissionsChanged.add(updateEnded);
@@ -47,6 +44,12 @@ class ReportBinder extends Binder
 	
 	public function removeMessagePage() {
 		removeChild(currentMessagePage);
+		currentMessagePage = null;
+		
+		if (endedPile.sheets.length == 0)
+		{
+			close();
+		}
 	}
 	
 	function updateEnded() 
@@ -58,18 +61,12 @@ class ReportBinder extends Binder
 			var missionSheet = new EndedMissionSheet(mission);
 			endedPile.addSheet(missionSheet);
 		}
-	}
-	
-	function updateArchived() {
-		
-		archivedPile.empty();
-		
-		var missions = gameManager.archivedMissions;
-		for(mission in missions)
+		if (endedPile.sheets.length == 0)
 		{
-			var missionSheet = new ArchivedMissionSheet(mission);
-			archivedPile.addSheet(missionSheet);
+			close();
 		}
 	}
+	
+	
 	
 }

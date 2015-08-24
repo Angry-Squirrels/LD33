@@ -37,13 +37,13 @@ class TextButton extends Sprite
 	}
 	
 	public function enable() {
-		mouseEnabled = true;
+		mouseEnabled = buttonMode = true;
 		alpha = 1;
 	}
 	
 	public function disable()
 	{
-		mouseEnabled = false;
+		mouseEnabled = buttonMode = false;
 		alpha = 0.5;
 	}
 	
