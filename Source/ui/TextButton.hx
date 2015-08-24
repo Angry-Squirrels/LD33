@@ -20,9 +20,14 @@ class TextButton extends Sprite
 		
 		var upState = new Sprite();
 		var startTf = new TF(text, Styles.WHITE16);
-		upState.addChild(new RectShape(startTf.width+32, 32, 0x0080ff, 8, 0xaaaaaa));
+		
+		var gray = new RectShape(startTf.width + 24, 36, 0xaaaaaa);
+		upState.addChild(gray);
+		var blue = new RectShape(startTf.width + 16, 28, 0x0080ff);
+		blue.x = blue.y = 4;
+		upState.addChild(blue);
 		startTf.x = (upState.width - startTf.width) / 2;
-		startTf.y = (upState.height - startTf.height) / 4;
+		startTf.y = (upState.height - startTf.height) / 2;
 		upState.addChild(startTf);
 		
 		addChild(upState);

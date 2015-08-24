@@ -29,8 +29,8 @@ class SheetPile extends Sprite
 		prevArrow = new Sprite();
 		prevArrow.addChild(new Bitmap(arrowBmp));
 		prevArrow.buttonMode = true;
-		prevArrow.x = 32;
-		prevArrow.y = Height - 32;
+		prevArrow.x = 48;
+		prevArrow.y = Height - 16;
 		prevArrow.rotation = 180;
 		prevArrow.addEventListener(MouseEvent.CLICK, prev);
 		addChild(prevArrow);
@@ -38,8 +38,8 @@ class SheetPile extends Sprite
 		nextArrow = new Sprite();
 		nextArrow.addChild(new Bitmap(arrowBmp));
 		nextArrow.buttonMode = true;
-		nextArrow.x = Width-32;
-		nextArrow.y = Height - 32 - nextArrow .height;
+		nextArrow.x = Width-48;
+		nextArrow.y = Height - 16 - nextArrow .height;
 		nextArrow.addEventListener(MouseEvent.CLICK, next);
 		addChild(nextArrow );
 		

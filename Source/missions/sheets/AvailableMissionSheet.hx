@@ -14,9 +14,10 @@ class AvailableMissionSheet extends AbstractMissionSheet
 	public var monsterRequested:Signal0;
 	var startButton:TextButton;
 	
-	public function new(mission:Mission, Width:Float=400, Height:Float=420) 
+	public function new(mission:Mission) 
 	{
-		super(mission, Width, Height);
+		super(mission, 304, 416);
+		//rotation = Math.random() * 5 - 2.5;
 		
 		monsterRequested = new Signal0();
 		
@@ -49,6 +50,7 @@ class AvailableMissionSheet extends AbstractMissionSheet
 	}
 	
 	override function draw() {
+		
 		super.draw();
 		
 		drawDurationLine("Duration");
@@ -75,6 +77,8 @@ class AvailableMissionSheet extends AbstractMissionSheet
 		currentY += vMargin;
 		
 		drawStartButton();
+		
+		bg.height = height;
 	}
 	
 	function drawStartButton() {

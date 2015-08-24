@@ -86,13 +86,13 @@ class AvatarGenerator
 		ct.redMultiplier = Math.random() * 1.5+0.5;
 		ct.greenMultiplier = Math.random() * 1.5+0.5;
 		ct.blueMultiplier = Math.random() * 1.5+0.5;
-		result.draw(skull[Std.int(Math.random() * skull.length)], null, ct);
+		result.draw(skull[Std.random(skull.length)], null, ct);
 		//result.draw(skull[Std.random(skull.length)], null, new ColorTransform(Math.random() * 2, Math.random() * 2, Math.random() * 2), null, null, true);
 	}
 	
 	static function addMouth() {
 		var ct = new ColorTransform();
-		var i:UInt = Std.int(Math.random() * mouth.length);
+		var i:UInt = Std.random(mouth.length);
 		if (colorableMouths.indexOf(i) >= 0)
 		{
 			ct.redMultiplier = Math.random() * 1.5+0.5;
@@ -108,7 +108,7 @@ class AvatarGenerator
 		ct.redMultiplier = Math.random() * 1.5+0.5;
 		ct.greenMultiplier = Math.random() * 1.5+0.5;
 		ct.blueMultiplier = Math.random() * 1.5+0.5;
-		result.draw(eyes[Std.int(Math.random() * eyes.length)], null, ct);
+		result.draw(eyes[Std.random(eyes.length)], null, ct);
 		//result.draw(skull[Std.random(skull.length)], null, new ColorTransform(Math.random() * 2, Math.random() * 2, Math.random() * 2), null, null, true);
 	}
 	
@@ -117,7 +117,7 @@ class AvatarGenerator
 		ct.redMultiplier = Math.random() * 1.5+0.5;
 		ct.greenMultiplier = Math.random() * 1.5+0.5;
 		ct.blueMultiplier = Math.random() * 1.5+0.5;
-		result.draw(hat[Std.int(Math.random() * hat.length)], null, ct);
+		result.draw(hat[Std.random(hat.length)], null, ct);
 		//result.draw(skull[Std.random(skull.length)], null, new ColorTransform(Math.random() * 2, Math.random() * 2, Math.random() * 2), null, null, true);
 	}
 	

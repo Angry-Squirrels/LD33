@@ -2,10 +2,13 @@ package ui;
 import motion.Actuate;
 import motion.easing.Quad;
 import msignal.Signal.Signal1;
+import openfl.Assets;
+import openfl.display.BitmapData;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
 import openfl.filters.GlowFilter;
+import openfl.geom.ColorTransform;
 import openfl.geom.Matrix;
 import openfl.geom.Matrix3D;
 import openfl.geom.Point;
@@ -16,7 +19,7 @@ import openfl.Lib;
  * ...
  * @author damrem
  */
-class Binder extends Sprite
+class Binder extends PaperObject
 {
 	
 	var tabs:Array<Tab>;
@@ -31,9 +34,9 @@ class Binder extends Sprite
 	var pressed : Bool;
 	var mouseDragPoint : Point;
 	
-	public function new(_title : String = "") 
+	public function new(_title : String = "", Width:Float=320, Height:Float=416) 
 	{
-		super();
+		super(320, 416, 16, 16);
 		title = _title;
 		isOpenedChanged = new Signal1<Bool>();
 		tabs = new Array<Tab>();
@@ -46,6 +49,16 @@ class Binder extends Sprite
 		addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 		Lib.current.stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 		Lib.current.stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+		
+		var paperData = Assets.getBitmapData("images/paper.jpg");
+		var bmpdt = new BitmapData(paperData.width, paperData.height,false);
+		bmpdt.draw(paperData, null, new ColorTransform(0.75, 0.5, 0.25));
+		bg.graphics.beginBitmapFill(bmpdt);
+		drawBg();
+		bg.graphics.endFill();
+		
+		bg.x -= bg.width / 2;
+		bg.y -= bg.height / 2;
 	}
 	
 	function onMouseMove(e:MouseEvent):Void 
@@ -91,21 +104,14 @@ class Binder extends Sprite
 		
 		trace("addtab("+tab);
 		lastTab = tabs.length > 0?tabs[tabs.length - 1]:null;
-		/*
-		if (tabs.length == 0) {
-			setCurrentTab(tab);
-		}
-		else {
-			setCurrentTab(tabs[0]);
-		}*/
 		tabs.push(tab);
 		
-		tab.label.x = ((lastTab != null)?lastTab.label.x + lastTab.label.width:0) + 16;
+		tab.label.x = ((lastTab != null)?lastTab.label.x + lastTab.label.width:0) + 4;
 		//tab.x = tab.y = 32;
 		//tab.label.y = 16;
 		addChild(tab);
 		tab.x = -tab.width / 2;
-		tab.y = -tab.height / 2;
+		tab.y = -tab.getH() / 2;
 		tab.label.addEventListener(MouseEvent.CLICK, function(evt:MouseEvent) {
 			if (tab != currentTab)
 			{

@@ -23,16 +23,16 @@ class ReportBinder extends Binder
 		
 		gameManager = GameManager.getInstance();
 		
-		var endedTab:Tab = new Tab("Rewards");
-		endedPile = new SheetPile(384, 464);
+		var endedTab:Tab = new Tab("Rewards", 304, 360);
+		endedPile = new SheetPile(304, 416);
 		endedPile.y = 32;
 		endedTab.addChild(endedPile);
 		gameManager.endedMissionsChanged.add(updateEnded);
 		updateEnded();
 		addTab(endedTab);
 		
-		var archivedTab:Tab = new Tab("Archives");
-		archivedPile = new SheetPile(384, 464);
+		var archivedTab:Tab = new Tab("Archives", 304, 360);
+		archivedPile = new SheetPile(304, 416);
 		archivedPile.y = 32;
 		archivedTab.addChild(archivedPile);
 		gameManager.archivedMissionsChanged.add(updateArchived);

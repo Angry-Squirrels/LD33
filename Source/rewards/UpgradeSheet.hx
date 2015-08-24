@@ -21,9 +21,9 @@ class UpgradeSheet extends PaperSheet
 
 	
 	
-	public function new(Width:Float=400, Height:Float=480) 
+	public function new()
 	{
-		super(Width, Height);
+		super();
 		
 		update();
 		
@@ -58,7 +58,7 @@ class UpgradeSheet extends PaperSheet
 		pix.alpha = 0.25;
 		container.addChild(pix);
 		
-		var dl = new DataLine(title, pre+(value*5)+post, contentWidth, Styles.BLACK16);
+		var dl = new DataLine(title, pre+(value*5)+post, contentWidth, Styles.BLACK12);
 		dl.y = pix.height;
 		container.addChild(dl);
 		

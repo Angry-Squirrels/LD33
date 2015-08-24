@@ -15,16 +15,16 @@ class MonsterListSheet extends PaperSheet
 	var gameManager:GameManager;
 	var avatars:Array<MonsterAvatar>;//WARNING: if we can sell monsters, remove monster from here
 
-	public function new(Width:Float=400, Height:Float=480) 
+	public function new() 
 	{
-		super(Width, Height);
+		super(304, 320);
 		this.gameManager = GameManager.getInstance();
 		
 		monsterPicked = new Signal1<Monster>();
 		
-		
-		
 		gameManager.monstersChanged.add(update);
+		gameManager.ongoingMissionsChanged.add(update);
+		gameManager.endedMissionsChanged.add(update);
 		
 		update();
 	}
@@ -53,7 +53,8 @@ class MonsterListSheet extends PaperSheet
 			avatar.y = Std.int(i / nbCols) * (avatarSize+avatarMargin);
 			content.addChild(avatar);
 			
-			avatar.alpha = monster.currentMission != null?0.5:1;
+			trace("CURRENT MISSION="+monster.currentMission);
+			avatar.alpha = (monster.currentMission != null)?0.5:1;
 			//avatar.alpha = 0.5;
 			
 			avatar.addEventListener(MouseEvent.CLICK, function(evt:MouseEvent) {

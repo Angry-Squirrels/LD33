@@ -34,7 +34,7 @@ class AbstractMissionSheet extends PaperSheet
 	
 	
 	
-	public function new(mission:Mission, Width:Float=400, Height:Float=420) 
+	public function new(mission:Mission, Width:Float=304, Height:Float=360) 
 	{
 		trace("missionSheet");
 		super(Width, Height);
@@ -56,7 +56,7 @@ class AbstractMissionSheet extends PaperSheet
 		descriptionTf.multiline = true;
 		descriptionTf.width = contentWidth;
 				
-		currentY = vMargin;
+		//currentY = vMargin;
 		
 		titleTf.y = currentY;
 		content.addChild(titleTf);
@@ -73,7 +73,7 @@ class AbstractMissionSheet extends PaperSheet
 	
 	function drawRewardLine() 
 	{
-		var rewardLine:DataLine = new DataLine("Reward", cast(mission.reward), contentWidth, Styles.BLACK16);
+		var rewardLine:DataLine = new DataLine("Reward", cast(mission.reward), contentWidth, Styles.BLACK12);
 		rewardLine.y = currentY;
 		content.addChild(rewardLine);
 		currentY += rewardLine.height;
@@ -82,7 +82,7 @@ class AbstractMissionSheet extends PaperSheet
 	
 	function drawDurationLine(label:String) 
 	{
-		var durationLine:DataLine = new DataLine(label, mission.duration+" days", contentWidth, Styles.BLACK16);
+		var durationLine:DataLine = new DataLine(label, mission.duration+" days", contentWidth, Styles.BLACK12);
 		durationLine.y = currentY;
 		content.addChild(durationLine);
 		currentY += durationLine.height;
@@ -92,7 +92,7 @@ class AbstractMissionSheet extends PaperSheet
 	
 	function drawTeamLineAndSlots() 
 	{
-		var teamLine:DataLine = new DataLine("Team", mission.teamSize+"monster" + ((mission.teamSize > 1)?"s":""), contentWidth, Styles.BLACK16);
+		var teamLine:DataLine = new DataLine("Team", mission.teamSize+"monster" + ((mission.teamSize > 1)?"s":""), contentWidth, Styles.BLACK12);
 		teamLine.y = currentY;
 		content.addChild(teamLine);
 		currentY += teamLine.height;
@@ -129,7 +129,7 @@ class AbstractMissionSheet extends PaperSheet
 	
 	function drawRequirements() 
 	{
-		var requirementsTf = new TF("Requirement", Styles.BLACK16);
+		var requirementsTf = new TF("Requirements", Styles.BLACK16);
 				
 		requirementsTf.y = currentY;
 		content.addChild(requirementsTf);
