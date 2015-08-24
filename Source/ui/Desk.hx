@@ -8,12 +8,13 @@ import openfl.display.Sprite;
  * ...
  * @author damrem
  */
-class Desk extends Bitmap
+class Desk extends Sprite
 {
 
 	public function new() 
 	{
-		super(Assets.getBitmapData("images/desk.jpg"));
+		super();
+		addChild(new Bitmap(Assets.getBitmapData("images/desk.jpg")));
 		
 	}
 	

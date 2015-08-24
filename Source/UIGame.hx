@@ -12,6 +12,7 @@ import motion.Actuate;
 import motion.easing.Cubic;
 import openfl.Assets;
 import openfl.display.Sprite;
+import openfl.events.MouseEvent;
 import openfl.Lib;
 import openfl.text.TextFormat;
 import openfl.text.TextFormatAlign;
@@ -53,6 +54,7 @@ class UIGame extends Sprite
 		this.gameManager = gameManager;
 		
 		desk = new Desk();
+		desk.addEventListener(MouseEvent.CLICK, onClickDesk);
 		addChild(desk);
 		
 		dayBlackTransition = new Sprite();
@@ -174,6 +176,14 @@ class UIGame extends Sprite
 		addChild(binderContainer);
 	}
 	
+	private function onClickDesk(e:MouseEvent):Void 
+	{
+		trace("desk");
+		missionBinder.close();
+		reportBinder.close();
+		monsterBinder.close();
+	}
+	
 	function openMissionBinder(isOpened:Bool) 
 	{
 		if (isOpened) {
@@ -236,12 +246,12 @@ class UIGame extends Sprite
 	public function dayTransition() {
 		dayBlackTransition.alpha = 0;
 		Lib.current.stage.addChild(dayBlackTransition);
-		Actuate.tween(dayBlackTransition, 0.5, { alpha:1 } ).ease(Cubic.easeOut).onComplete(function() {	
+		Actuate.tween(dayBlackTransition, 0.25, { alpha:1 } ).ease(Cubic.easeOut).onComplete(function() {	
 			var gotoNextDay = gameManager.endDay();
 			if (gotoNextDay){
 				gameManager.startNewDay();
-				calendar.updateData();
-				Actuate.tween(dayBlackTransition, 0.5, { alpha:0 } ).ease(Cubic.easeOut);
+				calendar.updateDate();
+				Actuate.tween(dayBlackTransition, 0.25, { alpha:0 } ).ease(Cubic.easeOut);
 			}
 		});
 	}

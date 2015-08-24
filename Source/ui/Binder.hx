@@ -5,6 +5,7 @@ import msignal.Signal.Signal1;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
+import openfl.filters.DropShadowFilter;
 import openfl.filters.GlowFilter;
 import openfl.geom.Matrix;
 import openfl.geom.Matrix3D;
@@ -26,18 +27,24 @@ class Binder extends Sprite
 	
 	public var isOpened:Bool;
 	public var isOpenedChanged:Signal1<Bool>;
+	public var title : String;
 	
 	var pressed : Bool;
 	var mouseDragPoint : Point;
+	
+	var dropShadow : DropShadowFilter;
 
-	public function new() 
+	public function new(_title : String = "") 
 	{
 		super();
+		title = _title;
 		isOpenedChanged = new Signal1<Bool>();
 		tabs = new Array<Tab>();
 		
-		cover = new BinderCover(this);
+		cover = new BinderCover(this, _title);
 		addChild(cover);
+		
+		dropShadow = new DropShadowFilter(3);
 		
 		close();
 		
@@ -135,6 +142,7 @@ class Binder extends Sprite
 		buttonMode = false;
 		useHandCursor = false;
 		removeHalo(null);
+		filters = [];
 		removeEventListener(MouseEvent.MOUSE_OVER, drawHalo);
 		removeEventListener(MouseEvent.MOUSE_OUT, removeHalo);
 		
@@ -154,6 +162,8 @@ class Binder extends Sprite
 		buttonMode = true;
 		useHandCursor = true;
 		
+		filters = [dropShadow];
+		
 		addEventListener(MouseEvent.MOUSE_OVER, drawHalo);
 		addEventListener(MouseEvent.MOUSE_OUT, removeHalo);
 		
@@ -170,12 +180,12 @@ class Binder extends Sprite
 	
 	private function removeHalo(e:MouseEvent):Void 
 	{
-		filters = [];
+		filters = [dropShadow];
 	}
 	
 	private function drawHalo(e:MouseEvent):Void 
 	{
-		filters = [new GlowFilter(0xffffff)];
+		filters = [new GlowFilter(0xffffff), dropShadow];
 	}
 	
 }

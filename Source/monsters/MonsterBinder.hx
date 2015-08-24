@@ -18,7 +18,7 @@ class MonsterBinder extends Binder
 
 	public function new() 
 	{
-		super();
+		super("Monsters");
 		
 		monsterPicked = new Signal1<Monster>();
 		
