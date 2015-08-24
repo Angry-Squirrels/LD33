@@ -36,11 +36,11 @@ class AvailableMissionSheet extends AbstractMissionSheet
 			
 			trace(mission.assignedMonsters);
 			
-			if (mission.assignedMonsters.length==0) {
-				disableStartButton();
+			if (mission.assignedMonsters.length==Std.int(mission.teamSize)) {
+				enableStartButton();
 			}
 			else {
-				enableStartButton();
+				disableStartButton();
 			}
 			
 			
