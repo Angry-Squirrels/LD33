@@ -22,14 +22,27 @@ class MonsterBinder extends Binder
 		
 		monsterPicked = new Signal1<Monster>();
 		
-		var tab = new Tab("Monster");
+		var monstersTab = new Tab("Monsters");
 		
 		listSheet = new MonsterListSheet();
 		listSheet.monsterPicked.add(monsterPicked.dispatch);
 		listSheet.y = 32;
-		tab.addChild(listSheet);
+		monstersTab.addChild(listSheet);
 		
-		addTab(tab);
+		addTab(monstersTab);
+		
+		
+		var marketTab = new Tab("Buy-a-Monster");
+		
+		var marketSheet = new MarketSheet();
+		marketSheet.y = 32;
+		marketTab.addChild(marketSheet);
+		
+		addTab(marketTab);
+		
+		setCurrentTab(monstersTab);
+		
+		
 	}
 	
 }
