@@ -189,7 +189,7 @@
 			"rewardType" : "Mission"
 		},
 		{
-			"title" : "Prospection frenxy",
+			"title" : "Prospection frenzy",
 			"desc" : "Send your minions to sell your services all arround the world!",
 			"statCoef" : [1, 1, 5, 7],
 			"type" : "Prospect",

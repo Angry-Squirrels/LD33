@@ -170,7 +170,7 @@ class GameManager
 				message(monster.name + " costed you " + monster.costOfLife + " to stay alive.");
 			}else {
 				monster.alive = false;
-				message(monster.name + " died of exhaustion while working on " + monster.currentMission.title);
+				message(monster.name + " died from exhaustion while working on " + monster.currentMission.title);
 				monsterToKill.push(monster);
 				monster.currentMission.unassignMonster(monster);
 			}
