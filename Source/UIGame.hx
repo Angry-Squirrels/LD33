@@ -53,7 +53,7 @@ class UIGame extends Sprite
 		monsterBinder = new MonsterBinder();
 		monsterBinder.x = 200;
 		monsterBinder.y = 300;
-		monsterBinder.rotation = Std.random(30) - 15;
+		monsterBinder.rotation = -10;
 		
 		monster3dContainer = new Sprite();
 		binderContainer.addChild(monster3dContainer);
@@ -65,7 +65,7 @@ class UIGame extends Sprite
 		missionBinder = new MissionBinder();
 		missionBinder.x = 600;
 		missionBinder.y = 300;
-		missionBinder.rotation = Std.random(30) - 15;
+		missionBinder.rotation = 10;
 		
 		mission3dContainer = new Sprite();
 		binderContainer.addChild(mission3dContainer);
@@ -77,7 +77,7 @@ class UIGame extends Sprite
 		reportBinder = new ReportBinder();
 		reportBinder.x = 400;
 		reportBinder.y = 300;
-		reportBinder.rotation = Std.random(30) - 15;
+		reportBinder.rotation = 0;
 		
 		repport3dContainer = new Sprite();
 		binderContainer.addChild(repport3dContainer);
