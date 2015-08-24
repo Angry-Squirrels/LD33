@@ -23,7 +23,7 @@ class AvatarGenerator
 		
 		initFeatures();
 		
-		var bitmapData : BitmapData = new BitmapData(64, 64, false, Std.random(0x888889) + 0x777777);
+		var bitmapData : BitmapData = new BitmapData(64, 64, false, Std.random(0xA00000)+0x666666);
 		result = bitmapData;
 		
 		addSkull();
@@ -83,9 +83,9 @@ class AvatarGenerator
 	
 	static function addSkull() {
 		var ct = new ColorTransform();
-		ct.redMultiplier = Math.random() * 2;
-		ct.greenMultiplier = Math.random() * 2;
-		ct.blueMultiplier = Math.random() * 2;
+		ct.redMultiplier = Math.random() * 1.5+0.5;
+		ct.greenMultiplier = Math.random() * 1.5+0.5;
+		ct.blueMultiplier = Math.random() * 1.5+0.5;
 		result.draw(skull[Std.int(Math.random() * skull.length)], null, ct);
 		//result.draw(skull[Std.random(skull.length)], null, new ColorTransform(Math.random() * 2, Math.random() * 2, Math.random() * 2), null, null, true);
 	}
@@ -95,9 +95,9 @@ class AvatarGenerator
 		var i:UInt = Std.int(Math.random() * mouth.length);
 		if (colorableMouths.indexOf(i) >= 0)
 		{
-			ct.redMultiplier = Math.random() * 2;
-			ct.greenMultiplier = Math.random() * 2;
-			ct.blueMultiplier = Math.random() * 2;
+			ct.redMultiplier = Math.random() * 1.5+0.5;
+			ct.greenMultiplier = Math.random() * 1.5+0.5;
+			ct.blueMultiplier = Math.random() * 1.5+0.5;
 		}
 		result.draw(mouth[i], null, ct);
 		//result.draw(skull[Std.random(skull.length)], null, new ColorTransform(Math.random() * 2, Math.random() * 2, Math.random() * 2), null, null, true);
@@ -105,18 +105,18 @@ class AvatarGenerator
 	
 	static function addEyes() {
 		var ct = new ColorTransform();
-		ct.redMultiplier = Math.random() * 2;
-		ct.greenMultiplier = Math.random() * 2;
-		ct.blueMultiplier = Math.random() * 2;
+		ct.redMultiplier = Math.random() * 1.5+0.5;
+		ct.greenMultiplier = Math.random() * 1.5+0.5;
+		ct.blueMultiplier = Math.random() * 1.5+0.5;
 		result.draw(eyes[Std.int(Math.random() * eyes.length)], null, ct);
 		//result.draw(skull[Std.random(skull.length)], null, new ColorTransform(Math.random() * 2, Math.random() * 2, Math.random() * 2), null, null, true);
 	}
 	
 	static function addHat() {
 		var ct = new ColorTransform();
-		ct.redMultiplier = Math.random() * 2;
-		ct.greenMultiplier = Math.random() * 2;
-		ct.blueMultiplier = Math.random() * 2;
+		ct.redMultiplier = Math.random() * 1.5+0.5;
+		ct.greenMultiplier = Math.random() * 1.5+0.5;
+		ct.blueMultiplier = Math.random() * 1.5+0.5;
 		result.draw(hat[Std.int(Math.random() * hat.length)], null, ct);
 		//result.draw(skull[Std.random(skull.length)], null, new ColorTransform(Math.random() * 2, Math.random() * 2, Math.random() * 2), null, null, true);
 	}
