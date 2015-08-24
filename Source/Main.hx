@@ -19,10 +19,6 @@ class Main extends Sprite {
 		
 		mGameManager = GameManager.getInstance();
 		mGameManager.addMonster();
-		for (i in 0 ... 5) {
-			mGameManager.addMonster();
-			mGameManager.addMission("Contract");
-		}
 		addChild(new UIGame(mGameManager));
 		
 		//mGameManager.startNewDay();
