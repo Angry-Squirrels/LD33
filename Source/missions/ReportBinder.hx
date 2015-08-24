@@ -13,7 +13,9 @@ class ReportBinder extends Binder
 {
 	public var endedPile:SheetPile;
 	public var archivedPile:SheetPile;
+	
 	var gameManager:GameManager;
+	var currentMessagePage:MessagePage;
 	
 	public function new() 
 	{
@@ -35,6 +37,17 @@ class ReportBinder extends Binder
 		setCurrentTab(endedTab);
 	}
 	
+	public function addMessagePage() {
+		currentMessagePage = new MessagePage(this);
+		addChild(currentMessagePage);
+		currentMessagePage.x = -currentMessagePage.width / 2;
+		currentMessagePage.y = -currentMessagePage.height / 2;
+		addChild(cover);
+	}
+	
+	public function removeMessagePage() {
+		removeChild(currentMessagePage);
+	}
 	
 	function updateEnded() 
 	{

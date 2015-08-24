@@ -1,6 +1,7 @@
 package;
 import haxe.Json;
 import missions.Mission;
+import missions.sheets.AvailableMissionSheet;
 import monsters.Monster;
 import msignal.Signal.Signal0;
 import msignal.Signal.Signal1;
@@ -39,6 +40,8 @@ class GameManager
 	public var archivedMissions : Array<Mission>;
 	public var archivedMissionsChanged:Signal0;
 	
+	public var messages : Array<String>;
+	
 	static public inline var maxMissionNb : Int = 10;
 	static public inline var maxMonsterNb : Int = 5;
 	static public inline var maxTime : Int = 30;
@@ -50,7 +53,6 @@ class GameManager
 	public var goldChanged:Signal1<Int>;
 	public var day : Int;
 	public var remainingTime : Int;
-	public var maxDay : UInt;
 	public var config : Dynamic;
 	
 	function new() 
@@ -63,6 +65,8 @@ class GameManager
 		rawText = Assets.getText("missions/config.json");
 		#end
 		config = Json.parse(rawText);
+		
+		messages = new Array<String>();
 		
 		monsters = new Array<Monster>();
 		monstersChanged = new Signal0();
@@ -77,10 +81,10 @@ class GameManager
 		archivedMissionsChanged = new Signal0(); 
 		market = new MonsterMarket(this);
 		
-		day = 0;
-		maxDay = 42;
+		day = 1;
 		goldChanged = new Signal1<Int>();
 		gold = 1000;
+		remainingTime = maxTime;
 	}
 	
 	public function addMonster() {
@@ -109,7 +113,7 @@ class GameManager
 		day++;
 		
 		remainingTime = GameManager.maxTime - day;
-		message("A new sun arise... Day " + day + " / " + GameManager.maxTime);
+		trace("A new sun arise... Day " + day + " / " + GameManager.maxTime);
 		market.newDay();
 		
 		for (mission in ongoingMissions) {
@@ -151,20 +155,46 @@ class GameManager
 	}
 	
 	public function endDay() : Bool {
-		message("A new moon is rising!");
+		trace("A new moon is rising!");
+		
+		var monsterToKill = new Array<Monster>();
 		
 		for (monster in monsters) {
-			gold -= monster.costOfLife;
-			message(monster.name + " costed you " + monster.costOfLife + " to stay alive.");
+			
+			var chanceOfDeath = 0.05;
+			var rollChance = Math.random();
+			var die = rollChance < chanceOfDeath;
+			if (monster.currentMission == null) die = false;
+			if(!die){ 
+				gold -= monster.costOfLife;
+				message(monster.name + " costed you " + monster.costOfLife + " to stay alive.");
+			}else {
+				monster.alive = false;
+				message(monster.name + " died from exhaustion while working on " + monster.currentMission.title);
+				monsterToKill.push(monster);
+				monster.currentMission.unassignMonster(monster);
+			}
+		}
+		
+		if (monsterToKill.length > 0) {
+			while (monsterToKill.length > 0)
+				monsters.remove(monsterToKill.pop());
+			monstersChanged.dispatch();
 		}
 		
 		if (gold >= 0)
-			if(remainingTime > 0)
-				return true;
-			else
+			if (remainingTime > 0) {
+				
 				return false;
-		else
-			return false;
+			}
+			else {
+				trace("no time ! " + remainingTime);
+				return true;
+			}
+		else {
+			trace("no money:");
+			return true;
+		}
 	}
 	
 	function endGame() 
@@ -194,7 +224,7 @@ class GameManager
 		#if neko
 		neko.Lib.println(message);
 		#else
-		trace(message);
+		messages.push(message);
 		#end
 	}
 	
@@ -215,15 +245,20 @@ class GameManager
 			ongoingMissions.push(mission);
 			ongoingMissionsChanged.dispatch();
 			mission.started = true;
-			message("Mission " + mission.title + " launched.");
 		}else {
 			if (mission.assignedMonsters.length < 1)
-				message("No monster assigned to this mission.");
+				trace("No monster assigned to this mission.");
 			else if (!mission.areRequirementFilled())
-				message("Your monsters doesn't fill the requirements for this mission.");
+				trace("Your monsters doesn't fill the requirements for this mission.");
 			for (monster in mission.assignedMonsters)
 				mission.unassignMonster(monster);
 		}
+	}
+	
+	public function dissmissMission(mission:Mission) 
+	{
+		availableMissions.remove(mission);
+		availableMissionsChanged.dispatch();
 	}
 	
 	function get_gold():Int 

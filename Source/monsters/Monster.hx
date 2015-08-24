@@ -22,6 +22,8 @@ class Monster
 	public var name : String;
 	public var picture : BitmapData;
 	
+	public var alive = true;
+	
 	public var costOfLife(get, null) : Int;
 	
 	public var sellValue(get, null) : Int;

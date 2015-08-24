@@ -12,6 +12,7 @@ class Styles
 	public static var BLACK24:TextFormat;
 	public static var BLACK16:TextFormat;
 	public static var BLACK12:TextFormat;
+	public static var BLACK10:TextFormat;
 	
 	public static var WHITE24:TextFormat;
 	public static var WHITE16:TextFormat;
@@ -27,6 +28,7 @@ class Styles
 		BLACK24 = new TextFormat(ps2p, 20, 0x000000);
 		BLACK16 = new TextFormat(ps2p, 15, 0x000000);
 		BLACK12 = new TextFormat(ps2p, 10, 0x000000);
+		BLACK10 = new TextFormat(ps2p, 10, 0x000000);
 		
 		WHITE24 = new TextFormat(ps2p, 20, 0xffffff);
 		WHITE16 = new TextFormat(ps2p, 15, 0xffffff);

@@ -31,7 +31,7 @@ class MonsterMarket
 			if (mGame.monsters.remove(monster)) {
 				mGame.monstersChanged.dispatch();
 				mGame.gold += monster.sellValue;
-				mGame.message("Sold " + monster.name + " for $" + monster.sellValue);
+				trace("Sold " + monster.name + " for $" + monster.sellValue);
 				monstersOnMarket.push(monster);
 				monstersOnMarketChanged.dispatch();
 			}
@@ -47,11 +47,11 @@ class MonsterMarket
 			mGame.monsters.push(monster);
 			mGame.monstersChanged.dispatch();
 			monstersOnMarketChanged.dispatch();
-			mGame.message("Bought " + monster.name + " for $" + monster.buyValue);
+			trace("Bought " + monster.name + " for $" + monster.buyValue);
 		}else if(mGame.gold < monster.buyValue)
-			mGame.message("Not enough muney.");
+			trace("Not enough muney.");
 		else
-			mGame.message("Not enough space for monster.");
+			trace("Not enough space for monster.");
 	}
 	
 	public function newDay() {

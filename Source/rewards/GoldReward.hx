@@ -16,8 +16,7 @@ class GoldReward extends Reward
 		mQuantity = Std.int(points * rewardBonus);
 	}
 	
-	override public function take(monsters : Array<Monster>) 
-	{
+	override public function take(monsters : Array<Monster>) {
 		GameManager.getInstance().gold += mQuantity;
 	}
 	

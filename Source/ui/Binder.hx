@@ -7,7 +7,6 @@ import openfl.display.BitmapData;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
-import openfl.filters.DropShadowFilter;
 import openfl.filters.GlowFilter;
 import openfl.geom.ColorTransform;
 import openfl.geom.Matrix;
@@ -35,8 +34,6 @@ class Binder extends PaperObject
 	var pressed : Bool;
 	var mouseDragPoint : Point;
 	
-	var dropShadow : DropShadowFilter;
-
 	public function new(_title : String = "", Width:Float=320, Height:Float=416) 
 	{
 		super(320, 416, 16, 16);
@@ -46,8 +43,6 @@ class Binder extends PaperObject
 		
 		cover = new BinderCover(this, _title);
 		addChild(cover);
-		
-		dropShadow = new DropShadowFilter(3);
 		
 		close();
 		
@@ -170,7 +165,7 @@ class Binder extends PaperObject
 		buttonMode = true;
 		useHandCursor = true;
 		
-		filters = [dropShadow];
+		filters = [];
 		
 		addEventListener(MouseEvent.MOUSE_OVER, drawHalo);
 		addEventListener(MouseEvent.MOUSE_OUT, removeHalo);
@@ -188,12 +183,12 @@ class Binder extends PaperObject
 	
 	private function removeHalo(e:MouseEvent):Void 
 	{
-		filters = [dropShadow];
+		filters = [];
 	}
 	
 	private function drawHalo(e:MouseEvent):Void 
 	{
-		filters = [new GlowFilter(0xffffff), dropShadow];
+		filters = [new GlowFilter(0xffffff)];
 	}
 	
 }

@@ -23,12 +23,112 @@
 	],
 	"missions" : [
 		{
-			"title" : "Actor",
-			"desc" : "for a shady anim production studio",
+			"title" : "Actor needed",
+			"desc" : "Good morning Sir, I need an actor for my next anime project. The action takes place in a girl highschool near tokyo. what do you have for me?",
 			"statCoef" : [2,3,1,4],
 			"type" : "Contract",
-			"requires" : ["tentacles"],
+			"requires" : ["tentacles","ugly"],
+			"duration" : 2,
+			"teamSize" : 1,
+			"rewardType" : "Gold"
+		},
+		{
+			"title" : "I need builders",
+			"desc" : "Hey, I lost two of my employees while building the Fookeeya-City's great wall. Could you lend me some of yours ?",
+			"statCoef" : [2,4,1,1],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 2,
+			"teamSize" : 2,
+			"rewardType" : "Gold"
+		},
+		{
+			"title" : "Sewer cleaning",
+			"desc" : "Fookeeya-City's sewer are overflowing! Please send us some of your cheap workforce to help the cleaning.",
+			"statCoef" : [2,1,0,0],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 2,
+			"teamSize" : 3,
+			"rewardType" : "Gold"
+		},
+		{
+			"title" : "Wrestling animation",
+			"desc" : "Hey, our kids are totaly crazy about that kids show, pukemon. Could you send us two of your guys for a cool surprise ? They'll love it!",
+			"statCoef" : [2,4,1,1],
+			"type" : "Contract",
+			"requires" : ["kind"],
+			"duration" : 2,
+			"teamSize" : 2,
+			"rewardType" : "Gold"
+		},
+		{
+			"title" : "Bodyguard",
+			"desc" : "Dude, I need some protection for like, 3 days, what do you have for me?",
+			"statCoef" : [3,5,1,1],
+			"type" : "Contract",
+			"requires" : ["heavy"],
 			"duration" : 3,
+			"teamSize" : 1,
+			"rewardType" : "Gold"
+		},
+		{
+			"title" : "VIP Air transportation at Fookeya",
+			"desc" : "Hello, I'm in charge of the transportation at Fookeeya. We're currently working on a VIP Air-taxi service but our vehicules provider are late. Do you have some flying slaves I could use ?",
+			"statCoef" : [4,4,1,1],
+			"type" : "Contract",
+			"requires" : ["wings"],
+			"duration" : 2,
+			"teamSize" : 1,
+			"rewardType" : "Gold"
+		},
+		{
+			"title" : "Laboratories test subject",
+			"desc" : "Don't tell anything about the following request. I'm working on some new 'growing' pills and need some test subject. I heard monsters are close enough to human and can be used for therapeuthic tests. Could you send me some ?",
+			"statCoef" : [1,1,1,1],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 4,
+			"teamSize" : 5,
+			"rewardType" : "Gold"
+		},
+		{
+			"title" : "Animator in a retirement home",
+			"desc" : "Hi, our patients are getting kind of bored lately. I heard you have some cute animals, could you lend us some?",
+			"statCoef" : [2,1,1,3],
+			"type" : "Contract",
+			"requires" : ["cute"],
+			"duration" : 3,
+			"teamSize" : 3,
+			"rewardType" : "Gold"
+		},
+		{
+			"title" : "Mercenary needed!",
+			"desc" : "We need some true warrior to protect the Fookeeya's great wall!",
+			"statCoef" : [2,8,1,3],
+			"type" : "Contract",
+			"requires" : ["heavy"],
+			"duration" : 4,
+			"teamSize" : 2,
+			"rewardType" : "Gold"
+		},
+		{
+			"title" : "Bad client",
+			"desc" : "Hey, I have some Bad client who didn't pay their \"insurance\". I need someone to convince them to pay. If you know what I mean.",
+			"statCoef" : [2,6,1,1],
+			"type" : "Contract",
+			"requires" : ["mean"],
+			"duration" : 1,
+			"teamSize" : 1,
+			"rewardType" : "Gold"
+		},
+		{
+			"title" : "Great job opportunities!",
+			"desc" : "Hi! We sell a lot of stuff, but lately, people doesn't seem as interested in our product as they used to be. We need some competent door-to-door salesman!",
+			"statCoef" : [1,1,8,5],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 1,
 			"teamSize" : 1,
 			"rewardType" : "Gold"
 		},
@@ -38,7 +138,27 @@
 			"statCoef" : [2,4,1,1],
 			"type" : "Contract",
 			"requires" : [],
-			"duration" : 5,
+			"duration" : 2,
+			"teamSize" : 2,
+			"rewardType" : "Gold"
+		},
+		{
+			"title" : "Builder",
+			"desc" : "construct a bridge in a dangerous area.",
+			"statCoef" : [2,4,1,1],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 2,
+			"teamSize" : 2,
+			"rewardType" : "Gold"
+		},
+		{
+			"title" : "Builder",
+			"desc" : "construct a bridge in a dangerous area.",
+			"statCoef" : [2,4,1,1],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 2,
 			"teamSize" : 2,
 			"rewardType" : "Gold"
 		},
@@ -48,8 +168,18 @@
 			"statCoef" : [2, 3, 1, 1],
 			"type" : "Capture",
 			"requires" : [],
-			"duration" : 2,
+			"duration" : 1,
 			"teamSize" : 1,
+			"rewardType" : "Monster"
+		},
+		{
+			"title" : "Rafle",
+			"desc" : "Get a lot of new slaves!",
+			"statCoef" : [3,6,1,1],
+			"type" : "Capture",
+			"requires" : [],
+			"duration" : 3,
+			"teamSize" : 3,
 			"rewardType" : "Monster"
 		},
 		{
@@ -58,8 +188,18 @@
 			"statCoef" : [1, 1, 3, 4],
 			"type" : "Prospect",
 			"requires" : [],
-			"duration" : 2,
+			"duration" : 1,
 			"teamSize" : 1,
+			"rewardType" : "Mission"
+		},
+		{
+			"title" : "Prospection frenzy",
+			"desc" : "Send your minions to sell your services all arround the world!",
+			"statCoef" : [1, 1, 5, 7],
+			"type" : "Prospect",
+			"requires" : [],
+			"duration" : 2,
+			"teamSize" : 3,
 			"rewardType" : "Mission"
 		},
 		{
@@ -68,7 +208,7 @@
 			"statCoef" : [1, 1, 7, 4],
 			"type" : "Contract",
 			"requires" : [],
-			"duration" : 7,
+			"duration" : 3,
 			"teamSize" : 3,
 			"rewardType" : "BuyUpgrade"
 		},
@@ -78,7 +218,7 @@
 			"statCoef" : [1, 1, 7, 4],
 			"type" : "Contract",
 			"requires" : [],
-			"duration" : 7,
+			"duration" : 3,
 			"teamSize" : 3,
 			"rewardType" : "SellUpgrade"
 		},
@@ -88,7 +228,7 @@
 			"statCoef" : [1, 1, 7, 4],
 			"type" : "Contract",
 			"requires" : [],
-			"duration" : 7,
+			"duration" : 3,
 			"teamSize" : 3,
 			"rewardType" : "MissionNumberUpgrade"
 		},
@@ -98,7 +238,7 @@
 			"statCoef" : [1, 1, 7, 4],
 			"type" : "Contract",
 			"requires" : [],
-			"duration" : 7,
+			"duration" : 3,
 			"teamSize" : 3,
 			"rewardType" : "MonsterNumberUpgrade"
 		},
@@ -108,7 +248,7 @@
 			"statCoef" : [1, 1, 7, 4],
 			"type" : "Contract",
 			"requires" : [],
-			"duration" : 7,
+			"duration" : 3,
 			"teamSize" : 3,
 			"rewardType" : "BetterRewardUpgrade"
 		}

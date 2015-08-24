@@ -12,7 +12,7 @@ class UpgradeBinder extends Binder
 
 	public function new() 
 	{
-		super();
+		super("Stats");
 		
 		var tab = new Tab("Upgrades");
 		addTab(tab);
