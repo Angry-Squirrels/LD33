@@ -1,5 +1,6 @@
 package;
 import monsters.Monster;
+import msignal.Signal.Signal0;
 
 /**
  * ...
@@ -8,7 +9,8 @@ import monsters.Monster;
 class MonsterMarket
 {
 	
-	public var monsterOnMarket : Array<Monster>;
+	public var monstersOnMarket : Array<Monster>;
+	public var monstersOnMarketChanged:Signal0;
 	public var maxOffers : UInt = 5;
 	public var buyValueMultiplier : Float = 2.0;
 	
@@ -19,7 +21,9 @@ class MonsterMarket
 	public function new(game : GameManager) 
 	{
 		mGame = game;
-		monsterOnMarket = new Array<Monster>();
+		monstersOnMarket = new Array<Monster>();
+		monstersOnMarketChanged = new Signal0();
+		monstersOnMarketChanged.dispatch();
 	}
 	
 	public function sellMonster(monster : Monster) {
@@ -28,19 +32,21 @@ class MonsterMarket
 				mGame.monstersChanged.dispatch();
 				mGame.gold += monster.sellValue;
 				mGame.message("Sold " + monster.name + " for $" + monster.sellValue);
-				monsterOnMarket.push(monster);
+				monstersOnMarket.push(monster);
+				monstersOnMarketChanged.dispatch();
 			}
 		}
 	}
 	
 	public function buyMonster(monster : Monster) {
 		if (mGame.gold >= monster.buyValue &&
-			monsterOnMarket.remove(monster) &&
+			monstersOnMarket.remove(monster) &&
 			mGame.monsters.length < Upgrades.maxMonsterUpgrade * GameManager.maxMonsterNb) {
 				
 			mGame.gold -= monster.buyValue;
 			mGame.monsters.push(monster);
 			mGame.monstersChanged.dispatch();
+			monstersOnMarketChanged.dispatch();
 			mGame.message("Bought " + monster.name + " for $" + monster.buyValue);
 		}else if(mGame.gold < monster.buyValue)
 			mGame.message("Not enough muney.");
@@ -58,14 +64,15 @@ class MonsterMarket
 	
 	public function changeOffers() {
 		mGame.message("New offers are available in the monster market!");
-		monsterOnMarket.splice(0, monsterOnMarket.length);
+		monstersOnMarket.splice(0, monstersOnMarket.length);
 		
 		for (i in 0 ... maxOffers) {
 			var monsterTier : Int = mGame.getMonstersTiers() + Std.random(7) - 3;
 			if (monsterTier < 1)
 				monsterTier = 1;
-			monsterOnMarket.push(Monster.get(monsterTier));
+			monstersOnMarket.push(Monster.get(monsterTier));
 		}
+		monstersOnMarketChanged.dispatch();
 	}
 	
 }

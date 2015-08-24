@@ -15,6 +15,8 @@ class SheetPile extends Sprite
 	var sheets:Array<PaperSheet>;
 	var holder:Sprite;
 	var currentSheetIndex:Int=0;
+	var prevArrow:openfl.display.Sprite;
+	var nextArrow:openfl.display.Sprite;
 
 	public function new(Width:Float, Height:Float) 
 	{
@@ -24,7 +26,7 @@ class SheetPile extends Sprite
 		
 		var arrowBmp = Assets.getBitmapData("images/arrow.png");
 		
-		var prevArrow = new Sprite();
+		prevArrow = new Sprite();
 		prevArrow.addChild(new Bitmap(arrowBmp));
 		prevArrow.buttonMode = true;
 		prevArrow.x = 32;
@@ -33,7 +35,7 @@ class SheetPile extends Sprite
 		prevArrow.addEventListener(MouseEvent.CLICK, prev);
 		addChild(prevArrow);
 		
-		var nextArrow = new Sprite();
+		nextArrow = new Sprite();
 		nextArrow.addChild(new Bitmap(arrowBmp));
 		nextArrow.buttonMode = true;
 		nextArrow.x = Width-32;
@@ -52,6 +54,7 @@ class SheetPile extends Sprite
 		}
 		sheets.push(sheet);
 		holder.addChild(sheet);
+		updateArrows();
 	}
 	
 	public function next(evt:MouseEvent = null) {
@@ -61,8 +64,8 @@ class SheetPile extends Sprite
 			sheets[currentSheetIndex].disactivate();
 			currentSheetIndex++;
 			sheets[currentSheetIndex].activate();
-			
 		}
+		updateArrows();
 	}
 	
 	public function prev(evt:MouseEvent = null) {
@@ -73,6 +76,27 @@ class SheetPile extends Sprite
 			currentSheetIndex--;
 			sheets[currentSheetIndex].activate();
 			
+		}
+		updateArrows();
+	}
+	
+	function updateArrows()
+	{
+		if(currentSheetIndex==sheets.length-1)
+		{
+			nextArrow.alpha = 0.25;
+		}
+		else
+		{
+			nextArrow.alpha = 1;
+		}
+		if(currentSheetIndex==0)
+		{
+			prevArrow.alpha = 0.25;
+		}
+		else
+		{
+			prevArrow.alpha = 1;
 		}
 	}
 	

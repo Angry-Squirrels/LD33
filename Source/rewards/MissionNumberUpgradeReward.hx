@@ -21,6 +21,7 @@ class MissionNumberUpgradeReward extends Reward
 	override public function take(monsters:Array<Monster>) 
 	{
 		Upgrades.maxMissionUpgrade++;
+		Upgrades.upgradeChanged.dispatch();
 	}
 	
 }

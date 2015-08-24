@@ -21,6 +21,7 @@ class SellUpgradeReward extends Reward
 	override public function take(monsters:Array<Monster>) 
 	{
 		Upgrades.betterSellUpgrade ++;
+		Upgrades.upgradeChanged.dispatch();
 	}
 	
 }

@@ -8,10 +8,8 @@ import ui.PaperSheet;
  * ...
  * @author damrem
  */
-class MonsterListSheet extends PaperSheet
+class MarketSheet extends PaperSheet
 {
-	public var pickMode:Bool;
-	public var monsterPicked:Signal1<Monster>;
 	var gameManager:GameManager;
 	var avatars:Array<MonsterAvatar>;//WARNING: if we can sell monsters, remove monster from here
 
@@ -20,11 +18,7 @@ class MonsterListSheet extends PaperSheet
 		super(Width, Height);
 		this.gameManager = GameManager.getInstance();
 		
-		monsterPicked = new Signal1<Monster>();
-		
-		
-		
-		gameManager.monstersChanged.add(update);
+		gameManager.market.monstersOnMarketChanged.add(update);
 		
 		update();
 	}
@@ -33,7 +27,7 @@ class MonsterListSheet extends PaperSheet
 	{
 		while (content.numChildren>0) content.removeChildAt(0);
 		
-		var monsters = gameManager.monsters;
+		var monsters = gameManager.market.monstersOnMarket;
 		var avatarSize = 64;
 		var avatarMargin = 8;
 		
@@ -56,22 +50,12 @@ class MonsterListSheet extends PaperSheet
 			avatar.alpha = monster.currentMission != null?0.5:1;
 			//avatar.alpha = 0.5;
 			
-			avatar.addEventListener(MouseEvent.CLICK, function(evt:MouseEvent) {
-				
-				trace(pickMode);
-				trace(monster.currentMission);
-				if (pickMode && monster.currentMission == null) {
-					trace("pickMode & available monster");
-					monsterPicked.dispatch(monster);
-				}
-			});
-			
 			avatar.addEventListener(MouseEvent.ROLL_OVER, function(evt:MouseEvent) {
 				trace("mouseover");
 				content.addChild(avatar);
 				//avatar.mouseChildren = true;
 				if (avatar.card == null) {
-					avatar.card = new MonsterCard(monster);
+					avatar.card = new MonsterCard(monster, true);
 				}
 				avatar.card.x = avatar.width/3;
 				avatar.card.y = avatar.height / 3;

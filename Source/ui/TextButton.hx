@@ -28,7 +28,18 @@ class TextButton extends Sprite
 		addChild(upState);
 		
 		super();
-		
+		enable();
+	}
+	
+	public function enable() {
+		mouseEnabled = true;
+		alpha = 1;
+	}
+	
+	public function disable()
+	{
+		mouseEnabled = false;
+		alpha = 0.5;
 	}
 	
 }
