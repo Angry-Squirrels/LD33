@@ -1,6 +1,7 @@
 package;
 import haxe.Json;
 import missions.Mission;
+import missions.sheets.AvailableMissionSheet;
 import monsters.Monster;
 import msignal.Signal.Signal0;
 import msignal.Signal.Signal1;
@@ -52,7 +53,6 @@ class GameManager
 	public var goldChanged:Signal1<Int>;
 	public var day : Int;
 	public var remainingTime : Int;
-	public var maxDay : UInt;
 	public var config : Dynamic;
 	
 	function new() 
@@ -81,10 +81,10 @@ class GameManager
 		archivedMissionsChanged = new Signal0(); 
 		market = new MonsterMarket(this);
 		
-		day = 0;
-		maxDay = 42;
+		day = 1;
 		goldChanged = new Signal1<Int>();
 		gold = 1000;
+		remainingTime = maxTime;
 	}
 	
 	public function addMonster() {
@@ -183,12 +183,18 @@ class GameManager
 		}
 		
 		if (gold >= 0)
-			if(remainingTime > 0)
-				return true;
-			else
+			if (remainingTime > 0) {
+				
 				return false;
-		else
-			return false;
+			}
+			else {
+				trace("no time ! " + remainingTime);
+				return true;
+			}
+		else {
+			trace("no money:");
+			return true;
+		}
 	}
 	
 	function endGame() 
@@ -247,6 +253,12 @@ class GameManager
 			for (monster in mission.assignedMonsters)
 				mission.unassignMonster(monster);
 		}
+	}
+	
+	public function dissmissMission(mission:Mission) 
+	{
+		availableMissions.remove(mission);
+		availableMissionsChanged.dispatch();
 	}
 	
 	function get_gold():Int 

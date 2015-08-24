@@ -61,6 +61,21 @@ class UIGame extends Sprite
 		dayBlackTransition.graphics.beginFill(0);
 		dayBlackTransition.graphics.drawRect(0, 0, Lib.current.stage.stageWidth, Lib.current.stage.stageHeight);
 		
+		
+		gameManager.message("Son,\n"+
+							"I sent you here to extend the Company.\n\n" + 
+							"Don't disapoint me.\n\n" +
+							"\tYou're on a trial and have a month to maximize your incomes." +
+							"This world is full of cheap workforce! Use it!\n\n" +
+							"\tAll the folder you need are on your desk.\n\n" +
+							"\tYou'll first need a sla... employee to send him in mission.\n\n" +
+							"\tUse the monster folder\n" + 
+							"to bu... recruit one in the market section.\n\n" +
+							"Then use the mission folder to send him into mission!\n" +
+							"Good luck !");
+							
+		
+		
 		binderContainer = new Sprite();
 		
 		
@@ -174,6 +189,10 @@ class UIGame extends Sprite
 		
 		//GameManager.getInstance().endedMission.push(Mission.get());
 		addChild(binderContainer);
+		
+		dayBlackTransition.alpha = 1;
+		Lib.current.stage.addChild(dayBlackTransition);
+		fadeIn(checkRepport,1);
 	}
 	
 	private function onClickDesk(e:MouseEvent):Void 
@@ -244,31 +263,47 @@ class UIGame extends Sprite
 		
 	}
 	
-	public function dayTransition() {
+	function fadeOut(onComplete : Dynamic) {
 		dayBlackTransition.alpha = 0;
 		Lib.current.stage.addChild(dayBlackTransition);
-		Actuate.tween(dayBlackTransition, 0.25, { alpha:1 } ).ease(Cubic.easeOut).onComplete(function() {	
-			var gotoNextDay = gameManager.endDay();
-			if (gotoNextDay){
-				gameManager.startNewDay();
-				calendar.updateDate();
-				Actuate.tween(dayBlackTransition, 0.25, { alpha:0 } ).ease(Cubic.easeOut);
-				
-				var openReport = false;
-				
-				if (gameManager.messages.length > 0)
-				{
-					reportBinder.addMessagePage();
-					openReport = true;
-				}
-				
-				if (gameManager.endedMission.length > 0)
-					openReport = true;
-				
-				if (openReport)
-					reportBinder.open();
-			}
+		Actuate.tween(dayBlackTransition, 0.25, { alpha:1 } ).ease(Cubic.easeOut).onComplete(onComplete);
+	}
+	
+	function fadeIn(onComplete : Dynamic, duration : Float = 0.25) {
+		Actuate.tween(dayBlackTransition, duration, { alpha:0 } ).ease(Cubic.easeOut).onComplete(function() {
+			Lib.current.stage.removeChild(dayBlackTransition);
+			onComplete();
 		});
+	}
+	
+	public function dayTransition(start : Bool = false) {
+		fadeOut(checkEndGame);
+	}
+	
+	function checkEndGame() {
+		var end = gameManager.endDay();
+		if (!end) {
+			gameManager.startNewDay();
+			calendar.updateDate();
+			fadeIn(checkRepport);
+		}else {
+			trace("this is the end.");
+		}
+	}
+	
+	function checkRepport() {
+		var openReport = false;
+				
+		if (gameManager.messages.length > 0){
+			reportBinder.addMessagePage();
+			openReport = true;
+		}
+		
+		if (gameManager.endedMission.length > 0)
+			openReport = true;
+		
+		if (openReport)
+			reportBinder.open();
 	}
 	
 	

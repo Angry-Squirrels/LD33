@@ -2,6 +2,9 @@ package missions.sheets;
 import missions.sheets.AbstractMissionSheet;
 import monsters.Monster;
 import msignal.Signal.Signal0;
+import openfl.Assets;
+import openfl.display.Bitmap;
+import openfl.display.Sprite;
 import openfl.events.MouseEvent;
 import ui.TextButton;
 
@@ -13,6 +16,7 @@ class AvailableMissionSheet extends AbstractMissionSheet
 {
 	public var monsterRequested:Signal0;
 	var startButton:TextButton;
+	var binButton : Sprite;
 	
 	public function new(mission:Mission) 
 	{
@@ -44,9 +48,18 @@ class AvailableMissionSheet extends AbstractMissionSheet
 			
 		});
 		
+		binButton = new Sprite();
+		binButton.addChild(new Bitmap(Assets.getBitmapData("images/bin.png")));
+		binButton.addEventListener(MouseEvent.CLICK, onBinClick);
+		binButton.buttonMode = true;
 		
 		draw();
 		
+	}
+	
+	private function onBinClick(e:MouseEvent):Void 
+	{
+		GameManager.getInstance().dissmissMission(mission);
 	}
 	
 	override function draw() {
@@ -79,6 +92,10 @@ class AvailableMissionSheet extends AbstractMissionSheet
 		drawStartButton();
 		
 		bg.height = height;
+		
+		addChild(binButton);
+		binButton.x = width - binButton.width - 10;
+		binButton.y = 10;
 	}
 	
 	function drawStartButton() {
