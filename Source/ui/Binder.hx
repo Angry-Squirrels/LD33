@@ -5,6 +5,7 @@ import msignal.Signal.Signal1;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
+import openfl.filters.DropShadowFilter;
 import openfl.filters.GlowFilter;
 import openfl.geom.Matrix;
 import openfl.geom.Matrix3D;
@@ -30,6 +31,8 @@ class Binder extends Sprite
 	
 	var pressed : Bool;
 	var mouseDragPoint : Point;
+	
+	var dropShadow : DropShadowFilter;
 
 	public function new(_title : String = "") 
 	{
@@ -40,6 +43,8 @@ class Binder extends Sprite
 		
 		cover = new BinderCover(this, _title);
 		addChild(cover);
+		
+		dropShadow = new DropShadowFilter(3);
 		
 		close();
 		
@@ -134,6 +139,7 @@ class Binder extends Sprite
 	}
 	
 	public function open(evt:MouseEvent = null) {
+		filters = [];
 		buttonMode = false;
 		useHandCursor = false;
 		removeHalo(null);
@@ -156,6 +162,8 @@ class Binder extends Sprite
 		buttonMode = true;
 		useHandCursor = true;
 		
+		filters = [dropShadow];
+		
 		addEventListener(MouseEvent.MOUSE_OVER, drawHalo);
 		addEventListener(MouseEvent.MOUSE_OUT, removeHalo);
 		
@@ -172,12 +180,12 @@ class Binder extends Sprite
 	
 	private function removeHalo(e:MouseEvent):Void 
 	{
-		filters = [];
+		filters = [dropShadow];
 	}
 	
 	private function drawHalo(e:MouseEvent):Void 
 	{
-		filters = [new GlowFilter(0xffffff)];
+		filters = [new GlowFilter(0xffffff), dropShadow];
 	}
 	
 }
