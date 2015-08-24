@@ -12,6 +12,7 @@ import motion.Actuate;
 import motion.easing.Cubic;
 import openfl.Assets;
 import openfl.display.Sprite;
+import openfl.events.MouseEvent;
 import openfl.Lib;
 import openfl.text.TextFormat;
 import openfl.text.TextFormatAlign;
@@ -50,6 +51,7 @@ class UIGame extends Sprite
 		this.gameManager = gameManager;
 		
 		desk = new Desk();
+		desk.addEventListener(MouseEvent.CLICK, onClickDesk);
 		addChild(desk);
 		
 		dayBlackTransition = new Sprite();
@@ -145,6 +147,14 @@ class UIGame extends Sprite
 		
 		//GameManager.getInstance().endedMission.push(Mission.get());
 		addChild(binderContainer);
+	}
+	
+	private function onClickDesk(e:MouseEvent):Void 
+	{
+		trace("desk");
+		missionBinder.close();
+		reportBinder.close();
+		monsterBinder.close();
 	}
 	
 	function openMissionBinder(isOpened:Bool) 

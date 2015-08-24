@@ -139,10 +139,10 @@ class Binder extends Sprite
 	}
 	
 	public function open(evt:MouseEvent = null) {
-		filters = [];
 		buttonMode = false;
 		useHandCursor = false;
 		removeHalo(null);
+		filters = [];
 		removeEventListener(MouseEvent.MOUSE_OVER, drawHalo);
 		removeEventListener(MouseEvent.MOUSE_OUT, removeHalo);
 		
