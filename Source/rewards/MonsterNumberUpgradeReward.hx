@@ -21,6 +21,7 @@ class MonsterNumberUpgradeReward extends Reward
 	override public function take(monsters:Array<Monster>) 
 	{
 		Upgrades.maxMonsterUpgrade++;
+		Upgrades.upgradeChanged.dispatch();
 	}
 	
 }

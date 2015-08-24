@@ -20,6 +20,7 @@ class BuyUpgradeReward extends Reward
 	override public function take(monsters:Array<Monster>) 
 	{
 		Upgrades.betterBuyUpgrade++;
+		Upgrades.upgradeChanged.dispatch();
 	}
 	
 }

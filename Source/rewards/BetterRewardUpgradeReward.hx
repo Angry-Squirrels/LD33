@@ -20,7 +20,8 @@ class BetterRewardUpgradeReward extends Reward
 	
 	override public function take(monsters:Array<Monster>) 
 	{
-		Upgrades.betterMissionRewardUpgrade++;	
+		Upgrades.betterMissionRewardUpgrade++;
+		Upgrades.upgradeChanged.dispatch();
 	}
 	
 }
