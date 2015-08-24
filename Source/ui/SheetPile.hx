@@ -12,7 +12,7 @@ import openfl.events.MouseEvent;
  */
 class SheetPile extends Sprite
 {
-	var sheets:Array<PaperSheet>;
+	public var sheets:Array<PaperSheet>;
 	var holder:Sprite;
 	var currentSheetIndex:Int=0;
 	var prevArrow:openfl.display.Sprite;
