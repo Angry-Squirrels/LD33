@@ -260,6 +260,10 @@ class GameManager
 	{
 		availableMissions.remove(mission);
 		availableMissionsChanged.dispatch();
+		for (monster in mission.assignedMonsters){
+			monster.currentMission = null;
+			monster.currentMissionChanged.dispatch(null);
+		}
 	}
 	
 	function get_gold():Int 
