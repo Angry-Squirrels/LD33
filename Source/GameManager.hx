@@ -44,8 +44,8 @@ class GameManager
 	
 	static public inline var maxMissionNb : Int = 10;
 	static public inline var maxMonsterNb : Int = 5;
-	static public inline var objective : UInt = 1500;
-	static public inline var startGold : UInt = 1000;
+	static public inline var objective : UInt = 15000;
+	static public inline var startGold : UInt = 10000;
 	
 	public var market : MonsterMarket;
 	
@@ -280,7 +280,6 @@ class GameManager
 	
 	function set_gold(value:Int):Int 
 	{
-		
 		_gold = value;
 		goldChanged.dispatch(_gold);
 		return  _gold;

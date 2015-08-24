@@ -41,6 +41,10 @@ class Stats
 			stats.g[statToAsign] += pointToGive;
 		}
 		
+		for (i in 0 ... stats.g.length)
+			if (stats.g[i] == 0)
+				stats.g[i] = 1;
+		
 		return stats;
 	}
 	
