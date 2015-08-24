@@ -44,7 +44,8 @@ class GameManager
 	
 	static public inline var maxMissionNb : Int = 10;
 	static public inline var maxMonsterNb : Int = 5;
-	static public inline var objective : UInt = 10000;
+	static public inline var objective : UInt = 1500;
+	static public inline var startGold : UInt = 1000;
 	
 	public var market : MonsterMarket;
 	
@@ -82,7 +83,7 @@ class GameManager
 		
 		day = 1;
 		goldChanged = new Signal1<Int>();
-		gold = 1000;
+		gold = startGold;
 	}
 	
 	public function addMonster() {
