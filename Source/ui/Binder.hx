@@ -152,6 +152,8 @@ class Binder extends PaperObject
 		removeEventListener(MouseEvent.MOUSE_OVER, drawHalo);
 		removeEventListener(MouseEvent.MOUSE_OUT, removeHalo);
 		
+		
+		
 		trace("open(" + evt);
 		mouseChildren = true;
 		removeEventListener(MouseEvent.MOUSE_UP, open);

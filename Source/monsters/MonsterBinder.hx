@@ -3,6 +3,7 @@ package monsters;
 import monsters.MonsterListSheet;
 import msignal.Signal.Signal0;
 import msignal.Signal.Signal1;
+import openfl.events.MouseEvent;
 import openfl.filesystem.File;
 import ui.Binder;
 import ui.Tab;
@@ -13,6 +14,8 @@ import ui.Tab;
  */
 class MonsterBinder extends Binder
 {
+	public var monstersTab:ui.Tab;
+	public var marketTab:ui.Tab;
 	public var monsterPicked:Signal1<Monster>;
 	public var listSheet:MonsterListSheet;
 
@@ -22,7 +25,7 @@ class MonsterBinder extends Binder
 		
 		monsterPicked = new Signal1<Monster>();
 		
-		var monstersTab = new Tab("Monsters", 304, 320);
+		monstersTab = new Tab("Monsters", 304, 320);
 		
 		listSheet = new MonsterListSheet();
 		listSheet.monsterPicked.add(monsterPicked.dispatch);
@@ -32,7 +35,7 @@ class MonsterBinder extends Binder
 		addTab(monstersTab);
 		
 		
-		var marketTab = new Tab("Buy-a-Monster", 304, 320);
+		marketTab = new Tab("Buy-a-Monster", 304, 320);
 		
 		var marketSheet = new MarketSheet();
 		marketSheet.y = 32;
@@ -43,6 +46,20 @@ class MonsterBinder extends Binder
 		setCurrentTab(monstersTab);
 		
 		
+	}
+	
+	override public function open(evt:MouseEvent = null)
+	{
+		if (listSheet.pickMode)
+		{
+			setCurrentTab(monstersTab);
+			marketTab.visible = false;
+		}
+		else
+		{
+			marketTab.visible = true;
+		}
+		super.open(evt);
 	}
 	
 }

@@ -230,6 +230,7 @@ class UIGame extends Sprite
 		trace("addMonsterToMission(" + monster);
 		cast(missionBinder.availablePile.getCurrentSheet(), AvailableMissionSheet).addMonster(monster);
 		monsterBinder.listSheet.pickMode = false;
+		monsterBinder.marketTab.visible = true;
 		//monsterBinder.close();
 		missionBinder.open();
 	}
@@ -238,7 +239,9 @@ class UIGame extends Sprite
 	{
 		trace("openMonsterList");
 		monsterBinder.listSheet.pickMode = true;
+		
 		monsterBinder.open();
+		
 		//monsterListSheet.visible = true;
 		
 	}
