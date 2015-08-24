@@ -74,12 +74,9 @@ class UIGame extends Sprite
 							"Then use the mission folder to send him into mission!\n" +
 							"Good luck !");
 							
-		
+		gameManager.market.newDay();
 		
 		binderContainer = new Sprite();
-		
-		
-		
 		
 		upgradeBinder = new UpgradeBinder();
 		upgradeBinder.x = 600;
