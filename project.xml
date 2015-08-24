@@ -17,5 +17,6 @@
 	<assets path="Assets/missions" rename="missions" />
 	<assets path="Assets/fonts" rename="fonts" />
 	<assets path="Assets/images" rename="images" />
+	<assets path="Assets/sounds" rename="sounds" />
 	
 </project>

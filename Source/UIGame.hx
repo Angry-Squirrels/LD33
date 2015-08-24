@@ -189,7 +189,15 @@ class UIGame extends Sprite
 		
 		dayBlackTransition.alpha = 1;
 		Lib.current.stage.addChild(dayBlackTransition);
-		fadeIn(checkRepport,1);
+		fadeIn(function() {
+			checkRepport();
+			startMusic();
+		}, 1);
+	}
+	
+	function startMusic() {
+		var music = Assets.getMusic("sounds/Local Forecast - Elevator.mp3");
+		music.play();
 	}
 	
 	private function onClickDesk(e:MouseEvent):Void 
