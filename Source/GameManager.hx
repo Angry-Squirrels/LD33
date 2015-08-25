@@ -173,7 +173,8 @@ class GameManager
 			message("Rent-A-Monster");
 			message("A Ludum Dare entry by:\n\n" + 
 					"\t\t- @damrem\n\n" +
-					"\t\t- @thomas_baudon");
+					"\t\t- @thomas_baudon\n\n" +
+					"\t\t- Music by Kevin MacLeod");
 		}
 		
 		if (gold < startGold / 10 && !saidInf10){ 
