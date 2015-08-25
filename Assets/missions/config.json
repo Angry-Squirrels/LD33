@@ -46,14 +46,14 @@
 			"rewardType": "Gold"
 		},
 		{
-			"title": "Sewer cleaning",
-			"desc": "Fookeeya-City's sewer are overflowing! Please send us some of your cheap workforce to help the cleaning.",
-			"statCoef": [2,1,0,0],
-			"type": "Contract",
-			"requires": [],
-			"duration": 2,
-			"teamSize": 3,
-			"rewardType": "Gold"
+			"title" : "Sewer cleaning",
+			"desc" : "Fookeeya-City's sewer are overflowing! Please send us some of your cheap workforce to help the cleaning.",
+			"statCoef" : [2,1,0,0],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 2,
+			"teamSize" : 2,
+			"rewardType" : "Gold"
 		},
 		{
 			"title": "Wrestling animation",
@@ -86,24 +86,24 @@
 			"rewardType": "Gold"
 		},
 		{
-			"title": "Laboratories test subject",
-			"desc": "Don't tell anything about the following request. I'm working on some new 'growing' pills and need some test subject. I heard monsters are close enough to human and can be used for therapeuthic tests. Could you send me some ?",
-			"statCoef": [1,1,1,1],
-			"type": "Contract",
-			"requires": [],
-			"duration": 4,
-			"teamSize": 5,
-			"rewardType": "Gold"
+			"title" : "Laboratories test subject",
+			"desc" : "Don't tell anything about the following request. I'm working on some new 'growing' pills and need some test subject. I heard monsters are close enough to human and can be used for therapeuthic tests. Could you send me some ?",
+			"statCoef" : [1,1,1,1],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 4,
+			"teamSize" : 2,
+			"rewardType" : "Gold"
 		},
 		{
-			"title": "Animator in a retirement home",
-			"desc": "Hi, our patients are getting kind of bored lately. I heard you have some cute animals, could you lend us some?",
-			"statCoef": [2,1,1,3],
-			"type": "Contract",
-			"requires": ["cute"],
-			"duration": 3,
-			"teamSize": 3,
-			"rewardType": "Gold"
+			"title" : "Animator in a retirement home",
+			"desc" : "Hi, our patients are getting kind of bored lately. I heard you have some cute animals, could you lend us some?",
+			"statCoef" : [2,1,1,3],
+			"type" : "Contract",
+			"requires" : ["cute"],
+			"duration" : 3,
+			"teamSize" : 2,
+			"rewardType" : "Gold"
 		},
 		{
 			"title": "Mercenary needed!",
@@ -166,14 +166,14 @@
 			"rewardType": "Gold"
 		},
 		{
-			"title": "A friend",
-			"desc": "I need a friend for my son. He never go outside and spend all his time on World of Weirdo. He's already 57 you know, he need to Get outerHeight! HELP ME!",
-			"statCoef": [1,1,1,10],
-			"type": "Contract",
-			"requires": ["kind"],
-			"duration": 15,
-			"teamSize": 1,
-			"rewardType": "Gold"
+			"title" : "A friend",
+			"desc" : "I need a friend for my son. He never go outside and spend all his time on World of Weirdo. He's already 57 you know, he need to get out! HELP ME!",
+			"statCoef" : [1,1,1,10],
+			"type" : "Contract",
+			"requires" : ["kind"],
+			"duration" : 15,
+			"teamSize" : 1,
+			"rewardType" : "Gold"
 		},
 		{
 			"title": "Capture",
@@ -186,14 +186,14 @@
 			"rewardType": "Monster"
 		},
 		{
-			"title": "Rafle",
-			"desc": "Get a lot of new slaves!",
-			"statCoef": [3,6,1,1],
-			"type": "Contract",
-			"requires": [],
-			"duration": 3,
-			"teamSize": 3,
-			"rewardType": "Monster"
+			"title" : "Rafle",
+			"desc" : "Get a lot of new slaves!",
+			"statCoef" : [3,6,1,1],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 3,
+			"teamSize" : 2,
+			"rewardType" : "Monster"
 		},
 		{
 			"title": "Get some contract",
@@ -206,65 +206,64 @@
 			"rewardType": "Mission"
 		},
 		{
-			"title": "Prospection frenzy",
-			"desc": "Send your minions to sell your services all arround the world!",
-			"statCoef": [1, 1, 5, 7],
-			"type": "Contract",
-			"requires": [],
-			"duration": 2,
-			"teamSize": 3,
-			"rewardType": "Mission"
+			"title" : "Prospection frenzy",
+			"desc" : "Send your minions to sell your services all arround the world!",
+			"statCoef" : [1, 1, 5, 7],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 2,
+			"teamSize" : 2,
+			"rewardType" : "Mission"
 		},
 		{
-			"title": "Upgrade: Better price",
-			"desc": "\"Kindly\" ask your minions to to train to negociate, allowing your to buy slaves at a lower price.",
-			"statCoef": [1, 1, 7, 4],
-			"type": "Contract",
-			"requires": [],
-			"duration": 3,
-			"teamSize": 3,
-			"rewardType": "BuyUpgrade"
+			"title" : "Upgrade : Better price",
+			"desc" : "\"Kindly\" ask your minions to to train to negociate, allowing your to buy slaves at a lower price.",
+			"statCoef" : [1, 1, 7, 4],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 3,
+			"teamSize" : 2,
+			"rewardType" : "BuyUpgrade"
 		},
 		{
-			"title": "Upgrade: Better selling skills",
-			"desc": "\"Kindly\" ask your minions to to train to negociate, allowing your to sell slaves at a better price.",
-			"statCoef": [1, 1, 7, 4],
-			"type": "Contract",
-			"requires": [],
-			"duration": 3,
-			"teamSize": 3,
-			"rewardType": "SellUpgrade"
+			"title" : "Upgrade : Better selling skills",
+			"desc" : "\"Kindly\" ask your minions to to train to negociate, allowing your to sell slaves at a better price.",
+			"statCoef" : [1, 1, 7, 4],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 3,
+			"teamSize" : 2,
+			"rewardType" : "SellUpgrade"
 		},
 		{
-			"title": "Upgrade: Moar missions",
-			"desc": "Upgrade your desk drawers so your cab stock more missions!",
-			"statCoef": [1, 1, 7, 4],
-			"type": "Contract",
-			"requires": [],
-			"duration": 3,
-			"teamSize": 3,
-			"rewardType": "MissionNumberUpgrade"
+			"title" : "Upgrade : Moar missions",
+			"desc" : "Upgrade your desk drawers so your cab stock more missions!",
+			"statCoef" : [1, 1, 7, 4],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 3,
+			"teamSize" : 2,
+			"rewardType" : "MissionNumberUpgrade"
 		},
 		{
-			"title": "Upgrade: Moar monsters",
-			"desc": "Upgrade your cages' size so you can stock more minions!",
-			"statCoef": [1, 1, 7, 4],
-			"type": "Contract",
-			"requires": [],
-			"duration": 3,
-			"teamSize": 3,
-			"rewardType": "MonsterNumberUpgrade"
+			"title" : "Upgrade : Moar monsters",
+			"desc" : "Upgrade your cages' size so you can stock more minions!",
+			"statCoef" : [1, 1, 7, 4],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 3,
+			"teamSize" : 2,
+			"rewardType" : "MonsterNumberUpgrade"
 		},
 		{
-			"title": "Upgrade: Moar rewards",
-			"desc": "Upgrade your minions efficiency, getting you more results from contracts!",
-			"statCoef": [1, 1, 7, 4],
-			"type": "Contract",
-			"requires": [],
-			"duration": 3,
-			"teamSize": 3,
-			"rewardType": "BetterRewardUpgrade"
-		},
+			"title" : "Upgrade : Moar rewards",
+			"desc" : "Upgrade your minions efficiency, getting you more results from contracts!",
+			"statCoef" : [1, 1, 7, 4],
+			"type" : "Contract",
+			"requires" : [],
+			"duration" : 3,
+			"teamSize" : 2,
+			"rewardType" : "BetterRewardUpgrade"
 		{
 			"title": "Smartphone Manufacturer",
 			"desc": "With the release of our higly anticipated product, the YPhone 42, we need to boost our production to its max. We want you!",

@@ -24,6 +24,7 @@ import ui.Desk;
 import ui.Binder;
 import ui.DollarIndicator;
 import ui.Styles;
+import ui.TextButton;
 import ui.TF;
 
 /**
@@ -192,7 +193,15 @@ class UIGame extends Sprite
 		
 		dayBlackTransition.alpha = 1;
 		Lib.current.stage.addChild(dayBlackTransition);
-		fadeIn(checkRepport,1);
+		fadeIn(function() {
+			checkRepport();
+			startMusic();
+		}, 1);
+	}
+	
+	function startMusic() {
+		var music = Assets.getMusic("sounds/Local Forecast - Elevator.mp3");
+		music.play();
 	}
 	
 	private function onClickDesk(e:MouseEvent):Void 
@@ -297,7 +306,38 @@ class UIGame extends Sprite
 			showDay();
 			//fadeIn(checkRepport);
 		}else {
-			trace("this is the end.");
+			trace("end game uigame");
+			var title : String = "";
+			var phrase : String = "";
+			if (gameManager.gold >= GameManager.objective) { // objectif atteind
+				title = "Congratulations!";
+				phrase = "You reached the required objective in " + gameManager.getDate() + " days!";
+			}else { // game over
+				title = "Game Over!";
+				phrase = "You survived " + gameManager.getDate() + " days only to lose all your belongings.";
+			}
+			var titleTF : TF = new TF(title, Styles.WHITE24, TextFieldAutoSize.LEFT);
+			var phraseTF : TF = new TF(phrase, Styles.WHITE16, TextFieldAutoSize.LEFT);
+			titleTF.alpha = 0;
+			phraseTF.alpha = 0;
+			
+			titleTF.x = (Lib.current.stage.stageWidth - titleTF.width) / 2;
+			titleTF.y = (Lib.current.stage.stageHeight) / 2 - 50;
+			Lib.current.stage.addChild(titleTF);
+			
+			phraseTF.x = (Lib.current.stage.stageWidth - phraseTF.width) / 2;
+			phraseTF.y = titleTF.y + titleTF.height + 20;
+			Lib.current.stage.addChild(phraseTF);
+			
+			var playAgainBtn : TextButton = new TextButton("Play again.");
+			playAgainBtn.alpha = 0;
+			//Lib.current.stage.addChild(playAgainBtn);
+			playAgainBtn.x = (Lib.current.stage.stageWidth - playAgainBtn.width) / 2;
+			playAgainBtn.y = phraseTF.y + phraseTF.height + 20;
+			
+			Actuate.tween(titleTF, 1, { alpha:1 } ).ease(Cubic.easeOut);
+			Actuate.tween(phraseTF, 1, { alpha:1 } ).ease(Cubic.easeOut);
+			Actuate.tween(playAgainBtn, 1, { alpha:1 } ).ease(Cubic.easeOut);
 		}
 	}
 	

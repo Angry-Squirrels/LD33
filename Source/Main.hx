@@ -18,7 +18,7 @@ class Main extends Sprite {
 		new Styles();
 		
 		mGameManager = GameManager.getInstance();
-		//mGameManager.addMonster();
+		mGameManager.addMonster();
 		addChild(new UIGame(mGameManager));
 		
 		//mGameManager.startNewDay();

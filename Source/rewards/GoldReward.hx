@@ -17,7 +17,7 @@ class GoldReward extends Reward
 	}
 	
 	override public function take(monsters : Array<Monster>) {
-		GameManager.getInstance().gold += mQuantity;
+		GameManager.getInstance().gold = GameManager.getInstance().gold + mQuantity;
 	}
 	
 	public function toString() : String {

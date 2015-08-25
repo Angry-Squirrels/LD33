@@ -211,7 +211,7 @@ class Mission
 	
 	function computeSuccess():Void 
 	{	
-		var sumStat = new Array<UInt>();
+		var sumStat = new Array<Int>();
 		for (i in 0 ... requiredStats.g.length) 
 			sumStat.push(0);
 		
