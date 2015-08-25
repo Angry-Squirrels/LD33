@@ -222,7 +222,15 @@ class GameManager
 				message(monster.name + " costed you " + monster.costOfLife + " to stay alive.");
 			}else {
 				monster.alive = false;
-				message(monster.name + " died from exhaustion while working on " + monster.currentMission.title);
+				
+				var msgs =
+				[
+					monster.name + " died from exhaustion while working on " + monster.currentMission.title,
+					monster.name + " died at work. Loser!",
+					monster.name + " died just before you could have sold it. It's a shame!"
+				];
+				
+				message(msgs[Std.random(msgs.length)]);
 				monsterToKill.push(monster);
 				monster.currentMission.unassignMonster(monster);
 			}
