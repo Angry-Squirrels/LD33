@@ -48,7 +48,18 @@ class NameGenerator
 			"Master",
 			"Liar",
 			"Sloppy",
-			"Thug"
+			"Thug",
+			"Greedy",
+			"Glutton",
+			"Special",
+			"Not-so-fast",
+			"'ASAP'",
+			"KO",
+			"So-so",
+			"Could Be",
+			"Villain",
+			"Heroic",
+			"Ugly"
 			
 		];
 		mNameList = [
@@ -95,7 +106,12 @@ class NameGenerator
 			"Rex",
 			"Roxane",
 			"Tony",
-			"Zorglub"
+			"Zorglub",
+			"Jack",
+			"Jackie",
+			"Francesca",
+			"Francis",
+			"Nick"
 		];
 		
 		mInited = true;

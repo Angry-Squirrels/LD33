@@ -1,5 +1,5 @@
 {
-	"possibleTraits" : [
+	"possibleTraits": [
 		"wings",
 		"tentacles",
 		"ugly",
@@ -13,34 +13,37 @@
 		"smelly",
 		"invisibility",
 		"wet",
-		"acid"
+		"acid",
+		"vicious",
+		"nervous",
+		"high-testosterone"
 	],
-	"statsNames" : [
+	"statsNames": [
 		"agi",
 		"str",
 		"int",
 		"chr"
 	],
-	"missions" : [
+	"missions": [
 		{
-			"title" : "Actor needed",
-			"desc" : "Good morning Sir, I need an actor for my next anime project. The action takes place in a girl highschool near tokyo. what do you have for me?",
-			"statCoef" : [2,3,1,4],
-			"type" : "Contract",
-			"requires" : ["tentacles"],
-			"duration" : 2,
-			"teamSize" : 1,
-			"rewardType" : "Gold"
+			"title": "Actor needed",
+			"desc": "Good morning Sir, I need an actor for my next anime project. The action takes place in a girl highschool near tokyo. what do you have for me?",
+			"statCoef": [2,3,1,4],
+			"type": "Contract",
+			"requires": ["tentacles"],
+			"duration": 2,
+			"teamSize": 1,
+			"rewardType": "Gold"
 		},
 		{
-			"title" : "I need builders",
-			"desc" : "Hey, I lost two of my employees while building the Fookeeya-City's great wall. Could you lend me some of yours ?",
-			"statCoef" : [2,4,1,1],
-			"type" : "Contract",
-			"requires" : [],
-			"duration" : 2,
-			"teamSize" : 2,
-			"rewardType" : "Gold"
+			"title": "I need builders",
+			"desc": "Hey, I lost two of my employees while building the Fookeeya-City's great wall. Could you lend me some of yours ?",
+			"statCoef": [2,4,1,1],
+			"type": "Contract",
+			"requires": [],
+			"duration": 2,
+			"teamSize": 2,
+			"rewardType": "Gold"
 		},
 		{
 			"title" : "Sewer cleaning",
@@ -53,34 +56,34 @@
 			"rewardType" : "Gold"
 		},
 		{
-			"title" : "Wrestling animation",
-			"desc" : "Hey, our kids are totaly crazy about that kids show, pukemon. Could you send us two of your guys for a cool surprise ? They'll love it!",
-			"statCoef" : [2,4,1,1],
-			"type" : "Contract",
-			"requires" : ["kind"],
-			"duration" : 2,
-			"teamSize" : 2,
-			"rewardType" : "Gold"
+			"title": "Wrestling animation",
+			"desc": "Hey, our kids are totaly crazy about that kids show, pukemon. Could you send us two of your guys for a cool surprise ? They'll love it!",
+			"statCoef": [2,4,1,1],
+			"type": "Contract",
+			"requires": ["kind"],
+			"duration": 2,
+			"teamSize": 2,
+			"rewardType": "Gold"
 		},
 		{
-			"title" : "Bodyguard",
-			"desc" : "Dude, I need some protection for like, 3 days, what do you have for me?",
-			"statCoef" : [3,5,1,1],
-			"type" : "Contract",
-			"requires" : ["heavy"],
-			"duration" : 3,
-			"teamSize" : 1,
-			"rewardType" : "Gold"
+			"title": "Bodyguard",
+			"desc": "Dude, I need some protection for like, 3 days, what do you have for me?",
+			"statCoef": [3,5,1,1],
+			"type": "Contract",
+			"requires": ["heavy"],
+			"duration": 3,
+			"teamSize": 1,
+			"rewardType": "Gold"
 		},
 		{
-			"title" : "VIP Air transportation at Fookeya",
-			"desc" : "Hello, I'm in charge of the transportation at Fookeeya. We're currently working on a VIP Air-taxi service but our vehicules provider are late. Do you have some flying slaves I could use ?",
-			"statCoef" : [4,4,1,1],
-			"type" : "Contract",
-			"requires" : ["wings"],
-			"duration" : 2,
-			"teamSize" : 1,
-			"rewardType" : "Gold"
+			"title": "VIP Air transportation at Fookeya",
+			"desc": "Hello, I'm in charge of the transportation at Fookeeya. We're currently working on a VIP Air-taxi service but our vehicules provider are late. Do you have some flying slaves I could use ?",
+			"statCoef": [4,4,1,1],
+			"type": "Contract",
+			"requires": ["wings"],
+			"duration": 2,
+			"teamSize": 1,
+			"rewardType": "Gold"
 		},
 		{
 			"title" : "Laboratories test subject",
@@ -103,64 +106,64 @@
 			"rewardType" : "Gold"
 		},
 		{
-			"title" : "Mercenary needed!",
-			"desc" : "We need some true warrior to protect the Fookeeya's great wall!",
-			"statCoef" : [2,8,1,3],
-			"type" : "Contract",
-			"requires" : ["heavy"],
-			"duration" : 4,
-			"teamSize" : 2,
-			"rewardType" : "Gold"
+			"title": "Mercenary needed!",
+			"desc": "We need some true warrior to protect the Fookeeya's great wall!",
+			"statCoef": [2,8,1,3],
+			"type": "Contract",
+			"requires": ["heavy"],
+			"duration": 4,
+			"teamSize": 2,
+			"rewardType": "Gold"
 		},
 		{
-			"title" : "Bad client",
-			"desc" : "Hey, I have some Bad client who didn't pay their \"insurance\". I need someone to convince them to pay. If you know what I mean.",
-			"statCoef" : [2,6,1,1],
-			"type" : "Contract",
-			"requires" : ["mean"],
-			"duration" : 1,
-			"teamSize" : 1,
-			"rewardType" : "Gold"
+			"title": "Bad client",
+			"desc": "Hey, I have some Bad client who didn't pay their \"insurance\". I need someone to convince them to pay. If you know what I mean.",
+			"statCoef": [2,6,1,1],
+			"type": "Contract",
+			"requires": ["mean"],
+			"duration": 1,
+			"teamSize": 1,
+			"rewardType": "Gold"
 		},
 		{
-			"title" : "Great job opportunities!",
-			"desc" : "Hi! We sell a lot of stuff, but lately, people doesn't seem as interested in our product as they used to be. We need some competent door-to-door salesman!",
-			"statCoef" : [1,1,8,5],
-			"type" : "Contract",
-			"requires" : [],
-			"duration" : 1,
-			"teamSize" : 1,
-			"rewardType" : "Gold"
+			"title": "Great job opportunities!",
+			"desc": "Hi! We sell a lot of stuff, but lately, people doesn't seem as interested in our product as they used to be. We need some competent door-to-door salesman!",
+			"statCoef": [1,1,8,5],
+			"type": "Contract",
+			"requires": [],
+			"duration": 1,
+			"teamSize": 1,
+			"rewardType": "Gold"
 		},
 		{
-			"title" : "Hamster parcour tester",
-			"desc" : "Good morning, I need some smart creature to test my latest Hamster toy, do you have something like that ?",
-			"statCoef" : [7,1,3,1],
-			"type" : "Contract",
-			"requires" : ["small"],
-			"duration" : 3,
-			"teamSize" : 1,
-			"rewardType" : "Gold"
+			"title": "Hamster parcour tester",
+			"desc": "Good morning, I need some smart creature to test my latest Hamster toy, do you have something like that ?",
+			"statCoef": [7,1,3,1],
+			"type": "Contract",
+			"requires": ["small"],
+			"duration": 3,
+			"teamSize": 1,
+			"rewardType": "Gold"
 		},
 		{
-			"title" : "Homework helper",
-			"desc" : "I want someone to do my homework. I'll use my dad credit card to pay. I promise I'll pay!",
-			"statCoef" : [1,1,8,1],
-			"type" : "Contract",
-			"requires" : [],
-			"duration" : 1,
-			"teamSize" : 1,
-			"rewardType" : "Gold"
+			"title": "Homework helper",
+			"desc": "I want someone to do my homework. I'll use my dad credit card to pay. I promise I'll pay!",
+			"statCoef": [1,1,8,1],
+			"type": "Contract",
+			"requires": [],
+			"duration": 1,
+			"teamSize": 1,
+			"rewardType": "Gold"
 		},
 		{
-			"title" : "Burger flipper",
-			"desc" : "Send me someone who can flip burgers. Now.",
-			"statCoef" : [6,1,1,1],
-			"type" : "Contract",
-			"requires" : [],
-			"duration" : 7,
-			"teamSize" : 1,
-			"rewardType" : "Gold"
+			"title": "Burger flipper",
+			"desc": "Send me someone who can flip burgers. Now.",
+			"statCoef": [6,1,1,1],
+			"type": "Contract",
+			"requires": [],
+			"duration": 7,
+			"teamSize": 1,
+			"rewardType": "Gold"
 		},
 		{
 			"title" : "A friend",
@@ -173,14 +176,14 @@
 			"rewardType" : "Gold"
 		},
 		{
-			"title" : "Capture",
-			"desc" : "Get some more slav... employees!",
-			"statCoef" : [2, 3, 1, 1],
-			"type" : "Capture",
-			"requires" : [],
-			"duration" : 1,
-			"teamSize" : 1,
-			"rewardType" : "Monster"
+			"title": "Capture",
+			"desc": "Get some more slav... employees!",
+			"statCoef": [2, 3, 1, 1],
+			"type": "Capture",
+			"requires": [],
+			"duration": 1,
+			"teamSize": 1,
+			"rewardType": "Monster"
 		},
 		{
 			"title" : "Rafle",
@@ -193,14 +196,14 @@
 			"rewardType" : "Monster"
 		},
 		{
-			"title" : "Get some contract",
-			"desc" : "Send your minion to other companies to offer \"your\" services",
-			"statCoef" : [1, 1, 3, 4],
-			"type" : "Prospect",
-			"requires" : [],
-			"duration" : 1,
-			"teamSize" : 1,
-			"rewardType" : "Mission"
+			"title": "Get some contract",
+			"desc": "Send your minion to other companies to offer \"your\" services",
+			"statCoef": [1, 1, 3, 4],
+			"type": "Prospect",
+			"requires": [],
+			"duration": 1,
+			"teamSize": 1,
+			"rewardType": "Mission"
 		},
 		{
 			"title" : "Prospection frenzy",
@@ -261,6 +264,36 @@
 			"duration" : 3,
 			"teamSize" : 2,
 			"rewardType" : "BetterRewardUpgrade"
+		},
+		{
+			"title": "Smartphone Manufacturer",
+			"desc": "With the release of our higly anticipated product, the YPhone 42, we need to boost our production to its max. We want you!",
+			"statCoef": [5, 3, 2, 0],
+			"type": "Contract",
+			"requires": [],
+			"duration": 3,
+			"teamSize": 3,
+			"rewardType": "Gold"
+		},
+		{
+			"title": "Image Cropper",
+			"desc": "You'll crop amounts of images for DVD boxes of our very imaginative adult movie studio. In this task, we need rigorous creatures to respect all the detail of our actors' anatomy.",
+			"statCoef": [5, 3, 2, 0],
+			"type": "Contract",
+			"requires": ["vicious"],
+			"duration": 4,
+			"teamSize": 1,
+			"rewardType": "Gold"
+		},
+		{
+			"title": "Private Security",
+			"desc": "As an international agribusiness corporation, we sell very efficient products to boost farming. We don't understand all those riots against us. We need strong personalities to defend our valors in this world of today.",
+			"statCoef": [5, 3, 2, 0],
+			"type": "Contract",
+			"requires": ["high-testosterone"],
+			"duration": 4,
+			"teamSize": 1,
+			"rewardType": "Gold"
 		}
 	]
 }

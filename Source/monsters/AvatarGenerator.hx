@@ -18,14 +18,17 @@ class AvatarGenerator
 	
 	static var result : BitmapData;
 	static private var colorableMouths:Array<UInt>;
+	static private var body:Array<BitmapData>;
 
 	static public function getAvatar() : BitmapData {
 		
 		initFeatures();
 		
-		var bitmapData : BitmapData = new BitmapData(64, 64, false, Std.random(0xA00000)+0x666666);
+		var bitmapData : BitmapData = new BitmapData(64, 64, false, Std.random(0xA00000) + 0x666666);
+		
 		result = bitmapData;
 		
+		addBody();
 		addSkull();
 		addMouth();
 		addEyes();
@@ -43,7 +46,7 @@ class AvatarGenerator
 		}
 		
 		mouth = new Array<BitmapData>();
-		for (i in 0...4)
+		for (i in 0...5)
 		{
 			mouth.push(Assets.getBitmapData("images/mouth" + i+".png"));
 		}
@@ -53,6 +56,12 @@ class AvatarGenerator
 		for (i in 0...12)
 		{
 			skull.push(Assets.getBitmapData("images/head" + i+".png"));
+		}
+		
+		body = new Array<BitmapData>();
+		for (i in 0...8)
+		{
+			body.push(Assets.getBitmapData("images/body" + i+".png"));
 		}
 		
 		/*for (i in 0 ... 3) {
@@ -79,6 +88,15 @@ class AvatarGenerator
 		}
 		
 		
+	}
+	
+	static function addBody() {
+		var ct = new ColorTransform();
+		ct.redMultiplier = Math.random() * 1.5+0.5;
+		ct.greenMultiplier = Math.random() * 1.5+0.5;
+		ct.blueMultiplier = Math.random() * 1.5+0.5;
+		result.draw(body[Std.random(body.length)], null, ct);
+		//result.draw(skull[Std.random(skull.length)], null, new ColorTransform(Math.random() * 2, Math.random() * 2, Math.random() * 2), null, null, true);
 	}
 	
 	static function addSkull() {

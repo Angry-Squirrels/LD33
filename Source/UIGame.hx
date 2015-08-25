@@ -156,9 +156,7 @@ class UIGame extends Sprite
 		calendar.y = 50;
 		addChild(calendar);
 		
-		var dollarIndic = new DollarIndicator();
-		addChild(dollarIndic);
-		dollarIndic.x = 800 - dollarIndic.width;
+		
 		
 		/*
 		
@@ -185,6 +183,12 @@ class UIGame extends Sprite
 		*/
 		
 		//GameManager.getInstance().endedMission.push(Mission.get());
+		
+		var dollarIndic = new DollarIndicator();
+		addChild(dollarIndic);
+		dollarIndic.x = 800 - dollarIndic.width + 16;
+		dollarIndic.y = -16;
+		
 		addChild(binderContainer);
 		
 		dayBlackTransition.alpha = 1;
@@ -197,7 +201,7 @@ class UIGame extends Sprite
 	
 	function startMusic() {
 		var music = Assets.getMusic("sounds/Local Forecast - Elevator.mp3");
-		music.play();
+		music.play(0,100);
 	}
 	
 	private function onClickDesk(e:MouseEvent):Void 
@@ -338,7 +342,7 @@ class UIGame extends Sprite
 	}
 	
 	function showDay() {
-		var dayTF : TF = new TF("Day : " + gameManager.getDate(), Styles.WHITE24, TextFieldAutoSize.LEFT);
+		var dayTF : TF = new TF("Day: " + gameManager.getDate(), Styles.WHITE24, TextFieldAutoSize.LEFT);
 		dayTF.x = (Lib.current.stage.stageWidth - dayTF.width) / 2;
 		dayTF.y = Lib.current.stage.stageHeight;
 		Lib.current.stage.addChild(dayTF);

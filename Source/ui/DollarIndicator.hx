@@ -1,6 +1,9 @@
 package ui;
 
+import openfl.Assets;
+import openfl.display.Bitmap;
 import openfl.display.Sprite;
+import openfl.text.TextFieldAutoSize;
 
 /**
  * ...
@@ -14,7 +17,11 @@ class DollarIndicator extends Sprite
 	{
 		super();
 		
-		tf = new TF("$" + GameManager.getInstance().gold, Styles.WHITE16);
+		var bg = new Bitmap(Assets.getBitmapData("images/dollar-indicator.png"));
+		addChild(bg);
+		tf = new TF("$" + GameManager.getInstance().gold, Styles.BLACK24);
+		tf.x = 55;
+		tf.y = 29;
 		addChild(tf);
 		GameManager.getInstance().goldChanged.add(update);
 		
