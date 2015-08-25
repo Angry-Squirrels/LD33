@@ -30,7 +30,7 @@
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
     <option enabledebug="False" />
-    <option additional="--macro include('rewards', true)&#xA;-swf-version 11.2" />
+    <option additional="--macro include('rewards', true)&#xA;-swf-version 11.2&#xA;-debug " />
   </build>
   <!-- haxelib libraries -->
   <haxelib>
