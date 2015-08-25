@@ -201,7 +201,7 @@ class UIGame extends Sprite
 	
 	function startMusic() {
 		var music = Assets.getMusic("sounds/Local Forecast - Elevator.mp3");
-		music.play();
+		music.play(0,100);
 	}
 	
 	private function onClickDesk(e:MouseEvent):Void 
