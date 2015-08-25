@@ -28,7 +28,7 @@ class MonsterReward extends Reward
 			monsterToAdd = maxMonster - nbMonsters;
 			GameManager.getInstance().message("You have to upgrade you Company with upgrade mission to stock more monsters.");
 		}
-		for (i in 0 ... mQuantity)
+		for (i in 0 ... monsterToAdd)
 			GameManager.getInstance().addMonster();
 	}
 	
