@@ -16,21 +16,22 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="C:\HaxeToolkit\haxe\lib\openfl\3,3,1" />
-    <class path="C:\HaxeToolkit\haxe\lib\lime\2,6,0" />
+    <class path="C:\Users\Damien\workspace\openfl" />
+    <class path="C:\HaxeToolkit\haxe\lib\lime\2,9,1" />
     <class path="C:\HaxeToolkit\haxe\lib\actuate\1,8,6" />
-    <class path="C:\HaxeToolkit\haxe\lib\msignal\1,2,2" />
+    <class path="C:\HaxeToolkit\haxe\lib\msignal\1,2,4" />
     <class path="Source" />
+    <class path="C:\Users\Damien\workspace\openfl\extern" />
     <class path="Export\flash\haxe" />
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="openfl=3.3.1&#xA;lime=2.6.0&#xA;actuate=1.8.6&#xA;msignal=1.2.2&#xA;openfl-next&#xA;tools=2.6.0&#xA;no-compilation&#xA;openfl-flash&#xA;web" />
+    <option directives="openfl=3.6.1&#xA;lime=2.9.1&#xA;actuate=1.8.6&#xA;msignal=1.2.4&#xA;openfl-next&#xA;tools=2.9.1&#xA;no-compilation&#xA;openfl-flash&#xA;web&#xA;display" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
     <option enabledebug="False" />
-    <option additional="--macro include('rewards', true)&#xA;-swf-version 11.2&#xA;-debug " />
+    <option additional="--macro include('rewards', true)&#xA;-swf-version 11.2" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>

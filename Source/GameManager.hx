@@ -187,16 +187,16 @@ class GameManager
 		}
 		else if (gold < startGold / 2 && !saidInf2) {
 			message("Son, I see you have less than half the money I gave you to establish our financial superiority in this world.\n\n" +
-					"\tStop fooling arround and start exploiting those pesky monster!");
+					"\tStop fooling arround and start exploiting those pesky monsters!");
 			saidInf2 = true;
 		}
 			
 		if (gold > Std.int(startGold * 9) && !saidSup9){
-			message("What exactly didn't you understand in \"As fats as possible\" ?\n\nWe need that money!");
+			message("What exactly didn't you understand in \"As fast as possible\" ?\n\nWe need that money!");
 			saidSup9 = true;
 		}
 		else if (gold > Std.int(startGold * 7.5) && !saidSup7){
-			message("Come on, you can't be my son. I was far more tallented than you at the same age. Could you send me some saliva samples ?");
+			message("Come on, you can't be my son. I was far more talented than you at the same age. Could you send me some saliva samples?");
 			saidSup7 = true;
 		}
 		else if (gold > Std.int(startGold * 5) && !saidSup5){
